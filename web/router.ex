@@ -18,10 +18,12 @@ defmodule Samwise.Router do
 
     get "/", PageController, :index
 
-    resources "/money/bills", Money.BillController
-    resources "/money/budgets", Money.BudgetController
-    resources "/money/goals", Money.GoalController
-    resources "/money/incomes", Money.IncomeController
+    scope "/money", Money do
+      resources "/bills", BillController
+      resources "/budgets", BudgetController
+      resources "/goals", GoalController
+      resources "/incomes", IncomeController
+    end
   end
 
   # Other scopes may use custom stacks.
