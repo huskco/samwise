@@ -1,0 +1,6 @@
+<h2>Edit income</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: income_path(@conn, :update, @income) %>
+
+<%= link "Back", to: income_path(@conn, :index) %>

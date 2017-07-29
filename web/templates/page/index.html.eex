@@ -1,0 +1,1 @@
+<%= link "Money", to: bill_path(@conn, :index) %>

@@ -1,0 +1,23 @@
+<h2>Show budget</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @budget.name %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @budget.url %>
+  </li>
+
+  <li>
+    <strong>Amount:</strong>
+    <%= @budget.amount %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: budget_path(@conn, :edit, @budget) %>
+<%= link "Back", to: budget_path(@conn, :index) %>

@@ -1,0 +1,33 @@
+<h2>Show goal</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @goal.name %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @goal.url %>
+  </li>
+
+  <li>
+    <strong>Amount:</strong>
+    <%= @goal.amount %>
+  </li>
+
+  <li>
+    <strong>Imageurl:</strong>
+    <%= @goal.imageUrl %>
+  </li>
+
+  <li>
+    <strong>Isdebt:</strong>
+    <%= @goal.isDebt %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: goal_path(@conn, :edit, @goal) %>
+<%= link "Back", to: goal_path(@conn, :index) %>

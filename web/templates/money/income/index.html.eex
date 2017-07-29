@@ -1,0 +1,30 @@
+<h2>Listing incomes</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Dates</th>
+      <th>Amount</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for income <- @incomes do %>
+    <tr>
+      <td><%= income.name %></td>
+      <td><%= income.dates %></td>
+      <td><%= income.amount %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: income_path(@conn, :show, income), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: income_path(@conn, :edit, income), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: income_path(@conn, :delete, income), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New income", to: income_path(@conn, :new) %>
