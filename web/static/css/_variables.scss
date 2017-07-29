@@ -1,0 +1,85 @@
+// Typography
+$base-font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande";
+$heading-font-family: $base-font-family;
+
+// Font Sizes
+$base-font-size: 1em;
+$small-font-size: $base-font-size * 0.75;
+
+// Line height
+$base-line-height: 1.5;
+$heading-line-height: 1.2;
+
+// Other Sizes
+$base-border-radius: 0.25rem;
+$base-spacing: $base-line-height * 1rem;
+$small-spacing: $base-spacing / 2;
+$large-spacing: $base-spacing * 2;
+$base-z-index: 0;
+
+// Media
+$small-screen: 760px;
+$medium-screen: 940px;
+$large-screen: 1200px;
+
+// Colors
+$white: #fff;
+$black: #000;
+$brown: #33312f;
+$light-brown: #4E4B48;
+$red: #f15729;
+$green: #bfd849;
+$yellow: #f4da5c;
+$blue: #5fbae9;
+$magenta: #c76baa;
+$dark-magenta: mix($magenta, #000, 75%);
+$cyan: #66ddd2;
+$light-gray: #F6F4F2;
+$medium-gray: darken($light-gray, 25%);
+$dark-gray: darken($medium-gray, 5%);
+
+// Font Colors
+$base-font-color: $brown;
+$light-font-color: $dark-gray;
+$action-color: $blue;
+
+// Border
+$base-border-color: $light-gray;
+$base-border: 1px solid $base-border-color;
+
+// Background Colors
+$base-background-color: $light-gray;
+$light-background-color: $white;
+$dark-background-color: $white;
+
+// Shadows
+$base-box-shadow: 0 1px 3px rgba($black, 0.05), 0 1px 2px rgba($black, 0.1);
+$large-box-shadow: 0 12px 28px rgba($black, 0.1), 0 8px 10px rgba($black, 0.1);
+$form-box-shadow: inset 0 1px 3px rgba($black, 0.05);
+$form-box-shadow-focus: inset 0 1px 3px rgba($action-color, 0.05);
+
+// Animations
+$base-duration: 150ms;
+$base-timing: ease;
+
+// Header
+$header-height: 4rem;
+$sidebar-width: 12rem;
+
+// Text Inputs
+$all-text-inputs: 'input[type="color"]',
+                   'input[type="date"]',
+                   'input[type="datetime"]',
+                   'input[type="datetime-local"]',
+                   'input[type="email"]',
+                   'input[type="month"]',
+                   'input[type="number"]',
+                   'input[type="password"]',
+                   'input[type="search"]',
+                   'input[type="tel"]',
+                   'input[type="text"]',
+                   'input[type="time"]',
+                   'input[type="url"]',
+                   'input[type="week"]',
+                   'input:not([type])',
+                   'textarea';

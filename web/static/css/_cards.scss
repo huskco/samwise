@@ -1,0 +1,80 @@
+.card {
+  background-color: $light-background-color;
+  border-radius: $base-border-radius;
+  box-shadow: $base-box-shadow;
+  margin-bottom: $small-spacing;
+  min-height: 5rem;
+  overflow: hidden;
+  padding: $base-spacing;
+  position: relative;
+  transition: $base-timing $base-duration;
+
+  &.card-add {
+    background-color: mix($light-background-color, $base-background-color);
+    cursor: context-menu;
+  }
+
+  form {
+    margin-top: $small-spacing;
+  }
+
+  .input-group {
+    margin-bottom: 0;
+  }
+
+  .form-actions {
+    margin-top: 0;
+  }
+
+  h3 {
+    line-height: 2rem;
+    margin-bottom: $small-spacing;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .add-icon {
+    color: $medium-gray;
+    font-size: 2rem;
+    left: 50%;
+    opacity: 0.25;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.card-actions {
+  color: $medium-gray;
+  cursor: context-menu;
+  opacity: 0.5;
+  position: absolute;
+  right: $small-spacing;
+  top: $small-spacing;
+  transition: opacity $base-duration $base-timing;
+  z-index: 2;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.card-icon {
+  background-color: $medium-gray;
+  background-position: center center;
+  background-size: cover;
+  border-radius: $base-border-radius;
+  display: inline-block;
+  height: 2rem;
+  margin-right: 0.5rem;
+  overflow: hidden;
+  vertical-align: middle;
+  line-height: 1.4rem;
+  text-align: center;
+  position: relative;
+  transform: translateY(-0.1rem);
+  width: 2rem;
+  vertical-align: middle;
+}

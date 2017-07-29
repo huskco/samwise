@@ -1,0 +1,26 @@
+.section-header {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $base-spacing;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.header-actions {
+  color: $dark-gray;
+
+  div {
+    display: inline-block;
+  }
+
+  > div {
+    margin-left: $base-spacing;
+  }
+
+  input {
+    margin-bottom: 0;
+  }
+}

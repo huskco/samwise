@@ -1,0 +1,78 @@
+.service-nav {
+  background-color: $white;
+  display: flex;
+  height: $header-height;
+  justify-content: space-between;
+  left: 0;
+  padding: $small-spacing;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+
+  @media (min-width: $medium-screen) {
+    flex-direction: column;
+    bottom: 0;
+    height: auto;
+    padding: $base-spacing;
+    right: auto;
+    width: $sidebar-width;
+  }
+
+  a,
+  .button {
+    display: inline-block;
+    width: 100%;
+  }
+
+  &-logo {
+    width: 2.5rem;
+  }
+}
+
+.service-nav-toggle {
+  margin: $small-spacing $base-spacing;
+  position: relative;
+  z-index: 1000;
+
+  @media (min-width: $medium-screen) {
+    display: none;
+  }
+}
+
+.service-nav-nav {
+  background-color: rgba($light-background-color, 0.9);
+  bottom: 0;
+  box-shadow: $large-box-shadow;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: translateX($sidebar-width);
+  transition: transform $base-duration $base-timing;
+  width: $sidebar-width;
+  z-index: 100;
+
+  @media (min-width: $medium-screen) {
+    background-color: transparent;
+    box-shadow: none;
+    margin-top: $base-spacing;
+    padding: 0;
+    position: static;
+    transform: translateX(0);
+    width: auto;
+  }
+
+  &.active {
+    transform: translateX(0);
+  }
+
+  a {
+    color: $action-color;
+    display: block;
+    padding: $small-spacing;
+
+    @media (min-width: $medium-screen) {
+      padding: $small-spacing 0;
+    }
+  }
+}

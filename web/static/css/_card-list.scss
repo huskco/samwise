@@ -1,0 +1,30 @@
+.card-list {
+  @media (min-width: $medium-screen) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  > .card {
+    @media (min-width: $medium-screen) {
+      flex: 0 0 calc(50% - #{$small-spacing * 1/2});
+      margin-right: $small-spacing;
+
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+    }
+
+    @media (min-width: $large-screen) {
+      flex-basis: calc(25% - #{$small-spacing * 3/4});
+
+      &:nth-child(2n) {
+        margin-right: $small-spacing;
+      }
+
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+    }
+  }
+}

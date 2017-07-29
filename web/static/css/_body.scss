@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+body > .ember-view {
+  min-height: 100vh;
+}
+
+body {
+  background-color: $base-background-color;
+  margin: 0;
+}
+
+main {
+  margin: $header-height 0 0 0;
+  padding: $base-spacing $large-spacing;
+
+  @media (min-width: $medium-screen) {
+    margin: 0 0 0 $sidebar-width;
+  }
+}

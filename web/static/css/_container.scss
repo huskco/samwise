@@ -1,0 +1,15 @@
+.container {
+  &-centered {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+
+    .card {
+      width: #{$small-screen / 2};
+      max-width: 100%;
+    }
+  }
+}

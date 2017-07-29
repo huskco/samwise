@@ -1,0 +1,33 @@
+table {
+  border-collapse: collapse;
+  margin: $small-spacing 0;
+  table-layout: fixed;
+  width: 100%;
+}
+
+thead {
+  background-color: $light-background-color;
+}
+
+th,
+td {
+  padding: $small-spacing;
+}
+
+th {
+  color: $light-font-color;
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid $light-background-color;
+}
+
+tr,
+td,
+th {
+  vertical-align: middle;
+}
