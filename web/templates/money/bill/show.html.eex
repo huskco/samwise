@@ -19,7 +19,7 @@
 
   <li>
     <strong>Amount:</strong>
-    <%= @bill.amount %>
+    <%= Number.Currency.number_to_currency @bill.amount %>
   </li>
 
 </ul>

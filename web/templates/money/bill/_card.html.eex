@@ -1,0 +1,20 @@
+<article class="card">
+  <div class="card-actions">
+    <%= link "Edit", to: bill_path(@conn, :edit, @bill), class: "button--ghost" %>
+  </div>
+
+  <h3>
+    <img src="<%= get_logo @bill.url %>" alt="<%= get_initial @bill.name %>" class="card-icon">
+    <%= link @bill.name, to: bill_path(@conn, :show, @bill) %>
+  </h3>
+
+  <p>
+    <%= Number.Currency.number_to_currency @bill.amount %>
+    due on the
+    <%= @bill.due %>
+  </p>
+
+  <p>
+    <span class="label label-inline">Next due</span>
+  </p>
+</article>

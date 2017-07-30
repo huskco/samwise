@@ -1,32 +1,10 @@
-<div class="table">
-  <header>
-    <nav class="actions header-actions">
-      <%= link "Add", to: bill_path(@conn, :new), class: "button--ghost" %>
-    </nav>
+<nav class="header-actions">
+  <%= link "Add", to: bill_path(@conn, :new), class: "button--ghost" %>
+</nav>
+<h2>Bills</h2>
 
-    <h2 class="table_title">Bills</h2>
-  </header>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Url</th>
-        <th>Due</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody>
+<div class="card-list">
   <%= for bill <- @bills do %>
-      <tr>
-        <td>
-          <%= link bill.name, to: bill_path(@conn, :show, bill) %>
-        </td>
-        <td><%= bill.url %></td>
-        <td><%= bill.due %></td>
-        <td><%= bill.amount %></td>
-      </tr>
+    <%= render("_card.html", conn: @conn, bill: bill) %>
   <% end %>
-    </tbody>
-  </table>
 </div>

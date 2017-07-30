@@ -24,7 +24,7 @@
           <%= link goal.name, to: goal_path(@conn, :show, goal) %>
         </td>
         <td><%= goal.url %></td>
-        <td><%= goal.amount %></td>
+        <td><%= Number.Currency.number_to_currency goal.amount %></td>
         <td><%= goal.imageUrl %></td>
         <td><%= goal.isDebt %></td>
       </tr>

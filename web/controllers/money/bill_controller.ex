@@ -5,7 +5,7 @@ defmodule Samwise.Money.BillController do
 
   def index(conn, _params) do
     bills = Repo.all(Bill)
-    render(conn, "index.html", bills: bills)
+    render(conn, "index.html", bills: bills, page_title: "Bills")
   end
 
   def new(conn, _params) do
@@ -22,19 +22,19 @@ defmodule Samwise.Money.BillController do
         |> put_flash(:info, "Bill created successfully.")
         |> redirect(to: bill_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, page_title: "New bill")
     end
   end
 
   def show(conn, %{"id" => id}) do
     bill = Repo.get!(Bill, id)
-    render(conn, "show.html", bill: bill)
+    render(conn, "show.html", bill: bill, page_title: bill.name)
   end
 
   def edit(conn, %{"id" => id}) do
     bill = Repo.get!(Bill, id)
     changeset = Bill.changeset(bill)
-    render(conn, "edit.html", bill: bill, changeset: changeset)
+    render(conn, "edit.html", bill: bill, changeset: changeset, page_title: "Edit #{bill.name}")
   end
 
   def update(conn, %{"id" => id, "bill" => bill_params}) do

@@ -14,7 +14,7 @@
 
   <li>
     <strong>Amount:</strong>
-    <%= @budget.amount %>
+    <%= Number.Currency.number_to_currency @budget.amount %>
   </li>
 
 </ul>

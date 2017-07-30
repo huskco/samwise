@@ -24,7 +24,7 @@
             <%= link budget.name, to: budget_path(@conn, :show, budget) %>
           </td>
           <td><%= budget.url %></td>
-          <td><%= budget.amount %></td>
+          <td><%= Number.Currency.number_to_currency budget.amount %></td>
 
           <td class="text-right">
           </td>

@@ -22,8 +22,12 @@
           <td>
             <%= link income.name, to: income_path(@conn, :show, income) %>
           </td>
-          <td><%= income.dates %></td>
-          <td><%= income.amount %></td>
+          <td>
+            <%= for dateItem <- income.dates do %>
+              <%= dateItem %>
+            <% end %>
+          </td>
+          <td><%= Number.Currency.number_to_currency income.amount %></td>
         </tr>
       <% end %>
     </tbody>
