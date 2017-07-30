@@ -1,34 +1,34 @@
-<h2>Listing goals</h2>
+<div class="table">
+  <header>
+    <nav class="actions header-actions">
+      <%= link "Add", to: goal_path(@conn, :new), class: "button--ghost" %>
+    </nav>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Url</th>
-      <th>Amount</th>
-      <th>Imageurl</th>
-      <th>Isdebt</th>
+    <h2 class="table_title">Goals</h2>
+  </header>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for goal <- @goals do %>
-    <tr>
-      <td><%= goal.name %></td>
-      <td><%= goal.url %></td>
-      <td><%= goal.amount %></td>
-      <td><%= goal.imageUrl %></td>
-      <td><%= goal.isDebt %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: goal_path(@conn, :show, goal), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: goal_path(@conn, :edit, goal), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: goal_path(@conn, :delete, goal), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<%= link "New goal", to: goal_path(@conn, :new) %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Url</th>
+        <th>Amount</th>
+        <th>Imageurl</th>
+        <th>Debt?</th>
+      </tr>
+    </thead>
+    <tbody>
+  <%= for goal <- @goals do %>
+      <tr>
+        <td>
+          <%= link goal.name, to: goal_path(@conn, :show, goal) %>
+        </td>
+        <td><%= goal.url %></td>
+        <td><%= goal.amount %></td>
+        <td><%= goal.imageUrl %></td>
+        <td><%= goal.isDebt %></td>
+      </tr>
+  <% end %>
+    </tbody>
+  </table>
+</div>

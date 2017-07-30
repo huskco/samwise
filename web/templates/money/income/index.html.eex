@@ -1,30 +1,31 @@
-<h2>Listing incomes</h2>
+<div class="table">
+  <header>
+    <nav class="actions header-actions">
+      <%= link "Add", to: income_path(@conn, :new), class: "button--ghost" %>
+    </nav>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Dates</th>
-      <th>Amount</th>
+    <h2 class="table_title">Incomes</h2>
+  </header>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for income <- @incomes do %>
-    <tr>
-      <td><%= income.name %></td>
-      <td><%= income.dates %></td>
-      <td><%= income.amount %></td>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Dates</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
 
-      <td class="text-right">
-        <%= link "Show", to: income_path(@conn, :show, income), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: income_path(@conn, :edit, income), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: income_path(@conn, :delete, income), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<%= link "New income", to: income_path(@conn, :new) %>
+    <tbody>
+      <%= for income <- @incomes do %>
+        <tr>
+          <td>
+            <%= link income.name, to: income_path(@conn, :show, income) %>
+          </td>
+          <td><%= income.dates %></td>
+          <td><%= income.amount %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

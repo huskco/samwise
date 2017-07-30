@@ -24,5 +24,6 @@
 
 </ul>
 
-<%= link "Edit", to: bill_path(@conn, :edit, @bill) %>
+<%= link "Edit", to: bill_path(@conn, :edit, @bill), class: "button" %>
+<%= link "Delete", to: bill_path(@conn, :delete, @bill), method: :delete, data: [confirm: "Are you sure?"], class: "button" %>
 <%= link "Back", to: bill_path(@conn, :index) %>

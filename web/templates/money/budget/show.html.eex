@@ -20,4 +20,5 @@
 </ul>
 
 <%= link "Edit", to: budget_path(@conn, :edit, @budget) %>
+<%= link "Delete", to: budget_path(@conn, :delete, @budget), method: :delete, data: [confirm: "Are you sure?"] %>
 <%= link "Back", to: budget_path(@conn, :index) %>

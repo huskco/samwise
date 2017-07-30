@@ -1,32 +1,32 @@
-<h2>Listing bills</h2>
+<div class="table">
+  <header>
+    <nav class="actions header-actions">
+      <%= link "Add", to: bill_path(@conn, :new), class: "button--ghost" %>
+    </nav>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Url</th>
-      <th>Due</th>
-      <th>Amount</th>
+    <h2 class="table_title">Bills</h2>
+  </header>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for bill <- @bills do %>
-    <tr>
-      <td><%= bill.name %></td>
-      <td><%= bill.url %></td>
-      <td><%= bill.due %></td>
-      <td><%= bill.amount %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: bill_path(@conn, :show, bill), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: bill_path(@conn, :edit, bill), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: bill_path(@conn, :delete, bill), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<%= link "New bill", to: bill_path(@conn, :new) %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Url</th>
+        <th>Due</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+  <%= for bill <- @bills do %>
+      <tr>
+        <td>
+          <%= link bill.name, to: bill_path(@conn, :show, bill) %>
+        </td>
+        <td><%= bill.url %></td>
+        <td><%= bill.due %></td>
+        <td><%= bill.amount %></td>
+      </tr>
+  <% end %>
+    </tbody>
+  </table>
+</div>

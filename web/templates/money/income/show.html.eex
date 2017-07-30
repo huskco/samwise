@@ -20,4 +20,5 @@
 </ul>
 
 <%= link "Edit", to: income_path(@conn, :edit, @income) %>
+<%= link "Delete", to: income_path(@conn, :delete, @income), method: :delete, data: [confirm: "Are you sure?"] %>
 <%= link "Back", to: income_path(@conn, :index) %>

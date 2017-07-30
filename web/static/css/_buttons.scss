@@ -27,7 +27,8 @@
     }
   }
 
-  &.button-ghost {
+  &--ghost {
+    @extend .button;
     background-color: transparent;
     border: 1px solid $action-color;
     color: $action-color;

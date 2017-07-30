@@ -1,30 +1,35 @@
-<h2>Listing budgets</h2>
+<div class="table">
+  <header>
+    <nav class="actions header-actions">
+      <%= link "Add", to: budget_path(@conn, :new), class: "button--ghost" %>
+    </nav>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Url</th>
-      <th>Amount</th>
+    <h2 class="table_title">Budgets</h2>
+  </header>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for budget <- @budgets do %>
-    <tr>
-      <td><%= budget.name %></td>
-      <td><%= budget.url %></td>
-      <td><%= budget.amount %></td>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Url</th>
+        <th>Amount</th>
 
-      <td class="text-right">
-        <%= link "Show", to: budget_path(@conn, :show, budget), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: budget_path(@conn, :edit, budget), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: budget_path(@conn, :delete, budget), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for budget <- @budgets do %>
+        <tr>
+          <td>
+            <%= link budget.name, to: budget_path(@conn, :show, budget) %>
+          </td>
+          <td><%= budget.url %></td>
+          <td><%= budget.amount %></td>
 
-<%= link "New budget", to: budget_path(@conn, :new) %>
+          <td class="text-right">
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

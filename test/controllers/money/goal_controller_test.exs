@@ -7,7 +7,7 @@ defmodule Samwise.Money.GoalControllerTest do
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, goal_path(conn, :index)
-    assert html_response(conn, 200) =~ "Listing goals"
+    assert html_response(conn, 200) =~ "Goals"
   end
 
   test "renders form for new resources", %{conn: conn} do
