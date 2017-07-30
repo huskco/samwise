@@ -42,6 +42,7 @@ defmodule Samwise.Web do
   def view do
     quote do
       use Phoenix.View, root: "web/templates"
+      use Number
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -52,6 +53,9 @@ defmodule Samwise.Web do
       import Samwise.Router.Helpers
       import Samwise.ErrorHelpers
       import Samwise.Gettext
+      import Samwise.GetInitial
+      import Samwise.GetLogo
+      import Samwise.NextDate
     end
   end
 

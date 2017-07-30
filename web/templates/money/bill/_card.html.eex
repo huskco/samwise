@@ -9,12 +9,12 @@
   </h3>
 
   <p>
+    <span class="label label-inline">Amount</span>
     <%= Number.Currency.number_to_currency @bill.amount %>
-    due on the
-    <%= @bill.due %>
   </p>
 
   <p>
     <span class="label label-inline">Next due</span>
+    <%= next_date @bill.due %>
   </p>
 </article>

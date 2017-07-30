@@ -1,5 +1,6 @@
 defmodule Samwise.Money.IncomeController do
   use Samwise.Web, :controller
+  plug :add_sidebar, "_sidebar_money.html"
 
   alias Samwise.Money.Income
 
@@ -61,5 +62,9 @@ defmodule Samwise.Money.IncomeController do
     conn
     |> put_flash(:info, "Income deleted successfully.")
     |> redirect(to: income_path(conn, :index))
+  end
+
+  def add_sidebar(conn, template) do
+    assign(conn, :sidebar, template)
   end
 end

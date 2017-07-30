@@ -1,5 +1,6 @@
 defmodule Samwise.Money.BudgetController do
   use Samwise.Web, :controller
+  plug :add_sidebar, "_sidebar_money.html"
 
   alias Samwise.Money.Budget
 
@@ -61,5 +62,9 @@ defmodule Samwise.Money.BudgetController do
     conn
     |> put_flash(:info, "Budget deleted successfully.")
     |> redirect(to: budget_path(conn, :index))
+  end
+
+  def add_sidebar(conn, template) do
+    assign(conn, :sidebar, template)
   end
 end

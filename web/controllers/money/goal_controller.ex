@@ -1,5 +1,6 @@
 defmodule Samwise.Money.GoalController do
   use Samwise.Web, :controller
+  plug :add_sidebar, "_sidebar_money.html"
 
   alias Samwise.Money.Goal
 
@@ -61,5 +62,9 @@ defmodule Samwise.Money.GoalController do
     conn
     |> put_flash(:info, "Goal deleted successfully.")
     |> redirect(to: goal_path(conn, :index))
+  end
+
+  def add_sidebar(conn, template) do
+    assign(conn, :sidebar, template)
   end
 end

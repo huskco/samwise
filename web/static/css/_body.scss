@@ -11,13 +11,14 @@ body > .ember-view {
 body {
   background-color: $base-background-color;
   margin: 0;
+
+  &.has-sidebar {
+    @media (min-width: $medium-screen) {
+      padding-left: $sidebar-width;
+    }
+  }
 }
 
 main {
-  margin: $header-height 0 0 0;
   padding: $base-spacing $large-spacing;
-
-  @media (min-width: $medium-screen) {
-    margin: 0 0 0 $sidebar-width;
-  }
 }

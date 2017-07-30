@@ -13,8 +13,8 @@
   </li>
 
   <li>
-    <strong>Due:</strong>
-    <%= @bill.due %>
+    <strong>Next Due:</strong>
+    <%= next_date @bill.due %>
   </li>
 
   <li>

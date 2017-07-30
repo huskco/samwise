@@ -1,10 +1,11 @@
 defmodule Samwise.Money.BillController do
   use Samwise.Web, :controller
+  plug :add_sidebar, "_sidebar_money.html"
 
   alias Samwise.Money.Bill
 
   def index(conn, _params) do
-    bills = Repo.all(Bill)
+    bills = from(bill in Bill, order_by: bill.name) |> Repo.all
     render(conn, "index.html", bills: bills, page_title: "Bills")
   end
 
@@ -61,5 +62,9 @@ defmodule Samwise.Money.BillController do
     conn
     |> put_flash(:info, "Bill deleted successfully.")
     |> redirect(to: bill_path(conn, :index))
+  end
+
+  def add_sidebar(conn, template) do
+    assign(conn, :sidebar, template)
   end
 end

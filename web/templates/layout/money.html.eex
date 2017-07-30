@@ -1,2 +1,0 @@
-<h2>Moneypenny</h2>
-<%= render @view_module, @view_template, assigns %>

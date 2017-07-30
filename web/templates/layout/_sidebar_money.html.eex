@@ -1,0 +1,13 @@
+<header class="service-nav">
+  <div class="service-nav-logo">
+    <img src="/images/favicon-money.png" class="service-nav-logo">
+    <%= link "Moneypenny", to: bill_path(@conn, :index) %>
+  </div>
+
+  <nav class="service-nav-nav {{navActiveClass}}">
+    <%= link "Bills", to: bill_path(@conn, :index) %>
+    <%= link "Budgets", to: budget_path(@conn, :index) %>
+    <%= link "Goals", to: goal_path(@conn, :index) %>
+    <%= link "Income", to: income_path(@conn, :index) %>
+  </nav>
+</header>
