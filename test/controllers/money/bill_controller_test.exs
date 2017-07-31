@@ -2,7 +2,7 @@ defmodule Samwise.Money.BillControllerTest do
   use Samwise.ConnCase
 
   alias Samwise.Money.Bill
-  @valid_attrs %{amount: 42, due: 42, name: "some content", url: "some content"}
+  @valid_attrs %{amount: 42.00, due: 11, name: "some content", url: "google.com"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
@@ -27,7 +27,7 @@ defmodule Samwise.Money.BillControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    bill = Repo.insert! %Bill{}
+    bill = Repo.insert! %Bill{name: "Bill", url: "google.com", due: 5, amount: 10.00}
     conn = get conn, bill_path(conn, :show, bill)
     assert html_response(conn, 200) =~ "Show bill"
   end

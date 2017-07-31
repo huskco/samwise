@@ -1,6 +1,6 @@
 defmodule Samwise.Money.GoalController do
   use Samwise.Web, :controller
-  plug :add_sidebar, "_sidebar_money.html"
+  plug :add_service_nav, "_service_nav_money.html"
 
   alias Samwise.Money.Goal
 
@@ -64,7 +64,7 @@ defmodule Samwise.Money.GoalController do
     |> redirect(to: goal_path(conn, :index))
   end
 
-  def add_sidebar(conn, template) do
-    assign(conn, :sidebar, template)
+  def add_service_nav(conn, template) do
+    assign(conn, :service_nav, template)
   end
 end

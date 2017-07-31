@@ -16,7 +16,7 @@
     height: auto;
     padding: $base-spacing;
     right: auto;
-    width: $sidebar-width;
+    width: $service_nav-width;
   }
 
   a,
@@ -26,7 +26,14 @@
   }
 
   &-logo {
-    width: 2.5rem;
+    display: block;
+
+    img {
+      display: inline-block;
+      margin-right: 0.2em;
+      vertical-align: -0.6em;
+      width: 2rem;
+    }
   }
 }
 
@@ -47,9 +54,9 @@
   position: fixed;
   right: 0;
   top: 0;
-  transform: translateX($sidebar-width);
+  transform: translateX($service_nav-width);
   transition: transform $base-duration $base-timing;
-  width: $sidebar-width;
+  width: $service_nav-width;
   z-index: 100;
 
   @media (min-width: $medium-screen) {
@@ -75,4 +82,8 @@
       padding: $small-spacing 0;
     }
   }
+}
+
+.service-nav--moneypenny .service-nav-logo {
+  color: $orange;
 }

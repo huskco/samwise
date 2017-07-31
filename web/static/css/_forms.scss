@@ -40,7 +40,7 @@ select {
 
 #{$all-text-inputs},
 select[multiple] {
-  background-color: $base-background-color;
+  background-color: darken($base-background-color, 5%);
   border: 1px solid transparent;
   border-radius: $base-border-radius;
   box-sizing: border-box;
@@ -97,13 +97,7 @@ select {
   width: auto;
 }
 
-.input-field {
+.form-group {
   clear: both;
   margin: $base-spacing 0;
-}
-
-.form-logo {
-  display: block;
-  margin: 0 auto $base-spacing;
-  max-width: 5rem;
 }

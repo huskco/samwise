@@ -31,6 +31,7 @@ $light-brown: #4E4B48;
 $red: #f15729;
 $green: #bfd849;
 $yellow: #f4da5c;
+$orange: mix($red, $yellow);
 $blue: #5fbae9;
 $magenta: #c76baa;
 $dark-magenta: mix($magenta, #000, 75%);
@@ -65,7 +66,7 @@ $base-timing: ease;
 
 // Header
 $header-height: 4rem;
-$sidebar-width: 12rem;
+$service_nav-width: 12rem;
 
 // Text Inputs
 $all-text-inputs: 'input[type="color"]',

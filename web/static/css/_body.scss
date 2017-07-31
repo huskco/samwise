@@ -12,13 +12,20 @@ body {
   background-color: $base-background-color;
   margin: 0;
 
-  &.has-sidebar {
+  &.has-service_nav {
+    padding-top: $header-height;
+
     @media (min-width: $medium-screen) {
-      padding-left: $sidebar-width;
+      padding-left: $service_nav-width;
+      padding-top: 0;
     }
   }
 }
 
 main {
-  padding: $base-spacing $large-spacing;
+  padding: $small-spacing $base-spacing;
+
+  @media (min-width: $medium-screen) {
+    padding: $base-spacing $large-spacing;
+  }
 }
