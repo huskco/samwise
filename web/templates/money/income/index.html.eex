@@ -1,35 +1,10 @@
-<div class="table">
-  <header>
-    <nav class="actions header-actions">
-      <%= link "Add", to: income_path(@conn, :new), class: "button--ghost" %>
-    </nav>
+<nav class="header-actions">
+  <%= link "Add", to: income_path(@conn, :new), class: "button--ghost" %>
+</nav>
+<h2>Incomes</h2>
 
-    <h2 class="table_title">Incomes</h2>
-  </header>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Dates</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <%= for income <- @incomes do %>
-        <tr>
-          <td>
-            <%= link income.name, to: income_path(@conn, :show, income) %>
-          </td>
-          <td>
-            <%= for dateItem <- income.dates do %>
-              <%= dateItem %>
-            <% end %>
-          </td>
-          <td><%= Number.Currency.number_to_currency income.amount %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="card-list">
+  <%= for income <- @incomes do %>
+    <%= render("_card.html", conn: @conn, income: income) %>
+  <% end %>
 </div>

@@ -1,24 +1,17 @@
-<h2>Show income</h2>
+<header>
+  <div class="actions header-actions">
+    <%= link "Edit", to: income_path(@conn, :edit, @income), class: "button--ghost" %>
+    <%= link "Delete", to: income_path(@conn, :delete, @income), method: :delete, data: [confirm: "Are you sure?"], class: "button--ghost" %>
+  </div>
+  <h2><%= @income.name %></h2>
+</header>
 
-<ul>
+<p>
+  <span class="label label-inline">Dates:</span>
+  <%= @income.dates %>
+</p>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @income.name %>
-  </li>
-
-  <li>
-    <strong>Dates:</strong>
-    <%= @income.dates %>
-  </li>
-
-  <li>
-    <strong>Amount:</strong>
-    <%= Number.Currency.number_to_currency @income.amount %>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: income_path(@conn, :edit, @income) %>
-<%= link "Delete", to: income_path(@conn, :delete, @income), method: :delete, data: [confirm: "Are you sure?"] %>
-<%= link "Back", to: income_path(@conn, :index) %>
+<p>
+  <span class="label label-inline">Amount:</span>
+  <%= Number.Currency.number_to_currency @income.amount %>
+</p>

@@ -62,19 +62,39 @@
 }
 
 .card-icon {
-  background-color: $medium-gray;
-  background-position: center center;
-  background-size: cover;
+  background-color: $white;
   border-radius: $base-border-radius;
-  display: inline-block;
+  border: 2px solid $white;
   height: 2rem;
   margin-right: 0.5rem;
+  margin-top: -0.25em;
   overflow: hidden;
   vertical-align: middle;
   line-height: 1.4rem;
   text-align: center;
   position: relative;
-  transform: translateY(-0.1rem);
   width: 2rem;
-  vertical-align: middle;
+
+  &::before {
+    background-color: $light-gray;
+    content: " ";
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    width: calc(100% + 10px);
+  }
+
+  &::after {
+    color: $medium-gray;
+    content: attr(alt);
+    display: block;
+    font-family: serif;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0.15em;
+    width: 100%;
+    z-index: 2;
+  }
 }

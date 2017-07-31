@@ -6,12 +6,12 @@ defmodule Samwise.Money.IncomeController do
 
   def index(conn, _params) do
     incomes = Repo.all(Income)
-    render(conn, "index.html", incomes: incomes)
+    render(conn, "index.html", incomes: incomes, page_title: "Incomes")
   end
 
   def new(conn, _params) do
     changeset = Income.changeset(%Income{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, page_title: "New Income")
   end
 
   def create(conn, %{"income" => income_params}) do
@@ -29,13 +29,13 @@ defmodule Samwise.Money.IncomeController do
 
   def show(conn, %{"id" => id}) do
     income = Repo.get!(Income, id)
-    render(conn, "show.html", income: income)
+    render(conn, "show.html", income: income, page_title: income.name)
   end
 
   def edit(conn, %{"id" => id}) do
     income = Repo.get!(Income, id)
     changeset = Income.changeset(income)
-    render(conn, "edit.html", income: income, changeset: changeset)
+    render(conn, "edit.html", income: income, changeset: changeset, page_title: "Edit #{income.name}")
   end
 
   def update(conn, %{"id" => id, "income" => income_params}) do

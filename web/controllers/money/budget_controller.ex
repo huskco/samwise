@@ -6,7 +6,7 @@ defmodule Samwise.Money.BudgetController do
 
   def index(conn, _params) do
     budgets = Repo.all(Budget)
-    render(conn, "index.html", budgets: budgets)
+    render(conn, "index.html", budgets: budgets, page_title: "Budgets")
   end
 
   def new(conn, _params) do
@@ -23,19 +23,19 @@ defmodule Samwise.Money.BudgetController do
         |> put_flash(:info, "Budget created successfully.")
         |> redirect(to: budget_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, page_title: "New Bill")
     end
   end
 
   def show(conn, %{"id" => id}) do
     budget = Repo.get!(Budget, id)
-    render(conn, "show.html", budget: budget)
+    render(conn, "show.html", budget: budget, page_title: budget.name)
   end
 
   def edit(conn, %{"id" => id}) do
     budget = Repo.get!(Budget, id)
     changeset = Budget.changeset(budget)
-    render(conn, "edit.html", budget: budget, changeset: changeset)
+    render(conn, "edit.html", budget: budget, changeset: changeset, page_title: "Edit #{budget.name}")
   end
 
   def update(conn, %{"id" => id, "budget" => budget_params}) do

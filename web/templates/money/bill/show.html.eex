@@ -1,29 +1,22 @@
-<h2>Show bill</h2>
+<header>
+  <div class="actions header-actions">
+    <%= link "Edit", to: bill_path(@conn, :edit, @bill), class: "button--ghost" %>
+    <%= link "Delete", to: bill_path(@conn, :delete, @bill), method: :delete, data: [confirm: "Are you sure?"], class: "button--ghost" %>
+  </div>
+  <h2><%= @bill.name %></h2>
+</header>
 
-<ul>
+<p>
+  <span class="label label-inline">Website:</span>
+  <%= link @bill.url, to: @bill.url, target: "_new" %>
+</p>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @bill.name %>
-  </li>
+<p>
+  <span class="label label-inline">Next Due:</span>
+  <%= next_date @bill.due %>
+</p>
 
-  <li>
-    <strong>Url:</strong>
-    <%= @bill.url %>
-  </li>
-
-  <li>
-    <strong>Next Due:</strong>
-    <%= next_date @bill.due %>
-  </li>
-
-  <li>
-    <strong>Amount:</strong>
-    <%= Number.Currency.number_to_currency @bill.amount %>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: bill_path(@conn, :edit, @bill), class: "button" %>
-<%= link "Delete", to: bill_path(@conn, :delete, @bill), method: :delete, data: [confirm: "Are you sure?"], class: "button" %>
-<%= link "Back", to: bill_path(@conn, :index) %>
+<p>
+  <span class="label label-inline">Amount</span>
+  <%= Number.Currency.number_to_currency @bill.amount %>
+</p>

@@ -1,0 +1,14 @@
+<article class="card">
+  <div class="card-actions">
+    <%= link "Edit", to: income_path(@conn, :edit, @income), class: "button--ghost" %>
+  </div>
+
+  <h3>
+    <%= link @income.name, to: income_path(@conn, :show, @income) %>
+  </h3>
+
+  <p>
+    <span class="label label-inline">Amount</span>
+    <%= Number.Currency.number_to_currency @income.amount %>
+  </p>
+</article>

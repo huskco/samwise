@@ -1,2 +1,2 @@
 <h1>Welcome to Samwise!</h1>
-<%= link "Money", to: bill_path(@conn, :index) %>
+<%= link "Money", to: forecast_path(@conn, :index) %>

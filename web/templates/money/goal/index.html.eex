@@ -1,34 +1,10 @@
-<div class="table">
-  <header>
-    <nav class="actions header-actions">
-      <%= link "Add", to: goal_path(@conn, :new), class: "button--ghost" %>
-    </nav>
+<nav class="header-actions">
+  <%= link "Add", to: goal_path(@conn, :new), class: "button--ghost" %>
+</nav>
+<h2>Goals</h2>
 
-    <h2 class="table_title">Goals</h2>
-  </header>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Url</th>
-        <th>Amount</th>
-        <th>Imageurl</th>
-        <th>Debt?</th>
-      </tr>
-    </thead>
-    <tbody>
+<div class="card-list">
   <%= for goal <- @goals do %>
-      <tr>
-        <td>
-          <%= link goal.name, to: goal_path(@conn, :show, goal) %>
-        </td>
-        <td><%= goal.url %></td>
-        <td><%= Number.Currency.number_to_currency goal.amount %></td>
-        <td><%= goal.imageUrl %></td>
-        <td><%= goal.isDebt %></td>
-      </tr>
+    <%= render("_card.html", conn: @conn, goal: goal) %>
   <% end %>
-    </tbody>
-  </table>
 </div>

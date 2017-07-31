@@ -1,7 +1,7 @@
 <header class="service-nav service-nav--moneypenny">
-  <%= link to: bill_path(@conn, :index), class: "service-nav-logo" do %>
+  <%= link to: forecast_path(@conn, :index), class: "service-nav-logo" do %>
     <img src="/images/favicon-money.png" class="service-nav-logo">
-    Moneypenny
+    Money
   <% end %>
 
   <nav class="service-nav-nav {{navActiveClass}}">

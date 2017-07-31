@@ -1,34 +1,17 @@
-<h2>Show goal</h2>
+<header>
+  <div class="actions header-actions">
+    <%= link "Edit", to: goal_path(@conn, :edit, @goal), class: "button--ghost" %>
+    <%= link "Delete", to: goal_path(@conn, :delete, @goal), method: :delete, data: [confirm: "Are you sure?"], class: "button--ghost" %>
+  </div>
+  <h2><%= @goal.name %></h2>
+</header>
 
-<ul>
+<p>
+  <span class="label label-inline">Website:</span>
+  <%= link @goal.url, to: @goal.url, target: "_new" %>
+</p>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @goal.name %>
-  </li>
-
-  <li>
-    <strong>Url:</strong>
-    <%= @goal.url %>
-  </li>
-
-  <li>
-    <strong>Amount:</strong>
-    <%= Number.Currency.number_to_currency @goal.amount %>
-  </li>
-
-  <li>
-    <strong>Imageurl:</strong>
-    <%= @goal.imageUrl %>
-  </li>
-
-  <li>
-    <strong>Isdebt:</strong>
-    <%= @goal.isDebt %>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: goal_path(@conn, :edit, @goal) %>
-<%= link "Delete", to: goal_path(@conn, :delete, @goal), method: :delete, data: [confirm: "Are you sure?"] %>
-<%= link "Back", to: goal_path(@conn, :index) %>
+<p>
+  <span class="label label-inline">Amount</span>
+  <%= Number.Currency.number_to_currency @goal.amount %>
+</p>

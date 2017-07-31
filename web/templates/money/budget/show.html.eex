@@ -1,24 +1,17 @@
-<h2>Show budget</h2>
+<header>
+  <div class="actions header-actions">
+    <%= link "Edit", to: budget_path(@conn, :edit, @budget), class: "button--ghost" %>
+    <%= link "Delete", to: budget_path(@conn, :delete, @budget), method: :delete, data: [confirm: "Are you sure?"], class: "button--ghost" %>
+  </div>
+  <h2><%= @budget.name %></h2>
+</header>
 
-<ul>
+<p>
+  <span class="label label-inline">Website:</span>
+  <%= link @budget.url, to: @budget.url, target: "_new" %>
+</p>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @budget.name %>
-  </li>
-
-  <li>
-    <strong>Url:</strong>
-    <%= @budget.url %>
-  </li>
-
-  <li>
-    <strong>Amount:</strong>
-    <%= Number.Currency.number_to_currency @budget.amount %>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: budget_path(@conn, :edit, @budget) %>
-<%= link "Delete", to: budget_path(@conn, :delete, @budget), method: :delete, data: [confirm: "Are you sure?"] %>
-<%= link "Back", to: budget_path(@conn, :index) %>
+<p>
+  <span class="label label-inline">Amount</span>
+  <%= Number.Currency.number_to_currency @budget.amount %>
+</p>

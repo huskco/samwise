@@ -6,12 +6,12 @@ defmodule Samwise.Money.GoalController do
 
   def index(conn, _params) do
     goals = Repo.all(Goal)
-    render(conn, "index.html", goals: goals)
+    render(conn, "index.html", goals: goals, page_title: "Goals")
   end
 
   def new(conn, _params) do
     changeset = Goal.changeset(%Goal{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, page_title: "New Goal")
   end
 
   def create(conn, %{"goal" => goal_params}) do
@@ -29,13 +29,13 @@ defmodule Samwise.Money.GoalController do
 
   def show(conn, %{"id" => id}) do
     goal = Repo.get!(Goal, id)
-    render(conn, "show.html", goal: goal)
+    render(conn, "show.html", goal: goal, page_title: goal.name)
   end
 
   def edit(conn, %{"id" => id}) do
     goal = Repo.get!(Goal, id)
     changeset = Goal.changeset(goal)
-    render(conn, "edit.html", goal: goal, changeset: changeset)
+    render(conn, "edit.html", goal: goal, changeset: changeset, page_title: "Edit #{goal.name}")
   end
 
   def update(conn, %{"id" => id, "goal" => goal_params}) do

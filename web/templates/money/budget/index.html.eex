@@ -1,35 +1,10 @@
-<div class="table">
-  <header>
-    <nav class="actions header-actions">
-      <%= link "Add", to: budget_path(@conn, :new), class: "button--ghost" %>
-    </nav>
+<nav class="header-actions">
+  <%= link "Add", to: budget_path(@conn, :new), class: "button--ghost" %>
+</nav>
+<h2>Budgets</h2>
 
-    <h2 class="table_title">Budgets</h2>
-  </header>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Url</th>
-        <th>Amount</th>
-
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= for budget <- @budgets do %>
-        <tr>
-          <td>
-            <%= link budget.name, to: budget_path(@conn, :show, budget) %>
-          </td>
-          <td><%= budget.url %></td>
-          <td><%= Number.Currency.number_to_currency budget.amount %></td>
-
-          <td class="text-right">
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="card-list">
+  <%= for budget <- @budgets do %>
+    <%= render("_card.html", conn: @conn, budget: budget) %>
+  <% end %>
 </div>
