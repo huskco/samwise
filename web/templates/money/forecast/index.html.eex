@@ -1,1 +1,11 @@
 <h2>Forecast</h2>
+
+<div class="card">
+  Chart
+</div>
+
+<div class="table">
+  Table
+</div>
+
+Bills total: <%= @bills_total %>

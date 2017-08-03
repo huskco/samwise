@@ -1,4 +1,8 @@
 <nav class="header-actions">
+  <div>
+    <span class="label label-inline">Total:</span>
+    <%= Number.Currency.number_to_currency @total %>
+  </div>
   <%= link "Add", to: budget_path(@conn, :new), class: "button--ghost" %>
 </nav>
 <h2>Budgets</h2>

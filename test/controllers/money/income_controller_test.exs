@@ -27,9 +27,9 @@ defmodule Samwise.Money.IncomeControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    income = Repo.insert! %Income{}
+    income = Repo.insert! %Income{name: "IncomeName", dates: [1, 15], amount: 29.99}
     conn = get conn, income_path(conn, :show, income)
-    assert html_response(conn, 200) =~ "Show income"
+    assert html_response(conn, 200) =~ income.name
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do

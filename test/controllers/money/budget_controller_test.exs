@@ -2,7 +2,7 @@ defmodule Samwise.Money.BudgetControllerTest do
   use Samwise.ConnCase
 
   alias Samwise.Money.Budget
-  @valid_attrs %{amount: 42, name: "some content", url: "some content"}
+  @valid_attrs %{amount: 42.00, name: "some content", url: "some content"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
@@ -27,9 +27,9 @@ defmodule Samwise.Money.BudgetControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    budget = Repo.insert! %Budget{}
+    budget = Repo.insert! %Budget{name: "BudgetName", url: "http://walmart.com", amount: 29.99}
     conn = get conn, budget_path(conn, :show, budget)
-    assert html_response(conn, 200) =~ "Show budget"
+    assert html_response(conn, 200) =~ budget.name
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do

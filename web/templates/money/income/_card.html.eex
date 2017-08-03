@@ -11,4 +11,9 @@
     <span class="label label-inline">Amount</span>
     <%= Number.Currency.number_to_currency @income.amount %>
   </p>
+
+  <p>
+    <span class="label label-inline">Pays on</span>
+    <%= Enum.map_join(@income.dates, ", ", &(Number.Human.number_to_ordinal(&1))) %>
+  </p>
 </article>

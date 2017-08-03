@@ -6,7 +6,7 @@ defmodule Samwise.Money.IncomeController do
 
   def index(conn, _params) do
     incomes = Repo.all(Income)
-    render(conn, "index.html", incomes: incomes, page_title: "Incomes")
+    render(conn, "index.html", incomes: incomes, total: total(), page_title: "Incomes")
   end
 
   def new(conn, _params) do
@@ -66,5 +66,9 @@ defmodule Samwise.Money.IncomeController do
 
   def add_service_nav(conn, template) do
     assign(conn, :service_nav, template)
+  end
+
+  def total do
+    Repo.one(from i in Income, select: sum(i.amount))
   end
 end

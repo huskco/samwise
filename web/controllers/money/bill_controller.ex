@@ -6,7 +6,7 @@ defmodule Samwise.Money.BillController do
 
   def index(conn, _params) do
     bills = from(bill in Bill, order_by: bill.name) |> Repo.all
-    render(conn, "index.html", bills: bills, page_title: "Bills")
+    render(conn, "index.html", bills: bills, total: total(), page_title: "Bills")
   end
 
   def new(conn, _params) do
@@ -66,5 +66,9 @@ defmodule Samwise.Money.BillController do
 
   def add_service_nav(conn, template) do
     assign(conn, :service_nav, template)
+  end
+
+  def total do
+    Repo.one(from b in Bill, select: sum(b.amount))
   end
 end

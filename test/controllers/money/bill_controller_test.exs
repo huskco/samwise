@@ -29,7 +29,7 @@ defmodule Samwise.Money.BillControllerTest do
   test "shows chosen resource", %{conn: conn} do
     bill = Repo.insert! %Bill{name: "Bill", url: "google.com", due: 5, amount: 10.00}
     conn = get conn, bill_path(conn, :show, bill)
-    assert html_response(conn, 200) =~ "Show bill"
+    assert html_response(conn, 200) =~ bill.name
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do

@@ -8,7 +8,7 @@
 
 <p>
   <span class="label label-inline">Dates:</span>
-  <%= @income.dates %>
+  <%= Enum.map_join(@income.dates, ", ", &(Number.Human.number_to_ordinal(&1))) %>
 </p>
 
 <p>

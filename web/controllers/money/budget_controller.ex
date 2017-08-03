@@ -6,7 +6,7 @@ defmodule Samwise.Money.BudgetController do
 
   def index(conn, _params) do
     budgets = Repo.all(Budget)
-    render(conn, "index.html", budgets: budgets, page_title: "Budgets")
+    render(conn, "index.html", budgets: budgets, total: total(), page_title: "Budgets")
   end
 
   def new(conn, _params) do
@@ -66,5 +66,9 @@ defmodule Samwise.Money.BudgetController do
 
   def add_service_nav(conn, template) do
     assign(conn, :service_nav, template)
+  end
+
+  def total do
+    Repo.one(from b in Budget, select: sum(b.amount))
   end
 end

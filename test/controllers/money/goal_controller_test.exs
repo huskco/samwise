@@ -27,9 +27,9 @@ defmodule Samwise.Money.GoalControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    goal = Repo.insert! %Goal{}
+    goal = Repo.insert! %Goal{name: "GoalName", amount: 5000.00, url: "http://google.com", imageUrl: "http://google.com", isDebt: false}
     conn = get conn, goal_path(conn, :show, goal)
-    assert html_response(conn, 200) =~ "Show goal"
+    assert html_response(conn, 200) =~ goal.name
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do

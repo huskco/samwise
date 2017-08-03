@@ -6,7 +6,7 @@ defmodule Samwise.Money.GoalController do
 
   def index(conn, _params) do
     goals = Repo.all(Goal)
-    render(conn, "index.html", goals: goals, page_title: "Goals")
+    render(conn, "index.html", goals: goals, total: total(), page_title: "Goals")
   end
 
   def new(conn, _params) do
@@ -66,5 +66,9 @@ defmodule Samwise.Money.GoalController do
 
   def add_service_nav(conn, template) do
     assign(conn, :service_nav, template)
+  end
+
+  def total do
+    Repo.one(from g in Goal, select: sum(g.amount))
   end
 end
