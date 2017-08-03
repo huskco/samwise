@@ -1,21 +1,12 @@
 defmodule Samwise.NextDate do
   use Number
 
-  def next_date(day) do
-    if day < today.day do
-      month = today.month + 1
-    else
-      month = today.month
-    end
+  def next_date(day, current_date \\ today()) do
+    month_name = day
+    |> futurize_month(current_date)
+    |> simplify_month
+    |> short_month_names
 
-    if month > 12 do
-      month = month - 12
-      year = today.year + 1
-    else
-      year = today.year
-    end
-
-    month_name = short_month_names(month)
     ordinalized_day = Number.Human.number_to_ordinal(day)
 
     "#{month_name} #{ordinalized_day}"
@@ -23,6 +14,20 @@ defmodule Samwise.NextDate do
 
   def today do
     DateTime.utc_now
+  end
+
+  def futurize_month(day, today) do
+    case day < today.day do
+      true -> today.month + 1
+      false -> today.month
+    end
+  end
+
+  def simplify_month(month) do
+    case month > 12 do
+      true -> month - 12
+      false -> month
+    end
   end
 
   def short_month_names(month) do
