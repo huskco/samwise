@@ -15,6 +15,4 @@ config :samwise, Samwise.Endpoint,
 config :samwise, Samwise.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: System.get_env("DATABASE_URL"),
-  username: System.get_env("DATABASE_USER"),
-  password: System.get_env("DATABASE_PASS"),
   pool_size: 20
