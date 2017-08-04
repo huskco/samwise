@@ -3,8 +3,17 @@ defmodule Samwise.Money.ForecastController do
   plug :add_service_nav, "_service_nav_money.html"
 
   def index(conn, _params) do
-    bills_total = 33
-    render(conn, "index.html", bills_total: bills_total, page_title: "Forecast")
+    bills_total = Samwise.Money.BillController.total()
+    budgets_total = Samwise.Money.BudgetController.total()
+    goals_total = Samwise.Money.GoalController.total()
+    incomes_total = Samwise.Money.IncomeController.total()
+    render(conn,
+      "index.html",
+      bills_total: bills_total,
+      budgets_total: budgets_total,
+      goals_total: goals_total,
+      incomes_total: incomes_total,
+      page_title: "Forecast")
   end
 
   def add_service_nav(conn, template) do

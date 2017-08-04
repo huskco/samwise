@@ -8,4 +8,7 @@
   Table
 </div>
 
-Bills total: <%= @bills_total %>
+Bills total: <%= Number.Currency.number_to_currency @bills_total %>
+Budgets total: <%= Number.Currency.number_to_currency @budgets_total %>
+Goals total: <%= Number.Currency.number_to_currency @goals_total %>
+Incomes total: <%= Number.Currency.number_to_currency @incomes_total %>
