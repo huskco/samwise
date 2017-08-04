@@ -1,8 +1,6 @@
 <h2>Forecast</h2>
 
-<div class="card">
-  Chart
-</div>
+<%= render(Samwise.SharedView, "_events_chart.html", conn: @conn) %>
 
 <div class="table">
   Table
