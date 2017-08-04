@@ -1,6 +1,6 @@
 defmodule Samwise.Money.IncomeController do
   use Samwise.Web, :controller
-  plug :add_service_nav, "_service_nav_money.html"
+  plug :add_service_layout, "money"
 
   alias Samwise.Money.Income
 
@@ -64,8 +64,8 @@ defmodule Samwise.Money.IncomeController do
     |> redirect(to: income_path(conn, :index))
   end
 
-  def add_service_nav(conn, template) do
-    assign(conn, :service_nav, template)
+  def add_service_layout(conn, service) do
+    Samwise.SharedController.add_service_layout(conn, service)
   end
 
   def total do

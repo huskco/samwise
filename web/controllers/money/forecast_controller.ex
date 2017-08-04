@@ -1,6 +1,6 @@
 defmodule Samwise.Money.ForecastController do
   use Samwise.Web, :controller
-  plug :add_service_nav, "_service_nav_money.html"
+  plug :add_service_layout, "money"
 
   def index(conn, _params) do
     bills_total = Samwise.Money.BillController.total()
@@ -16,7 +16,7 @@ defmodule Samwise.Money.ForecastController do
       page_title: "Forecast")
   end
 
-  def add_service_nav(conn, template) do
-    assign(conn, :service_nav, template)
+  def add_service_layout(conn, service) do
+    Samwise.SharedController.add_service_layout(conn, service)
   end
 end
