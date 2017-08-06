@@ -11,7 +11,7 @@ defmodule Samwise.Money.ForecastController do
     days_to_forecast = 120
     table_events = get_forecast_items()
     chart_events = get_dates_map(days_to_forecast, Timex.today, [])
-      #|> add_items_to_forecast()
+      |> add_items_to_forecast(get_forecast_items())
       #|> add_balance()
 
     render(conn,
@@ -30,7 +30,9 @@ defmodule Samwise.Money.ForecastController do
     Samwise.SharedController.add_service_layout(conn, service)
   end
 
-  def get_dates_map(days_to_forecast, date, dates_list \\ []) when days_to_forecast > 0 do
+  def get_dates_map(days_to_forecast, date, dates_list \\ [])
+
+  def get_dates_map(days_to_forecast, date, dates_list) when days_to_forecast > 0 do
     next_date = Timex.shift(date, days: 1)
     item = %{date: date, items: %{}}
     get_dates_map(days_to_forecast - 1, next_date, [item | dates_list])
@@ -38,6 +40,16 @@ defmodule Samwise.Money.ForecastController do
 
   def get_dates_map(days_to_forecast, _date, dates_list) when days_to_forecast == 0 do
     Enum.reverse(dates_list)
+  end
+
+  def add_items_to_forecast(dates_list, [head | tail], itemized_list \\ [])
+
+  def add_items_to_forecast(dates_list, [head | tail], itemized_list) do
+    add_items_to_forecast(dates_list, tail, itemized_list)
+  end
+
+  def add_items_to_forecast(dates_list, [], itemized_list) do
+    itemized_list
   end
 
   def get_forecast_items do
