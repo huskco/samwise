@@ -2,7 +2,7 @@ defmodule Samwise.Money.IncomeControllerTest do
   use Samwise.ConnCase
 
   alias Samwise.Money.Income
-  @valid_attrs %{amount: 42, dates: [], name: "some content"}
+  @valid_attrs %{amount: 42, due: 1, name: "some content"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
@@ -27,7 +27,7 @@ defmodule Samwise.Money.IncomeControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    income = Repo.insert! %Income{name: "IncomeName", dates: [1, 15], amount: 29.99}
+    income = Repo.insert! %Income{name: "IncomeName", due: 1, amount: 29.99}
     conn = get conn, income_path(conn, :show, income)
     assert html_response(conn, 200) =~ income.name
   end

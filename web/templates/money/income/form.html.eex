@@ -18,9 +18,9 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :dates, class: "control-label" %>
-    <%= text_input f, :dates, class: "form-control" %>
-    <%= error_tag f, :dates %>
+    <%= label f, :due, class: "control-label" %>
+    <%= number_input f, :due, class: "form-control" %>
+    <%= error_tag f, :due %>
   </div>
 
   <div class="form-group">

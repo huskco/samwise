@@ -8,10 +8,11 @@ defmodule Samwise.Money.ForecastController do
     goals_total = Samwise.Money.GoalController.total()
     incomes_total = Samwise.Money.IncomeController.total()
     balance = 10000
-    events = get_forecast_items()
-      |> make_several_months(4)
-      |> sort_events()
-      |> add_balance()
+    days_to_forecast = 120
+    table_events = get_forecast_items()
+    chart_events = get_dates_map(days_to_forecast, Timex.today, [])
+      #|> add_items_to_forecast()
+      #|> add_balance()
 
     render(conn,
       "index.html",
@@ -19,7 +20,8 @@ defmodule Samwise.Money.ForecastController do
       budgets_total: budgets_total,
       goals_total: goals_total,
       incomes_total: incomes_total,
-      events: events,
+      table_events: table_events,
+      chart_events: chart_events,
       balance: balance,
       page_title: "Forecast")
   end
@@ -28,27 +30,19 @@ defmodule Samwise.Money.ForecastController do
     Samwise.SharedController.add_service_layout(conn, service)
   end
 
+  def get_dates_map(days_to_forecast, date, dates_list \\ []) when days_to_forecast > 0 do
+    next_date = Timex.shift(date, days: 1)
+    item = %{date: date, items: %{}}
+    get_dates_map(days_to_forecast - 1, next_date, [item | dates_list])
+  end
+
+  def get_dates_map(days_to_forecast, _date, dates_list) when days_to_forecast == 0 do
+    Enum.reverse(dates_list)
+  end
+
   def get_forecast_items do
     incomes = Samwise.Money.IncomeController.all_incomes()
     bills = Samwise.Money.BillController.all_bills()
-
     incomes ++ bills
-  end
-
-  def make_several_months([head | tail], months_to_add, full_events \\ []) do
-    item = %{item: head, balance: 0}
-    make_several_months(tail, months_to_add, full_events)
-  end
-
-  def make_several_months([], months_to_add, full_events) do
-    full_events
-  end
-
-  def sort_events(events) do
-    events
-  end
-
-  def add_balance(items) do
-    items
   end
 end

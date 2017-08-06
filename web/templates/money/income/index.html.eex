@@ -9,8 +9,8 @@
 <div class="card-list">
   <%= for income <- @incomes do %>
     <%= render("_card.html", conn: @conn, income: income) %>
-    <%= link to: income_path(@conn, :new), class: "card card-add" do %>
-      <span class="add-icon">+</span>
-    <% end %>
+  <% end %>
+  <%= link to: income_path(@conn, :new), class: "card card-add" do %>
+    <span class="add-icon">+</span>
   <% end %>
 </div>

@@ -62,5 +62,11 @@ Repo.insert! %Samwise.Money.Goal{
 Repo.insert! %Samwise.Money.Income{
   name: "Husk",
   amount: 3500.00,
-  dates: [1, 15]
+  due: 1
+}
+
+Repo.insert! %Samwise.Money.Income{
+  name: "Husk",
+  amount: 3500.00,
+  due: 15
 }

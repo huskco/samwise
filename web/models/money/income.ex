@@ -3,7 +3,7 @@ defmodule Samwise.Money.Income do
 
   schema "incomes" do
     field :name, :string
-    field :dates, {:array, :integer}
+    field :due, :integer
     field :amount, :float
 
     timestamps()
@@ -14,7 +14,7 @@ defmodule Samwise.Money.Income do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :dates, :amount])
-    |> validate_required([:name, :dates, :amount])
+    |> cast(params, [:name, :due, :amount])
+    |> validate_required([:name, :due, :amount])
   end
 end

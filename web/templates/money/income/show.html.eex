@@ -7,8 +7,8 @@
 </header>
 
 <p>
-  <span class="label label-inline">Dates:</span>
-  <%= Enum.map_join(@income.dates, ", ", &(Number.Human.number_to_ordinal(&1))) %>
+  <span class="label label-inline">Due:</span>
+  <%= pretty_next_date @income.due %>
 </p>
 
 <p>
