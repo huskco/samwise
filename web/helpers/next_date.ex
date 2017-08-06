@@ -20,6 +20,15 @@ defmodule Samwise.NextDate do
     end
   end
 
+  def simple_date(date) do
+    date_string = Timex.format(date, "%-m/%-d/%Y", :strftime)
+
+    case date_string do
+      {:ok, string} -> string
+      {:error, reason} -> reason
+    end
+  end
+
   def pretty_date(naivedate) do
     month = naivedate.month |> short_month_names()
     day = naivedate.day |> Number.Human.number_to_ordinal()

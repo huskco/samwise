@@ -6,6 +6,11 @@ defmodule Samwise.NextDateHelperTest do
     assert Samwise.NextDate.current_month_datetime(5, starting_date) == ~N[1982-02-05 00:00:00]
   end
 
+  test "makes a date simple" do
+    date = Timex.parse!("02/23/1982", "%-m/%-d/%Y", :strftime)
+    assert Samwise.NextDate.simple_date(date) == "2/23/1982"
+  end
+
   test "makes a date pretty" do
     date = Timex.parse!("02/23/1982", "%-m/%-d/%Y", :strftime)
     assert Samwise.NextDate.pretty_date(date) == "Feb 23rd"
