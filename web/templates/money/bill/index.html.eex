@@ -11,4 +11,7 @@
   <%= for bill <- @bills do %>
     <%= render("_card.html", conn: @conn, bill: bill) %>
   <% end %>
+  <%= link to: bill_path(@conn, :new), class: "card card-add" do %>
+    <span class="add-icon">+</span>
+  <% end %>
 </div>

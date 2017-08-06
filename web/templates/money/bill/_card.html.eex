@@ -1,6 +1,6 @@
 <article class="card">
   <div class="card-actions">
-    <%= link "Edit", to: bill_path(@conn, :edit, @bill), class: "button--ghost" %>
+    <%= link "", to: bill_path(@conn, :edit, @bill), class: "ion-edit" %>
   </div>
 
   <h3>
@@ -15,6 +15,6 @@
 
   <p>
     <span class="label label-inline">Next due</span>
-    <%= next_date @bill.due %>
+    <%= pretty_next_date @bill.due %>
   </p>
 </article>

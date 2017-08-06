@@ -1,6 +1,6 @@
 <article class="card">
   <div class="card-actions">
-    <%= link "Edit", to: goal_path(@conn, :edit, @goal), class: "button--ghost" %>
+    <%= link "", to: goal_path(@conn, :edit, @goal), class: "ion-edit" %>
   </div>
 
   <h3>

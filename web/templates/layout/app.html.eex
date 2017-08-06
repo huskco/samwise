@@ -10,17 +10,19 @@
     <title><%= page_title(@conn) %></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <%= if service_name(@conn) do %>
       <link rel="icon" type="image/png" href="<%= static_path(@conn, "/images/favicon-#{service_name(@conn)}.png") %>">
-      <link rel="apple-touch-icon" href="<%= static_path(@conn, "/images/apple-touch-icon.png-#{service_name(@conn)}") %>">
+      <link rel="apple-touch-icon" href="<%= static_path(@conn, "/images/apple-touch-icon-#{service_name(@conn)}.png") %>">
     <% else %>
       <link rel="icon" type="image/png" href="<%= static_path(@conn, "/images/favicon.png") %>">
       <link rel="apple-touch-icon" href="<%= static_path(@conn, "/images/apple-touch-icon.png") %>">
     <% end %>
 
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="//code.highcharts.com/highcharts.js"></script>
     <script src="//code.jquery.com/jquery-git.js"></script>
   </head>

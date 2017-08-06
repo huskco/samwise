@@ -5,8 +5,7 @@ defmodule Samwise.Money.GoalController do
   alias Samwise.Money.Goal
 
   def index(conn, _params) do
-    goals = Repo.all(Goal)
-    render(conn, "index.html", goals: goals, total: total(), page_title: "Goals")
+    render(conn, "index.html", goals: all_goals, total: total(), page_title: "Goals")
   end
 
   def new(conn, _params) do
@@ -62,6 +61,10 @@ defmodule Samwise.Money.GoalController do
     conn
     |> put_flash(:info, "Goal deleted successfully.")
     |> redirect(to: goal_path(conn, :index))
+  end
+
+  def all_goals do
+    from(goal in Goal, order_by: goal.name) |> Repo.all
   end
 
   def add_service_layout(conn, service) do

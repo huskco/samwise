@@ -1,10 +1,7 @@
 <h2>Forecast</h2>
 
 <%= render(Samwise.SharedView, "_events_chart.html", conn: @conn) %>
-
-<div class="table">
-  Table
-</div>
+<%= render(Samwise.SharedView, "_events_table.html", conn: @conn, events: @events) %>
 
 Bills total: <%= Number.Currency.number_to_currency @bills_total %>
 Budgets total: <%= Number.Currency.number_to_currency @budgets_total %>

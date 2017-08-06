@@ -5,8 +5,7 @@ defmodule Samwise.Money.IncomeController do
   alias Samwise.Money.Income
 
   def index(conn, _params) do
-    incomes = Repo.all(Income)
-    render(conn, "index.html", incomes: incomes, total: total(), page_title: "Incomes")
+    render(conn, "index.html", incomes: all_incomes(), total: total(), page_title: "Incomes")
   end
 
   def new(conn, _params) do
@@ -62,6 +61,10 @@ defmodule Samwise.Money.IncomeController do
     conn
     |> put_flash(:info, "Income deleted successfully.")
     |> redirect(to: income_path(conn, :index))
+  end
+
+  def all_incomes do
+    from(income in Income, order_by: income.name) |> Repo.all
   end
 
   def add_service_layout(conn, service) do

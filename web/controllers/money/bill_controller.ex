@@ -5,8 +5,7 @@ defmodule Samwise.Money.BillController do
   alias Samwise.Money.Bill
 
   def index(conn, _params) do
-    bills = from(bill in Bill, order_by: bill.name) |> Repo.all
-    render(conn, "index.html", bills: bills, total: total(), page_title: "Bills")
+    render(conn, "index.html", bills: all_bills(), total: total(), page_title: "Bills")
   end
 
   def new(conn, _params) do
@@ -62,6 +61,10 @@ defmodule Samwise.Money.BillController do
     conn
     |> put_flash(:info, "Bill deleted successfully.")
     |> redirect(to: bill_path(conn, :index))
+  end
+
+  def all_bills do
+    from(bill in Bill, order_by: bill.name) |> Repo.all
   end
 
   def add_service_layout(conn, service) do

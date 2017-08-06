@@ -1,35 +1,30 @@
 defmodule Samwise.NextDateHelperTest do
   use Samwise.ConnCase
 
-  test "displays the pretty next date for this month" do
-    today = ~N[2017-02-25 12:00:00.0]
-    assert Samwise.NextDate.next_date(28, today) == "Feb 28th"
+  test "converts day to date in current month" do
+    starting_date = Timex.parse!("02/28/1982", "%-m/%-d/%Y", :strftime)
+    assert Samwise.NextDate.current_month_datetime(5, starting_date) == ~N[1982-02-05 00:00:00]
   end
 
-  test "displays the pretty next date for next month" do
-    today = ~N[2017-02-25 12:00:00.0]
-    assert Samwise.NextDate.next_date(22, today) == "Mar 22nd"
+  test "makes a date pretty" do
+    date = Timex.parse!("02/23/1982", "%-m/%-d/%Y", :strftime)
+    assert Samwise.NextDate.pretty_date(date) == "Feb 23rd"
   end
 
-  test "changes to the next month if date passed" do
-    today = ~N[2017-02-23 23:00:00.0]
-    assert Samwise.NextDate.futurize_month(22, today) == 3
+  test "shifts to next month if passed" do
+    current_month_date = Timex.parse!("02/11/1982", "%-m/%-d/%Y", :strftime)
+    starting_date = Timex.parse!("02/23/1982", "%-m/%-d/%Y", :strftime)
+    assert Samwise.NextDate.next_date(current_month_date, starting_date) == ~N[1982-03-11 00:00:00]
   end
 
-  test "do not change to the next month if date hasn't passed" do
-    today = ~N[2017-02-23 23:00:00.0]
-    assert Samwise.NextDate.futurize_month(25, today) == 2
+  test "doesn't shift to next month if not passed" do
+    current_month_date = Timex.parse!("02/23/1982", "%-m/%-d/%Y", :strftime)
+    starting_date = Timex.parse!("02/15/1982", "%-m/%-d/%Y", :strftime)
+    assert Samwise.NextDate.next_date(current_month_date, starting_date) == ~N[1982-02-23 00:00:00]
   end
 
-  test "simplifies month if given one more than 12" do
-    assert Samwise.NextDate.simplify_month(15) == 3
-  end
-
-  test "does not simplify month if given one less than 12" do
-    assert Samwise.NextDate.simplify_month(4) == 4
-  end
-
-  test "gets month name from shortnames" do
-    assert Samwise.NextDate.short_month_names(5) == "May"
+  test "converts day to pretty date in next month" do
+    starting_date = Timex.parse!("02/23/1982", "%-m/%-d/%Y", :strftime)
+    assert Samwise.NextDate.pretty_next_date(5, starting_date) == "Mar 5th"
   end
 end

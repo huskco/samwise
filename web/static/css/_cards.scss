@@ -11,7 +11,7 @@
 
   &.card-add {
     background-color: mix($light-background-color, $base-background-color);
-    cursor: context-menu;
+    display: block;
   }
 
   form {
@@ -39,7 +39,7 @@
     color: $medium-gray;
     font-size: 2rem;
     left: 50%;
-    opacity: 0.25;
+    opacity: 0.5;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -51,19 +51,26 @@
   cursor: context-menu;
   opacity: 0.5;
   position: absolute;
-  right: $small-spacing;
-  top: $small-spacing;
+  right: $base-spacing;
+  top: $base-spacing;
   transition: opacity $base-duration $base-timing;
   z-index: 2;
 
+  a {
+    color: $medium-gray;
+  }
+
   &:hover {
     opacity: 1;
+  }
+
+  .ion-edit {
+    cursor: context-menu;
   }
 }
 
 .card-icon {
   background-color: $white;
-  border-radius: $base-border-radius;
   border: 2px solid $white;
   height: 2rem;
   margin-right: 0.5rem;
@@ -86,10 +93,10 @@
   }
 
   &::after {
-    color: $medium-gray;
+    color: rgba($medium-gray, 0.5);
     content: attr(alt);
     display: block;
-    font-family: serif;
+    font-weight: 600;
     height: 100%;
     left: 0;
     position: absolute;

@@ -3,12 +3,14 @@
     <span class="label label-inline">Total:</span>
     <%= Number.Currency.number_to_currency @total %>
   </div>
-  <%= link "Add", to: goal_path(@conn, :new), class: "button--ghost" %>
 </nav>
 <h2>Goals</h2>
 
 <div class="card-list">
   <%= for goal <- @goals do %>
     <%= render("_card.html", conn: @conn, goal: goal) %>
+  <% end %>
+  <%= link to: goal_path(@conn, :new), class: "card card-add" do %>
+    <span class="add-icon">+</span>
   <% end %>
 </div>

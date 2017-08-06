@@ -1,6 +1,6 @@
 <article class="card">
   <div class="card-actions">
-    <%= link "Edit", to: budget_path(@conn, :edit, @budget), class: "button--ghost" %>
+    <%= link "", to: budget_path(@conn, :edit, @budget), class: "ion-edit" %>
   </div>
 
   <h3>

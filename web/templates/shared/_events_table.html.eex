@@ -1,0 +1,25 @@
+<div class="table">
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Forecasted Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for event <- @events do %>
+        <tr>
+          <td><%= event.date %></td>
+          <td>
+            <img src="<%= get_logo(event.item.name) %>" alt="<%= get_initial(event.item.name) %>" class="card-icon">
+            <%= event.item.name %>
+          </td>
+          <td><%= Number.Currency.number_to_currency event.item.amount %></td>
+          <td><%= Number.Currency.number_to_currency event.balance %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

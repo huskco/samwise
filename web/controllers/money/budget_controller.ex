@@ -5,8 +5,7 @@ defmodule Samwise.Money.BudgetController do
   alias Samwise.Money.Budget
 
   def index(conn, _params) do
-    budgets = Repo.all(Budget)
-    render(conn, "index.html", budgets: budgets, total: total(), page_title: "Budgets")
+    render(conn, "index.html", budgets: all_budgets(), total: total(), page_title: "Budgets")
   end
 
   def new(conn, _params) do
@@ -62,6 +61,10 @@ defmodule Samwise.Money.BudgetController do
     conn
     |> put_flash(:info, "Budget deleted successfully.")
     |> redirect(to: budget_path(conn, :index))
+  end
+
+  def all_budgets do
+    from(budget in Budget, order_by: budget.name) |> Repo.all
   end
 
   def add_service_layout(conn, service) do

@@ -19,7 +19,7 @@ defmodule Samwise.Mixfile do
   def application do
     [mod: {Samwise, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :timex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,7 +38,8 @@ defmodule Samwise.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:number, "~> 0.5.1"}]
+     {:number, "~> 0.5.1"},
+     {:timex, "~> 3.1.24"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

@@ -4,7 +4,7 @@
     Money
   <% end %>
 
-  <nav class="service-nav-nav {{navActiveClass}}">
+  <nav class="service-nav-nav">
     <%= link "Bills", to: bill_path(@conn, :index) %>
     <%= link "Budgets", to: budget_path(@conn, :index) %>
     <%= link "Goals", to: goal_path(@conn, :index) %>

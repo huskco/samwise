@@ -13,7 +13,7 @@
 
 <p>
   <span class="label label-inline">Next Due:</span>
-  <%= next_date @bill.due %>
+  <%= pretty_next_date @bill.due %>
 </p>
 
 <p>

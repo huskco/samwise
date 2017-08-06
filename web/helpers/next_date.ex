@@ -1,33 +1,30 @@
 defmodule Samwise.NextDate do
   use Number
 
-  def next_date(day, current_date \\ today()) do
-    month_name = day
-    |> futurize_month(current_date)
-    |> simplify_month
-    |> short_month_names
-
-    ordinalized_day = Number.Human.number_to_ordinal(day)
-
-    "#{month_name} #{ordinalized_day}"
+  def pretty_next_date(day, starting_date \\ Timex.today) do
+    current_month_datetime(day, starting_date)
+    |> next_date(starting_date)
+    |> pretty_date
   end
 
-  def today do
-    DateTime.utc_now
+  def current_month_datetime(day, starting_date) do
+    starting_date
+    |> Timex.format!("%-m/#{day}/%Y", :strftime)
+    |> Timex.parse!("{M}/{D}/{YYYY}")
   end
 
-  def futurize_month(day, today) do
-    case day < today.day do
-      true -> today.month + 1
-      false -> today.month
+  def next_date(date, starting_date) do
+    case Timex.before?(date, starting_date) do
+      true -> Timex.shift(date, months: 1)
+      false -> date
     end
   end
 
-  def simplify_month(month) do
-    case month > 12 do
-      true -> month - 12
-      false -> month
-    end
+  def pretty_date(naivedate) do
+    month = naivedate.month |> short_month_names()
+    day = naivedate.day |> Number.Human.number_to_ordinal()
+
+    "#{month} #{day}"
   end
 
   def short_month_names(month) do
