@@ -47,9 +47,10 @@ defmodule Samwise.Money.ForecastController do
 
   def add_items_to_forecast([head | tail], items_list, balance, acc) do
     items = items_on_day(items_list, head.day, [])
-    updated_item = Map.put(head, :items, items)
+    new_balance = balance_after_items(items, balance)
+    updated_item = Map.put(head, :items, items) |> Map.put(:balance, new_balance)
     updated_acc = acc ++ [updated_item]
-    add_items_to_forecast(tail, items_list, balance, updated_acc)
+    add_items_to_forecast(tail, items_list, new_balance, updated_acc)
   end
 
   def add_items_to_forecast([], _items_list, _balance, acc) do
@@ -80,6 +81,19 @@ defmodule Samwise.Money.ForecastController do
     |> Map.delete(:updated_at)
     |> Map.delete(:id)
     |> Map.put(:type, type)
+  end
+
+  def balance_after_items([head | tail], balance) do
+    new_balance = case head.type do
+      "income" -> balance + head.amount
+      "bill" -> balance - head.amount
+    end
+
+    balance_after_items(tail, new_balance)
+  end
+
+  def balance_after_items([], balance) do
+    balance
   end
 
   # Get all forecast items (incomes & bills)

@@ -74,4 +74,8 @@ defmodule Samwise.Money.BudgetController do
   def total do
     Repo.one(from b in Budget, select: sum(b.amount))
   end
+
+  def daily_average do
+    total() / 30
+  end
 end
