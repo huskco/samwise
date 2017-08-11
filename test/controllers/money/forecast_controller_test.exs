@@ -34,7 +34,7 @@ defmodule Samwise.Money.ForecastControllerTest do
       %Samwise.Money.Bill{amount: 11.99, due: 12, name: "Hulu", url: "hulu.com"},
       %Samwise.Money.Bill{amount: 10.35, due: 13, name: "XBox Gold", url: "xbox.com"}
     ]
-    balance = 1000
+    balance = 1000.00
     expected_list = [
       %{date: "2/11/1982", day: 11, max_balance: 1000, events: []},
       %{date: "2/12/1982", day: 12, max_balance: 4488.01, events: [
@@ -63,7 +63,7 @@ defmodule Samwise.Money.ForecastControllerTest do
       %{date: "2/14/1982", day: 14, max_balance: 4477.66, events: []},
       %{date: "2/15/1982", day: 15, max_balance: 4477.66, events: []}
     ]
-    budgets_daily = 25
+    budgets_daily = 25.00
     expected_list = [
       %{date: "2/11/1982", day: 11, max_balance: 1000, min_balance: 975, events: []},
       %{date: "2/12/1982", day: 12, max_balance: 4488.01, min_balance: 4438.01, events: [
