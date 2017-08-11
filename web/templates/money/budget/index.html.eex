@@ -1,5 +1,9 @@
 <nav class="header-actions">
   <div>
+    <span class="label label-inline">Daily:</span>
+    <%= Number.Currency.number_to_currency @daily_average %>
+  </div>
+  <div>
     <span class="label label-inline">Total:</span>
     <%= Number.Currency.number_to_currency @total %>
   </div>

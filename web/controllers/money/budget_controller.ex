@@ -5,7 +5,7 @@ defmodule Samwise.Money.BudgetController do
   alias Samwise.Money.Budget
 
   def index(conn, _params) do
-    render(conn, "index.html", budgets: all_budgets(), total: total(), page_title: "Budgets")
+    render(conn, "index.html", budgets: all_budgets(), total: total(), daily_average: daily_average(), page_title: "Budgets")
   end
 
   def new(conn, _params) do

@@ -5,6 +5,7 @@ defmodule Samwise.Money.ForecastController do
   def index(conn, _params) do
     bills_total = Samwise.Money.BillController.total()
     budgets_total = Samwise.Money.BudgetController.total()
+    budgets_daily = budgets_total / 30
     goals_total = Samwise.Money.GoalController.total()
     incomes_total = Samwise.Money.IncomeController.total()
     balance = 10000
@@ -12,11 +13,13 @@ defmodule Samwise.Money.ForecastController do
     table_events = get_forecast_items()
     chart_events = get_dates_map(days_to_forecast, Timex.today, [])
       |> add_items_to_forecast(get_forecast_items(), balance, [])
+      |> add_min_max_budgets(budgets_daily, [])
 
     render(conn,
       "index.html",
       bills_total: bills_total,
       budgets_total: budgets_total,
+      budgets_daily: budgets_daily,
       goals_total: goals_total,
       incomes_total: incomes_total,
       table_events: table_events,
@@ -48,7 +51,8 @@ defmodule Samwise.Money.ForecastController do
   def add_items_to_forecast([head | tail], items_list, balance, acc) do
     items = items_on_day(items_list, head.day, [])
     new_balance = balance_after_items(items, balance)
-    updated_item = Map.put(head, :items, items) |> Map.put(:balance, new_balance)
+    updated_item = Map.put(head, :items, items)
+    |> Map.put(:max_balance, new_balance)
     updated_acc = acc ++ [updated_item]
     add_items_to_forecast(tail, items_list, new_balance, updated_acc)
   end
@@ -94,6 +98,19 @@ defmodule Samwise.Money.ForecastController do
 
   def balance_after_items([], balance) do
     balance
+  end
+
+  # Add min & max budgets to forecast list
+
+  def add_min_max_budgets([head | tail], budgets_daily, acc, index \\ 1) do
+    min_balance = head.max_balance - (budgets_daily * index)
+    updated_item = Map.put(head, :min_balance, min_balance)
+    updated_acc = acc ++ [updated_item]
+    add_min_max_budgets(tail, budgets_daily, updated_acc, index + 1)
+  end
+
+  def add_min_max_budgets([], _budgets_daily, acc, index) do
+    acc
   end
 
   # Get all forecast items (incomes & bills)
