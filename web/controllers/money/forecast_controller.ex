@@ -12,7 +12,7 @@ defmodule Samwise.Money.ForecastController do
     days_to_forecast = 120
     table_events = get_forecast_items()
     chart_events = get_dates_map(days_to_forecast, Timex.today, [])
-      |> add_items_to_forecast(get_forecast_items(), balance, [])
+      |> add_events_to_forecast(get_forecast_items(), balance, [])
       |> add_min_max_budgets(budgets_daily, [])
 
     render(conn,
@@ -38,7 +38,7 @@ defmodule Samwise.Money.ForecastController do
 
   def get_dates_map(days_to_forecast, date, dates_list) when days_to_forecast > 0 do
     next_date = Timex.shift(date, days: 1)
-    item = %{date: Samwise.NextDate.simple_date(date), day: date.day, items: []}
+    item = %{date: Samwise.NextDate.simple_date(date), day: date.day, events: []}
     get_dates_map(days_to_forecast - 1, next_date, [item | dates_list])
   end
 
@@ -46,31 +46,31 @@ defmodule Samwise.Money.ForecastController do
     Enum.reverse(dates_list)
   end
 
-  # Add items to Forecast
+  # Add events to Forecast
 
-  def add_items_to_forecast([head | tail], items_list, balance, acc) do
-    items = items_on_day(items_list, head.day, [])
-    new_balance = balance_after_items(items, balance)
-    updated_item = Map.put(head, :items, items)
+  def add_events_to_forecast([head | tail], events_list, balance, acc) do
+    events = events_on_day(events_list, head.day, [])
+    new_balance = balance_after_events(events, balance)
+    updated_item = Map.put(head, :events, events)
     |> Map.put(:max_balance, new_balance)
     updated_acc = acc ++ [updated_item]
-    add_items_to_forecast(tail, items_list, new_balance, updated_acc)
+    add_events_to_forecast(tail, events_list, new_balance, updated_acc)
   end
 
-  def add_items_to_forecast([], _items_list, _balance, acc) do
+  def add_events_to_forecast([], _events_list, _balance, acc) do
     acc
   end
 
-  def items_on_day([head | tail], day, acc) do
+  def events_on_day([head | tail], day, acc) do
     updated_acc = case head.due == day do
       true -> acc ++ [item_to_map(head)]
       false -> acc
     end
 
-    items_on_day(tail, day, updated_acc)
+    events_on_day(tail, day, updated_acc)
   end
 
-  def items_on_day([], _day, acc) do
+  def events_on_day([], _day, acc) do
     acc
   end
 
@@ -87,16 +87,16 @@ defmodule Samwise.Money.ForecastController do
     |> Map.put(:type, type)
   end
 
-  def balance_after_items([head | tail], balance) do
+  def balance_after_events([head | tail], balance) do
     new_balance = case head.type do
       "income" -> balance + head.amount
       "bill" -> balance - head.amount
     end
 
-    balance_after_items(tail, new_balance)
+    balance_after_events(tail, new_balance)
   end
 
-  def balance_after_items([], balance) do
+  def balance_after_events([], balance) do
     balance
   end
 
@@ -109,7 +109,7 @@ defmodule Samwise.Money.ForecastController do
     add_min_max_budgets(tail, budgets_daily, updated_acc, index + 1)
   end
 
-  def add_min_max_budgets([], _budgets_daily, acc, index) do
+  def add_min_max_budgets([], _budgets_daily, acc, _index) do
     acc
   end
 
