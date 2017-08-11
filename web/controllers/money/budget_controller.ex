@@ -76,6 +76,9 @@ defmodule Samwise.Money.BudgetController do
   end
 
   def daily_average do
-    total() / 30
+    case is_float(total()) do
+      true -> total() / 30
+      false -> 0
+    end
   end
 end

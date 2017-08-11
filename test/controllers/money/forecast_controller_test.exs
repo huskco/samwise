@@ -79,6 +79,4 @@ defmodule Samwise.Money.ForecastControllerTest do
 
     assert Controller.add_min_max_budgets(dates_list, budgets_daily, []) == expected_list
   end
-
-
 end

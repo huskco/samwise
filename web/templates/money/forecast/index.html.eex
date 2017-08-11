@@ -1,7 +1,6 @@
 <h2>Forecast</h2>
 
-<%= render(Samwise.SharedView, "_events_chart.html", conn: @conn) %>
-<%= inspect @chart_events %>
+<%= render(Samwise.SharedView, "_events_chart.html", conn: @conn, events: @chart_events) %>
 <%= render(Samwise.SharedView, "_events_table.html", conn: @conn, events: @table_events) %>
 
 

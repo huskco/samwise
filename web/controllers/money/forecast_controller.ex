@@ -5,7 +5,7 @@ defmodule Samwise.Money.ForecastController do
   def index(conn, _params) do
     bills_total = Samwise.Money.BillController.total()
     budgets_total = Samwise.Money.BudgetController.total()
-    budgets_daily = budgets_total / 30
+    budgets_daily = Samwise.Money.BudgetController.daily_average()
     goals_total = Samwise.Money.GoalController.total()
     incomes_total = Samwise.Money.IncomeController.total()
     balance = 10000
@@ -102,7 +102,9 @@ defmodule Samwise.Money.ForecastController do
 
   # Add min & max budgets to forecast list
 
-  def add_min_max_budgets([head | tail], budgets_daily, acc, index \\ 1) do
+  def add_min_max_budgets(dates_list, budgets_daily, acc, index \\ 1)
+
+  def add_min_max_budgets([head | tail], budgets_daily, acc, index) do
     min_balance = head.max_balance - (budgets_daily * index)
     updated_item = Map.put(head, :min_balance, min_balance)
     updated_acc = acc ++ [updated_item]
