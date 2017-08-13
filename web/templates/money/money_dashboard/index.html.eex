@@ -7,6 +7,7 @@
   <script>
     $(function() {
       var options = Object.assign(window.chartOptions, {
+        colors: ['#eeeeee', '#5fbae9', '#bfd849'],
         chart: {
           type: 'pie'
         },
@@ -17,14 +18,14 @@
           name: 'Brands',
           colorByPoint: true,
           data: [{
+            name: 'Income left over',
+            y: <%= @incomes_total - @budgets_total - @bills_total %>
+          }, {
             name: 'Bills',
             y: <%= @bills_total %>
           }, {
             name: 'Budgets',
             y: <%= @budgets_total %>,
-          }, {
-            name: 'Income',
-            y: <%= @incomes_total %>
           }]
         }]
       });

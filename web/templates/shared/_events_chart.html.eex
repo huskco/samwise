@@ -1,13 +1,12 @@
 <div id="forecastChart" class="card"></div>
 <script>
   $(function() {
-    var chartData = <%= raw @eventsChartData %>;
-    console.log(chartData);
     Highcharts.chart('forecastChart', Object.assign(window.chartOptions, {
 	    chart: {
-        height: 500,
+        height: 300,
         type: 'areaspline'
 	    },
+      colors: ['#c76baa'],
       series: <%= raw @eventsChartData %>
   	}));
   });

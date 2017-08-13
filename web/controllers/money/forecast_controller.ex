@@ -5,7 +5,7 @@ defmodule Samwise.Money.ForecastController do
   def index(conn, _params) do
     budgets_daily = Samwise.Money.BudgetController.daily_average()
     balance = 12000
-    days_to_forecast = 120
+    days_to_forecast = 90
     events = get_dates_map(days_to_forecast, Timex.today, [])
       |> add_events_to_forecast(get_forecast_items(), balance, [])
       |> add_min_max_budgets(budgets_daily, [])
@@ -125,11 +125,12 @@ defmodule Samwise.Money.ForecastController do
 
   def transform_to_chart_data(events, min_acc, max_acc) do
     [%{
-      name: "Maximum balance",
-      data: min_acc
-    }, %{
       name: "Minimum balance",
       data: max_acc
+    },
+    %{
+      name: "Maximum balance",
+      data: min_acc
     }]
   end
 

@@ -21,7 +21,7 @@ defmodule Samwise.NextDate do
   end
 
   def simple_date(date) do
-    date_string = Timex.format(date, "%-m/%-d/%Y", :strftime)
+    date_string = Timex.format(date, "%m/%d/%Y", :strftime)
 
     case date_string do
       {:ok, string} -> string
