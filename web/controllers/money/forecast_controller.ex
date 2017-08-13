@@ -3,27 +3,22 @@ defmodule Samwise.Money.ForecastController do
   plug :add_service_layout, "money"
 
   def index(conn, _params) do
-    bills_total = Samwise.Money.BillController.total()
-    budgets_total = Samwise.Money.BudgetController.total()
     budgets_daily = Samwise.Money.BudgetController.daily_average()
-    goals_total = Samwise.Money.GoalController.total()
-    incomes_total = Samwise.Money.IncomeController.total()
-    balance = 10000
+    balance = 12000
     days_to_forecast = 120
-    table_events = get_forecast_items()
-    chart_events = get_dates_map(days_to_forecast, Timex.today, [])
+    events = get_dates_map(days_to_forecast, Timex.today, [])
       |> add_events_to_forecast(get_forecast_items(), balance, [])
       |> add_min_max_budgets(budgets_daily, [])
 
+    eventsChartData = events
+      |> transform_to_chart_data
+      |> Poison.encode!
+
     render(conn,
       "index.html",
-      bills_total: bills_total,
-      budgets_total: budgets_total,
       budgets_daily: budgets_daily,
-      goals_total: goals_total,
-      incomes_total: incomes_total,
-      table_events: table_events,
-      chart_events: chart_events,
+      events: events,
+      eventsChartData: eventsChartData,
       balance: balance,
       page_title: "Forecast")
   end
@@ -79,12 +74,17 @@ defmodule Samwise.Money.ForecastController do
       Samwise.Money.Income -> "income"
       Samwise.Money.Bill -> "bill"
     end
+    url = case item.__struct__ do
+      Samwise.Money.Income -> nil
+      Samwise.Money.Bill -> item.url
+    end
     Map.from_struct(item)
     |> Map.delete(:__meta__)
     |> Map.delete(:inserted_at)
     |> Map.delete(:updated_at)
     |> Map.delete(:id)
     |> Map.put(:type, type)
+    |> Map.put(:url, url)
   end
 
   def balance_after_events([head | tail], balance) do
@@ -113,6 +113,24 @@ defmodule Samwise.Money.ForecastController do
 
   def add_min_max_budgets([], _budgets_daily, acc, _index) do
     acc
+  end
+
+  # Transform all that into something the chart can digest
+
+  def transform_to_chart_data([head | tail], min_acc \\ [], max_acc \\ []) do
+    min_acc = min_acc ++ [[head.date, head.min_balance]]
+    max_acc = max_acc ++ [[head.date, head.max_balance]]
+    transform_to_chart_data(tail, min_acc, max_acc)
+  end
+
+  def transform_to_chart_data(events, min_acc, max_acc) do
+    [%{
+      name: "Maximum balance",
+      data: min_acc
+    }, %{
+      name: "Minimum balance",
+      data: max_acc
+    }]
   end
 
   # Get all forecast items (incomes & bills)

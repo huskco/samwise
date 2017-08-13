@@ -1,32 +1,14 @@
-
-<div id="chart" class="card">
-  Chart
-</div>
-
+<div id="forecastChart" class="card"></div>
 <script>
   $(function() {
-    var myChart = Highcharts.chart('chart', {
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: 'Fruit Consumption'
-        },
-        xAxis: {
-            categories: ['Apples', 'Bananas', 'Oranges']
-        },
-        yAxis: {
-            title: {
-                text: 'Fruit eaten'
-            }
-        },
-        series: [{
-            name: 'Jane',
-            data: [1, 0, 4]
-        }, {
-            name: 'John',
-            data: [5, 7, 3]
-        }]
-    });
+    var chartData = <%= raw @eventsChartData %>;
+    console.log(chartData);
+    Highcharts.chart('forecastChart', Object.assign(window.chartOptions, {
+	    chart: {
+        height: 500,
+        type: 'areaspline'
+	    },
+      series: <%= raw @eventsChartData %>
+  	}));
   });
 </script>

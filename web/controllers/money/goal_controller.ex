@@ -5,7 +5,7 @@ defmodule Samwise.Money.GoalController do
   alias Samwise.Money.Goal
 
   def index(conn, _params) do
-    render(conn, "index.html", goals: all_goals, total: total(), page_title: "Goals")
+    render(conn, "index.html", goals: all_goals(), total: total(), page_title: "Goals")
   end
 
   def new(conn, _params) do

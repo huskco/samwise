@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="//code.highcharts.com/highcharts.js"></script>
     <script src="//code.jquery.com/jquery-git.js"></script>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </head>
 
   <body class="<%= if service_nav(@conn) do 'has-service_nav' end %>">
@@ -36,8 +37,6 @@
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
-
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    </div>
   </body>
 </html>

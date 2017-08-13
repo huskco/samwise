@@ -5,20 +5,22 @@
         <th>Next</th>
         <th>Name</th>
         <th>Amount</th>
-        <th>Forecasted Balance</th>
       </tr>
     </thead>
     <tbody>
-      <%= for event <- @events do %>
-        <tr>
-          <td><%= pretty_next_date event.due %></td>
-          <td>
-            <img src="<%= get_logo(event.name) %>" alt="<%= get_initial(event.name) %>" class="card-icon">
-            <%= event.name %>
-          </td>
-          <td><%= Number.Currency.number_to_currency event.amount %></td>
-          <td><%#= Number.Currency.number_to_currency event.balance %></td>
-        </tr>
+      <%= for date <- @events do %>
+        <%= for event <- date.events do %>
+          <tr>
+            <td><%= date.date %></td>
+            <td>
+              <img src="<%= get_logo(event.url) %>" alt="<%= get_initial(event.name) %>" class="card-icon">
+              <%= event.name %>
+            </td>
+            <td>
+              <%= Number.Currency.number_to_currency event.amount %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

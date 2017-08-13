@@ -1,0 +1,40 @@
+<h2>Dashboard</h2>
+<div class="card-list">
+  <div class="card">
+    <div id="budgetChart"></div>
+  </div>
+
+  <script>
+    $(function() {
+      var options = Object.assign(window.chartOptions, {
+        chart: {
+          type: 'pie'
+        },
+        title: {
+          text: 'Budget breakdown'
+        },
+        series: [{
+          name: 'Brands',
+          colorByPoint: true,
+          data: [{
+            name: 'Bills',
+            y: <%= @bills_total %>
+          }, {
+            name: 'Budgets',
+            y: <%= @budgets_total %>,
+          }, {
+            name: 'Income',
+            y: <%= @incomes_total %>
+          }]
+        }]
+      });
+      Highcharts.chart('budgetChart', options);
+    });
+  </script>
+  <div class="card">
+    Budgets daily: <%= Number.Currency.number_to_currency @budgets_daily %>
+  </div>
+  <div class="card">
+    Goals total: <%= Number.Currency.number_to_currency @goals_total %>
+  </div>
+</div>

@@ -1,23 +1,4 @@
 <h2>Forecast</h2>
 
-<%= render(Samwise.SharedView, "_events_chart.html", conn: @conn, events: @chart_events) %>
-<%= render(Samwise.SharedView, "_events_table.html", conn: @conn, events: @table_events) %>
-
-
-<div class="card-list">
-  <div class="card">
-    Bills total: <%= Number.Currency.number_to_currency @bills_total %>
-  </div>
-  <div class="card">
-    Budgets total: <%= Number.Currency.number_to_currency @budgets_total %>
-  </div>
-  <div class="card">
-    Budgets daily: <%= Number.Currency.number_to_currency @budgets_daily %>
-  </div>
-  <div class="card">
-    Goals total: <%= Number.Currency.number_to_currency @goals_total %>
-  </div>
-  <div class="card">
-    Incomes total: <%= Number.Currency.number_to_currency @incomes_total %>
-  </div>
-</div>
+<%= render(Samwise.SharedView, "_events_chart.html", conn: @conn, eventsChartData: @eventsChartData) %>
+<%= render(Samwise.SharedView, "_events_table.html", conn: @conn, events: @events) %>

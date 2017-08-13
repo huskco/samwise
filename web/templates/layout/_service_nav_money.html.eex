@@ -1,10 +1,11 @@
 <header class="service-nav service-nav--moneypenny">
-  <%= link to: forecast_path(@conn, :index), class: "service-nav-logo" do %>
+  <%= link to: money_dashboard_path(@conn, :index), class: "service-nav-logo" do %>
     <img src="/images/favicon-money.png" class="service-nav-logo">
     Money
   <% end %>
 
   <nav class="service-nav-nav">
+    <%= link "Forecast", to: forecast_path(@conn, :index) %>
     <%= link "Bills", to: bill_path(@conn, :index) %>
     <%= link "Budgets", to: budget_path(@conn, :index) %>
     <%= link "Goals", to: goal_path(@conn, :index) %>

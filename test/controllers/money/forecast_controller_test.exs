@@ -36,9 +36,9 @@ defmodule Samwise.Money.ForecastControllerTest do
     ]
     balance = 1000.00
     expected_list = [
-      %{date: "2/11/1982", day: 11, max_balance: 1000, events: []},
+      %{date: "2/11/1982", day: 11, max_balance: 1.0e3, events: []},
       %{date: "2/12/1982", day: 12, max_balance: 4488.01, events: [
-        %{amount: 3500, due: 12, name: "Husk", type: "income"},
+        %{amount: 3500, due: 12, name: "Husk", type: "income", url: nil},
         %{amount: 11.99, due: 12, name: "Hulu", url: "hulu.com", type: "bill"}
       ]},
       %{date: "2/13/1982", day: 13, max_balance: 4477.66, events: [
@@ -78,5 +78,44 @@ defmodule Samwise.Money.ForecastControllerTest do
     ]
 
     assert Controller.add_min_max_budgets(dates_list, budgets_daily, []) == expected_list
+  end
+
+  test "transforms events to chart data" do
+    dates_list = [
+      %{date: "2/11/1982", day: 11, max_balance: 1000, min_balance: 975, events: []},
+      %{date: "2/12/1982", day: 12, max_balance: 4488.01, min_balance: 4438.01, events: [
+        %{amount: 3500, due: 12, name: "Husk", type: "income"},
+        %{amount: 11.99, due: 12, name: "Hulu", url: "hulu.com", type: "bill"}
+      ]},
+      %{date: "2/13/1982", day: 13, max_balance: 4477.66, min_balance: 4402.66, events: [
+        %{amount: 10.35, due: 13, name: "XBox Gold", url: "xbox.com", type: "bill"}
+      ]},
+      %{date: "2/14/1982", day: 14, max_balance: 4477.66, min_balance: 4377.66, events: []},
+      %{date: "2/15/1982", day: 15, max_balance: 4477.66, min_balance: 4352.66, events: []}
+    ]
+
+    expected_list = [
+      %{
+        name: "Maximum balance",
+        data: [
+          ["2/11/1982", 975],
+          ["2/12/1982", 4438.01],
+          ["2/13/1982", 4402.66],
+          ["2/14/1982", 4377.66],
+          ["2/15/1982", 4352.66]
+        ]
+      },
+      %{
+        name: "Minimum balance",
+        data: [
+          ["2/11/1982", 1000],
+          ["2/12/1982", 4488.01],
+          ["2/13/1982", 4477.66],
+          ["2/14/1982", 4477.66],
+          ["2/15/1982", 4477.66]
+        ]
+      }]
+
+    assert Controller.transform_to_chart_data(dates_list) == expected_list
   end
 end
