@@ -1,2 +1,5 @@
-<h1>Welcome to Samwise!</h1>
-<%= link "Money", to: money_dashboard_path(@conn, :index) %>
+<div class="centered">
+  <div class="card">
+    <%= render(Samwise.SharedView, "_services_list.html", conn: @conn) %>
+  </div>
+</div>

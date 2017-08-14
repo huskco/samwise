@@ -20,4 +20,5 @@ import "phoenix_html"
 
 // import socket from "./socket"
 import "./standalone.js"
+import "./toggle_nav.js"
 import "./charts.js"

@@ -1,0 +1,6 @@
+<nav class="service-list">
+  <%= active_link(@conn, to: money_dashboard_path(@conn, :index), active: [{Money.Bills, :index}], class: "service-nav-logo") do %>
+    <img src="/images/favicon-money.png" class="service-nav-logo">
+    Money
+  <% end %>
+</nav>

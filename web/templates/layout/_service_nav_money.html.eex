@@ -1,9 +1,7 @@
 <header class="service-nav service-nav--moneypenny">
-  <%= link to: money_dashboard_path(@conn, :index), class: "service-nav-logo" do %>
-    <img src="/images/favicon-money.png" class="service-nav-logo">
-    Money
-  <% end %>
+  <%= render(Samwise.SharedView, "_services_list.html", conn: @conn) %>
 
+  <div class="service-nav-toggle ion-navicon-round"></div>
   <nav class="service-nav-nav">
     <%= link "Forecast", to: forecast_path(@conn, :index) %>
     <%= link "Bills", to: bill_path(@conn, :index) %>

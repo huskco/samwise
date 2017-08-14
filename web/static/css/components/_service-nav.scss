@@ -2,7 +2,7 @@
   background-color: $white;
   display: flex;
   height: $header-height;
-  justify-content: flex-start;
+  justify-content: space-between;
   left: 0;
   padding: $small-spacing;
   position: fixed;
@@ -14,6 +14,7 @@
     flex-direction: column;
     bottom: 0;
     height: auto;
+    justify-content: flex-start;
     padding: $base-spacing;
     right: auto;
     width: $service_nav-width;
@@ -41,7 +42,12 @@
 }
 
 .service-nav-toggle {
-  margin: $small-spacing $base-spacing;
+  color: $medium-gray;
+  cursor: pointer;
+  font-size: 1.25em;
+  line-height: 1;
+  margin: 0 $small-spacing;
+  padding: $small-spacing 0;
   position: relative;
   z-index: 1000;
 
@@ -52,11 +58,13 @@
 
 .service-nav-nav {
   background-color: rgba($light-background-color, 0.9);
+  border-top: $base-border;
   bottom: 0;
   box-shadow: $large-box-shadow;
+  padding: $base-spacing;
   position: fixed;
   right: 0;
-  top: 0;
+  top: $header-height;
   transform: translateX($service_nav-width);
   transition: transform $base-duration $base-timing;
   width: $service_nav-width;

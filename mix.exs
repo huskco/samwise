@@ -39,7 +39,8 @@ defmodule Samwise.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:number, "~> 0.5.1"},
-     {:timex, "~> 3.1.24"}]
+     {:timex, "~> 3.1.24"},
+     {:phoenix_active_link, "~> 0.1.1"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

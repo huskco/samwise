@@ -6,7 +6,7 @@
         height: 300,
         type: 'areaspline'
 	    },
-      colors: ['#c76baa'],
+      colors: ['#e4a5d0', '#c76baa'],
       series: <%= raw @eventsChartData %>
   	}));
   });
