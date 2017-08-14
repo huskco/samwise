@@ -8,7 +8,7 @@ defmodule Samwise.NextDateHelperTest do
 
   test "makes a date simple" do
     date = Timex.parse!("02/23/1982", "%-m/%-d/%Y", :strftime)
-    assert Samwise.NextDate.simple_date(date) == "2/23/1982"
+    assert Samwise.NextDate.simple_date(date) == "02/23/1982"
   end
 
   test "makes a date pretty" do

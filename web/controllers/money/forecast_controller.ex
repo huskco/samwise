@@ -9,6 +9,7 @@ defmodule Samwise.Money.ForecastController do
     events = get_dates_map(days_to_forecast, Timex.today, [])
       |> add_events_to_forecast(get_forecast_items(), balance, [])
       |> add_min_max_budgets(budgets_daily, [])
+    cushion = get_cushion(events)
 
     eventsChartData = events
       |> transform_to_chart_data
@@ -20,11 +21,27 @@ defmodule Samwise.Money.ForecastController do
       events: events,
       eventsChartData: eventsChartData,
       balance: balance,
+      cushion: cushion,
       page_title: "Forecast")
   end
 
   def add_service_layout(conn, service) do
     Samwise.SharedController.add_service_layout(conn, service)
+  end
+
+  def get_cushion([head | tail]) do
+    get_cushion(tail, head.min_balance)
+  end
+
+  def get_cushion([head | tail], smallest) do
+    case smallest > head.min_balance do
+      true -> get_cushion(tail, head.min_balance)
+      false -> get_cushion(tail, smallest)
+    end
+  end
+
+  def get_cushion([], smallest) do
+    smallest
   end
 
   # Build list of dates for N days
@@ -123,7 +140,7 @@ defmodule Samwise.Money.ForecastController do
     transform_to_chart_data(tail, min_acc, max_acc)
   end
 
-  def transform_to_chart_data(events, min_acc, max_acc) do
+  def transform_to_chart_data([], min_acc, max_acc) do
     [%{
       name: "Minimum balance",
       data: max_acc

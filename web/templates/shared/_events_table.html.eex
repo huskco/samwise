@@ -5,6 +5,7 @@
         <th>Next</th>
         <th>Name</th>
         <th>Amount</th>
+        <th>Min balance</th>
       </tr>
     </thead>
     <tbody>
@@ -18,6 +19,9 @@
             </td>
             <td>
               <%= Number.Currency.number_to_currency event.amount %>
+            </td>
+            <td>
+              <%= Number.Currency.number_to_currency date.min_balance %>
             </td>
           </tr>
         <% end %>

@@ -1,3 +1,9 @@
+<nav class="header-actions">
+  <div>
+    <span class="label label-inline">Cushion:</span>
+    <%= Number.Currency.number_to_currency @cushion %>
+  </div>
+</nav>
 <h2>Forecast</h2>
 
 <%= render(Samwise.SharedView, "_events_chart.html", conn: @conn, eventsChartData: @eventsChartData) %>

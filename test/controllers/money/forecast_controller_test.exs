@@ -10,13 +10,13 @@ defmodule Samwise.Money.ForecastControllerTest do
 
   test "makes list of forecasted dates" do
     days_to_forecast = 5
-    starting_date = Timex.parse!("02/11/1982", "%-m/%-d/%Y", :strftime)
+    starting_date = Timex.parse!("02/11/1982", "%m/%d/%Y", :strftime)
     expected_list = [
-      %{date: "2/11/1982", day: 11, events: []},
-      %{date: "2/12/1982", day: 12, events: []},
-      %{date: "2/13/1982", day: 13, events: []},
-      %{date: "2/14/1982", day: 14, events: []},
-      %{date: "2/15/1982", day: 15, events: []}
+      %{date: "02/11/1982", day: 11, events: []},
+      %{date: "02/12/1982", day: 12, events: []},
+      %{date: "02/13/1982", day: 13, events: []},
+      %{date: "02/14/1982", day: 14, events: []},
+      %{date: "02/15/1982", day: 15, events: []}
     ]
     assert Controller.get_dates_map(days_to_forecast, starting_date, []) == expected_list
   end
@@ -96,16 +96,6 @@ defmodule Samwise.Money.ForecastControllerTest do
 
     expected_list = [
       %{
-        name: "Maximum balance",
-        data: [
-          ["2/11/1982", 975],
-          ["2/12/1982", 4438.01],
-          ["2/13/1982", 4402.66],
-          ["2/14/1982", 4377.66],
-          ["2/15/1982", 4352.66]
-        ]
-      },
-      %{
         name: "Minimum balance",
         data: [
           ["2/11/1982", 1000],
@@ -113,6 +103,16 @@ defmodule Samwise.Money.ForecastControllerTest do
           ["2/13/1982", 4477.66],
           ["2/14/1982", 4477.66],
           ["2/15/1982", 4477.66]
+        ]
+      },
+      %{
+        name: "Maximum balance",
+        data: [
+          ["2/11/1982", 975],
+          ["2/12/1982", 4438.01],
+          ["2/13/1982", 4402.66],
+          ["2/14/1982", 4377.66],
+          ["2/15/1982", 4352.66]
         ]
       }]
 
