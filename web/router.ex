@@ -13,6 +13,13 @@ defmodule Samwise.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/auth", Samwise do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :new
+  end
+
   scope "/", Samwise do
     pipe_through :browser # Use the default browser stack
 
