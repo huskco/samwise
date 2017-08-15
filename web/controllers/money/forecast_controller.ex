@@ -1,5 +1,6 @@
 defmodule Samwise.Money.ForecastController do
   use Samwise.Web, :controller
+  plug Samwise.Plugs.RequireAuth
   plug :add_service_layout, "money"
 
   def index(conn, _params) do

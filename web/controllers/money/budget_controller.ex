@@ -1,5 +1,6 @@
 defmodule Samwise.Money.BudgetController do
   use Samwise.Web, :controller
+  plug Samwise.Plugs.RequireAuth
   plug :add_service_layout, "money"
 
   alias Samwise.Money.Budget

@@ -7,6 +7,7 @@ defmodule Samwise.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Samwise.Plugs.SetUser
   end
 
   pipeline :api do
@@ -16,6 +17,7 @@ defmodule Samwise.Router do
   scope "/auth", Samwise do
     pipe_through :browser
 
+    get "/signout", AuthController, :delete
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :new
   end

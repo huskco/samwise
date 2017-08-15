@@ -25,6 +25,8 @@ defmodule Samwise.ConnCase do
       import Ecto.Changeset
       import Ecto.Query
 
+      import Samwise.Factory
+
       import Samwise.Router.Helpers
 
       # The default endpoint for testing
