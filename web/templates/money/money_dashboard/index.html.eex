@@ -7,7 +7,7 @@
   <script>
     $(function() {
       var options = Object.assign(window.chartOptions, {
-        colors: ['#eeeeee', '#5fbae9', '#bfd849'],
+        colors: ['#eaeaea', '#5fbae9', '#bfd849'],
         chart: {
           type: 'pie'
         },
@@ -17,6 +17,7 @@
         series: [{
           name: 'Brands',
           colorByPoint: true,
+          innerSize: "75%",
           data: [{
             name: 'Income left over',
             y: <%= @incomes_total - @budgets_total - @bills_total %>

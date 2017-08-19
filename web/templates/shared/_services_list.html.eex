@@ -1,6 +1,11 @@
-<nav class="service-list">
-  <%= active_link(@conn, to: money_dashboard_path(@conn, :index), active: [{Money.Bills, :index}], class: "service-nav-logo") do %>
+<nav class="services-list">
+  <%= link to: money_dashboard_path(@conn, :index), class: "service-nav-item service-nav-item--money" do %>
     <img src="/images/favicon-money.png" class="service-nav-logo">
     Money
+  <% end %>
+
+  <%= link to: auth_path(@conn, :delete), class: "service-nav-item" do %>
+    <span class="ion-log-out service-sign-out-icon"></span>
+    Sign out as <%= @conn.assigns.user.first_name %>
   <% end %>
 </nav>

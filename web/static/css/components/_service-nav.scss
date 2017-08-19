@@ -20,13 +20,7 @@
     width: $service_nav-width;
   }
 
-  a,
-  .button {
-    display: inline-block;
-    width: 100%;
-  }
-
-  &-logo {
+  &-item {
     display: block;
     font-size: 1.25rem;
     font-weight: 200;
@@ -34,11 +28,19 @@
 
     img {
       display: inline-block;
-      margin-right: 0.2rem;
+      margin-right: 0.5rem;
       vertical-align: -0.6rem;
       width: 2rem;
     }
   }
+}
+
+.service-nav-back {
+  color: $medium-gray;
+  font-size: 1.4rem;
+  left: 0;
+  padding: 0 0.25em;
+  position: absolute;
 }
 
 .service-nav-toggle {

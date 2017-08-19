@@ -1,0 +1,21 @@
+.services-list {
+  a {
+    border-bottom: $base-border;
+    display: block;
+    padding: $small-spacing $base-spacing;
+
+    &:last-child,
+    .service-nav & {
+      border-bottom: 0;
+    }
+  }
+
+  .service-sign-out-icon {
+    &::before {
+      font-size: 2rem;
+      line-height: 1;
+      margin: 0 0.6rem 0 0.1rem;
+      vertical-align: middle;
+    }
+  }
+}

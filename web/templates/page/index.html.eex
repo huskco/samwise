@@ -1,12 +1,12 @@
 <div class="centered">
-  <div class="card">
-      <%= if @conn.assigns[:user] do %>
-        Welcome, <%= @conn.assigns.user.first_name %>!
-        <%= render(Samwise.SharedView, "_services_list.html", conn: @conn) %>
-        <%= link "Sign out", to: auth_path(@conn, :delete), class: "button alert" %>
-      <% else %>
-        <%= link "Sign in with Google", to: auth_path(@conn, :request, "google", scope: "email profile"), class: "button" %>
-      <% end %>
-
-  </div>
+  <%= if @conn.assigns[:user] do %>
+    <div class="card">
+      <%= render(Samwise.SharedView, "_services_list.html", conn: @conn) %>
+    </div>
+  <% else %>
+    <div class="card session-action">
+      <img src="/images/favicon.png">
+      <%= link "Sign in with Google", to: auth_path(@conn, :request, "google", scope: "email profile"), class: "button" %>
+    </div>
+  <% end %>
 </div>

@@ -50,7 +50,6 @@ defmodule Samwise.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import PhoenixActiveLink
       import Samwise.Router.Helpers
       import Samwise.ErrorHelpers
       import Samwise.Gettext

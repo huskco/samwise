@@ -6,7 +6,7 @@ window.chartOptions = {
       fillColor: {
         linearGradient: [0, 0, 0, 300],
         stops: [
-          [0, 'rgba(199, 107, 170, 0.5)'],
+          [0, 'rgba(199, 107, 170, 0.33)'],
           [1, 'rgba(199, 107, 170, 0.0)']
          ]
        },

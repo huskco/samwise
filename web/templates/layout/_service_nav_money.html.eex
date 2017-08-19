@@ -1,5 +1,10 @@
 <header class="service-nav service-nav--moneypenny">
-  <%= render(Samwise.SharedView, "_services_list.html", conn: @conn) %>
+  <%= link "", to: "/", class: "service-nav-back ion-android-more-vertical" %>
+
+  <%= link to: money_dashboard_path(@conn, :index), class: "service-nav-item service-nav-item--money" do %>
+    <img src="/images/favicon-money.png" class="service-nav-logo">
+    Money
+  <% end %>
 
   <div class="service-nav-toggle ion-navicon-round"></div>
   <nav class="service-nav-nav">

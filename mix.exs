@@ -40,7 +40,6 @@ defmodule Samwise.Mixfile do
      {:cowboy, "~> 1.0"},
      {:number, "~> 0.5.1"},
      {:timex, "~> 3.1.24"},
-     {:phoenix_active_link, "~> 0.1.1"},
      {:ueberauth, "~> 0.4"},
      {:ueberauth_google, "~> 0.5"},
      {:ex_machina, "~> 2.0"}]

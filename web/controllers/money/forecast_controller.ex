@@ -136,8 +136,10 @@ defmodule Samwise.Money.ForecastController do
   # Transform all that into something the chart can digest
 
   def transform_to_chart_data([head | tail], min_acc \\ [], max_acc \\ []) do
-    min_acc = min_acc ++ [[head.date, head.min_balance]]
-    max_acc = max_acc ++ [[head.date, head.max_balance]]
+    if head.events != [] do
+      min_acc = min_acc ++ [[head.date, head.min_balance]]
+      max_acc = max_acc ++ [[head.date, head.max_balance]]
+    end
     transform_to_chart_data(tail, min_acc, max_acc)
   end
 
