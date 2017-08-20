@@ -6,7 +6,8 @@ defmodule Samwise.Money.GoalController do
   alias Samwise.Money.Goal
 
   def index(conn, _params) do
-    render(conn, "index.html", goals: all_goals(), total: total(), page_title: "Goals")
+    goals = all_goals() |> add_progress
+    render(conn, "index.html", goals: goals, total: total(), page_title: "Goals")
   end
 
   def new(conn, _params) do
@@ -65,7 +66,7 @@ defmodule Samwise.Money.GoalController do
   end
 
   def all_goals do
-    from(goal in Goal, order_by: goal.name) |> Repo.all
+    from(goal in Goal, order_by: goal.order) |> Repo.all
   end
 
   def add_service_layout(conn, service) do
@@ -74,5 +75,25 @@ defmodule Samwise.Money.GoalController do
 
   def total do
     Repo.one(from g in Goal, select: sum(g.amount))
+  end
+
+  def add_progress(goals) do
+    available_to_spend = Samwise.Money.ForecastController.get_available_to_spend()
+    add_progress(goals, available_to_spend, [])
+  end
+
+  def add_progress([head | tail], available_to_spend, acc) do
+    progress = case head.amount < available_to_spend do
+      true -> head.amount
+      false -> available_to_spend
+    end
+    updated_item = Map.put(head, :progress, progress)
+    updated_acc = acc ++ [updated_item]
+    updated_available_to_spend = available_to_spend - progress
+    add_progress(tail, updated_available_to_spend, updated_acc)
+  end
+
+  def add_progress([], _available_to_spend, acc) do
+    acc
   end
 end

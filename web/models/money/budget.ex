@@ -15,6 +15,6 @@ defmodule Samwise.Money.Budget do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:name, :url, :amount])
-    |> validate_required([:name, :url, :amount])
+    |> validate_required([:name, :amount])
   end
 end

@@ -101,3 +101,40 @@ select {
   clear: both;
   margin: $base-spacing 0;
 }
+
+.progress {
+  display: block;
+  height: $smallest-spacing;
+  margin: $smallest-spacing 0;
+  padding-right: 2.5rem;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+
+  &-background {
+    background: $light-gray;
+    border-radius: $base-spacing;
+    height: $smallest-spacing;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+  }
+
+  &-bar {
+    background-color: $green;
+    border-radius: $base-spacing;
+    height: $smallest-spacing;
+    z-index: 2;
+  }
+
+  &-percent {
+    content: attr(value);
+    color: $medium-gray;
+    font-size: $small-font-size;
+    line-height: 1;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

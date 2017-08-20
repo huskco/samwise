@@ -15,3 +15,8 @@
   <span class="label label-inline">Amount</span>
   <%= Number.Currency.number_to_currency @goal.amount %>
 </p>
+
+<p>
+  <span class="label label-inline">Order</span>
+  <%= @goal.order || "N/A" %>
+</p>

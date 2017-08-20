@@ -22,9 +22,4 @@
     <span class="label label-inline">Next due</span>
     <%= pretty_next_date @bill.due %>
   </p>
-
-  <p>
-    <span class="label label-inline">Autopay</span>
-    <%= @bill.autopay %>
-  </p>
 </article>

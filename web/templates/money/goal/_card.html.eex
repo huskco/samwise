@@ -12,4 +12,15 @@
     <span class="label label-inline">Amount</span>
     <%= Number.Currency.number_to_currency @goal.amount %>
   </p>
+
+  <p>
+    <div class="progress">
+      <div class="progress-background">
+        <div class="progress-bar" style="width: <%= round(@goal.progress / @goal.amount * 100) %>%"></div>
+      </div>
+      <div class="progress-percent">
+        <%= round(@goal.progress / @goal.amount * 100) %>%
+      </div>
+    </div>
+  </p>
 </article>

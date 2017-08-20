@@ -7,6 +7,7 @@ defmodule Samwise.Money.Goal do
     field :amount, :float
     field :imageUrl, :string
     field :isDebt, :boolean, default: false
+    field :order, :integer
 
     timestamps()
   end
@@ -16,7 +17,7 @@ defmodule Samwise.Money.Goal do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :url, :amount, :imageUrl, :isDebt])
-    |> validate_required([:name, :url, :amount, :imageUrl, :isDebt])
+    |> cast(params, [:name, :url, :amount, :imageUrl, :isDebt, :order])
+    |> validate_required([:name, :amount, :isDebt, :order])
   end
 end
