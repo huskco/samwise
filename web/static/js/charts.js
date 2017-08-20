@@ -25,7 +25,7 @@ window.chartOptions = {
       allowPointSelect: true,
       cursor: 'pointer',
       dataLabels: {
-          enabled: false
+        enabled: false
       },
       showInLegend: true
     }

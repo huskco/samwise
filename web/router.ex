@@ -34,6 +34,7 @@ defmodule Samwise.Router do
       resources "/budgets", BudgetController
       resources "/goals", GoalController
       resources "/incomes", IncomeController
+      resources "/bank_account", BankAccountController
     end
   end
 

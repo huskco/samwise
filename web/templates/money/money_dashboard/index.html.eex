@@ -1,42 +1,21 @@
 <h2>Dashboard</h2>
 <div class="card-list">
+  <%= render("_card_breakdown.html", conn: @conn) %>
+
   <div class="card">
-    <div id="budgetChart"></div>
+    <div class="card-actions">
+      <%= link "", to: bank_account_path(@conn, :edit, 1), class: "ion-edit" %>
+    </div>
+    <div class="label">Balance</div>
+    <div class="dashboard-number">
+      <%= Number.Currency.number_to_currency @balance %>
+    </div>
   </div>
 
-  <script>
-    $(function() {
-      var options = Object.assign(window.chartOptions, {
-        colors: ['#eaeaea', '#5fbae9', '#bfd849'],
-        chart: {
-          type: 'pie'
-        },
-        title: {
-          text: 'Budget breakdown'
-        },
-        series: [{
-          name: 'Brands',
-          colorByPoint: true,
-          innerSize: "75%",
-          data: [{
-            name: 'Income left over',
-            y: <%= @incomes_total - @budgets_total - @bills_total %>
-          }, {
-            name: 'Bills',
-            y: <%= @bills_total %>
-          }, {
-            name: 'Budgets',
-            y: <%= @budgets_total %>,
-          }]
-        }]
-      });
-      Highcharts.chart('budgetChart', options);
-    });
-  </script>
   <div class="card">
-    Budgets daily: <%= Number.Currency.number_to_currency @budgets_daily %>
-  </div>
-  <div class="card">
-    Goals total: <%= Number.Currency.number_to_currency @goals_total %>
+    <div class="label">Available</div>
+    <div class="dashboard-number">
+      <%= Number.Currency.number_to_currency @available %>
+    </div>
   </div>
 </div>

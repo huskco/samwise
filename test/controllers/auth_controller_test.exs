@@ -1,5 +1,5 @@
-defmodule Catcasts.AuthControllerTest do
-  use Catcasts.ConnCase
+defmodule Samwise.AuthControllerTest do
+  use Samwise.ConnCase
 
   test "Sign in with Google", %{conn: conn} do
     conn = get conn, "/auth/google?scope=email%20profile"
