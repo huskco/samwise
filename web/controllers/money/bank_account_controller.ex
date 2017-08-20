@@ -13,11 +13,11 @@ defmodule Samwise.Money.BankAccountController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"bill" => bank_account_params}) do
+  def create(conn, %{"" => bank_account_params}) do
     changeset = BankAccount.changeset(%BankAccount{}, bank_account_params)
 
     case Repo.insert(changeset) do
-      {:ok, _bill} ->
+      {:ok, _bank_account} ->
         conn
         |> put_flash(:info, "Account created successfully.")
         |> redirect(to: bank_account_path(conn, :index))
@@ -40,7 +40,7 @@ defmodule Samwise.Money.BankAccountController do
       {:ok, bank_account} ->
         conn
         |> put_flash(:info, "BankAccount updated successfully.")
-        |> redirect(to: bank_account_path(conn, :show, bank_account))
+        |> redirect(to: money_dashboard_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", bank_account: bank_account, changeset: changeset)
     end

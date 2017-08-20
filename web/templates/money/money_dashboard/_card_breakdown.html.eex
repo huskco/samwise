@@ -1,6 +1,6 @@
 <div class="card">
   <div class="label">Budget breakdown</div>
-  <div id="budgetChart"></div>
+  <div id="budgetChart" class="card-list-chart"></div>
 
   <script>
     $(function() {
@@ -8,7 +8,7 @@
         colors: ['#eaeaea', '#c76baa', '#e4a5d0'],
         chart: {
           type: 'pie',
-          height: 100,
+          height: $("#budgetChart").width() * 0.5,
           marginLeft: 0,
           marginTop: 0,
           marginBottom: 0
