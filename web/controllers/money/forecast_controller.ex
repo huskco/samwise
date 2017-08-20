@@ -6,11 +6,8 @@ defmodule Samwise.Money.ForecastController do
   def index(conn, _params) do
     budgets_daily = Samwise.Money.BudgetController.daily_average()
     balance = Samwise.Money.BankAccountController.balance()
-    days_to_forecast = 90
-    events = get_dates_map(days_to_forecast, Timex.today, [])
-      |> add_events_to_forecast(get_forecast_items(), balance, [])
-      |> add_min_max_budgets(budgets_daily, [])
-    available_to_spend = get_available_to_spend(events)
+    events = get_events()
+    available_to_spend = get_available_to_spend()
 
     eventsChartData = events
       |> transform_to_chart_data
@@ -28,6 +25,25 @@ defmodule Samwise.Money.ForecastController do
 
   def add_service_layout(conn, service) do
     Samwise.SharedController.add_service_layout(conn, service)
+  end
+
+  def get_events() do
+    days_to_forecast = 90
+    start_date = Timex.today
+    items = get_forecast_items()
+    balance = Samwise.Money.BankAccountController.balance()
+    budgets_daily = Samwise.Money.BudgetController.daily_average()
+    get_events(days_to_forecast, start_date, items, balance, budgets_daily)
+  end
+
+  def get_events(days_to_forecast, start_date, forecast_items, balance, budgets_daily) do
+    get_dates_map(days_to_forecast, start_date, [])
+      |> add_events_to_forecast(get_forecast_items(), balance, [])
+      |> add_min_max_budgets(budgets_daily, [])
+  end
+
+  def get_available_to_spend() do
+    get_available_to_spend(get_events())
   end
 
   def get_available_to_spend([head | tail]) do

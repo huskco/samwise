@@ -13,7 +13,7 @@
   </div>
 
   <div class="card">
-    <div class="label">Available</div>
+    <div class="label">Available to spend</div>
     <div class="dashboard-number">
       <%= Number.Currency.number_to_currency @available %>
     </div>
