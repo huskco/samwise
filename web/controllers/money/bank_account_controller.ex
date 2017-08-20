@@ -8,6 +8,24 @@ defmodule Samwise.Money.BankAccountController do
     Repo.get!(BankAccount, 1)
   end
 
+  def new(conn, _params) do
+    changeset = BankAccount.changeset(%BankAccount{})
+    render(conn, "new.html", changeset: changeset)
+  end
+
+  def create(conn, %{"bill" => bank_account_params}) do
+    changeset = BankAccount.changeset(%BankAccount{}, bank_account_params)
+
+    case Repo.insert(changeset) do
+      {:ok, _bill} ->
+        conn
+        |> put_flash(:info, "Account created successfully.")
+        |> redirect(to: bank_account_path(conn, :index))
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset, page_title: "New account")
+    end
+  end
+
   def edit(conn, _) do
     bank_account = get_bank_account()
     changeset = BankAccount.changeset(bank_account)

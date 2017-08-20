@@ -1,0 +1,4 @@
+<h2>New bank account</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: bank_account_path(@conn, :create) %>
