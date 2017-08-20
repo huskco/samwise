@@ -4,7 +4,12 @@
   </div>
 
   <h3>
-    <img src="<%= get_logo @bill.url %>" alt="<%= get_initial @bill.name %>" class="card-icon">
+    <span class="card-icon-container">
+      <img src="<%= get_logo @bill.url %>" alt="<%= get_initial @bill.name %>" class="card-icon">
+      <%= if @bill.autopay == true do %>
+        <span class="card-icon-autopay ion-loop"></span>
+      <% end %>
+    </span>
     <%= link @bill.name, to: bill_path(@conn, :show, @bill) %>
   </h3>
 
@@ -16,5 +21,10 @@
   <p>
     <span class="label label-inline">Next due</span>
     <%= pretty_next_date @bill.due %>
+  </p>
+
+  <p>
+    <span class="label label-inline">Autopay</span>
+    <%= @bill.autopay %>
   </p>
 </article>

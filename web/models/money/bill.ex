@@ -6,6 +6,7 @@ defmodule Samwise.Money.Bill do
     field :url, :string
     field :due, :integer
     field :amount, :float
+    field :autopay, :boolean
 
     timestamps()
   end
@@ -15,7 +16,7 @@ defmodule Samwise.Money.Bill do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :url, :due, :amount])
-    |> validate_required([:name, :url, :due, :amount])
+    |> cast(params, [:name, :url, :due, :amount, :autopay])
+    |> validate_required([:name, :url, :due, :amount, :autopay])
   end
 end

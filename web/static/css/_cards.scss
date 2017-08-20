@@ -69,6 +69,15 @@
   }
 }
 
+.card-icon-container {
+  display: inline-block;
+  position: relative;
+
+  .card-icon {
+    display: block;
+  }
+}
+
 .card-icon {
   background-color: $white;
   border: 2px solid $white;
@@ -105,4 +114,20 @@
     width: 100%;
     z-index: 2;
   }
+}
+
+.card-icon-autopay {
+  background-color: $white;
+  border-radius: 50%;
+  color: $action-color;
+  bottom: 0;
+  display: block;
+  font-size: $small-font-size;
+  height: 0.85rem;
+  line-height: 0.85rem;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  transform: translate(-10%, 35%);
+  width: 0.85rem;
 }
