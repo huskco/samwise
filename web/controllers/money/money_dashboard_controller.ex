@@ -5,7 +5,7 @@ defmodule Samwise.Money.MoneyDashboardController do
 
   def index(conn, _params) do
     balance = Samwise.Money.BankAccountController.balance()
-    available = Samwise.Money.BankAccountController.available()
+    available = Samwise.Money.BankAccountController.cushion()
 
     render(conn,
       "index.html",

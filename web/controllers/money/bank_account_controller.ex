@@ -60,9 +60,4 @@ defmodule Samwise.Money.BankAccountController do
     account = get_bank_account()
     account.cushion
   end
-
-  def available do
-    account = get_bank_account()
-    account.balance + account.savings - account.cushion
-  end
 end

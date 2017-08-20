@@ -7,7 +7,15 @@
         type: 'areaspline'
 	    },
       colors: ['#e4a5d0', '#c76baa'],
-      series: <%= raw @eventsChartData %>
+      series: <%= raw @eventsChartData %>,
+      yAxis: {
+        min: 0,
+        plotLines: [{
+          color: '#e4a5d0',
+          width: 1,
+          value: <%= Samwise.Money.BankAccountController.cushion() %>
+        }]
+      }
   	}));
   });
 </script>

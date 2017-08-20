@@ -1,7 +1,7 @@
 <nav class="header-actions">
   <div>
-    <span class="label label-inline">Cushion:</span>
-    <%= Number.Currency.number_to_currency @cushion %>
+    <span class="label label-inline">Available to spend:</span>
+    <%= Number.Currency.number_to_currency @available_to_spend %>
   </div>
 </nav>
 <h2>Forecast</h2>

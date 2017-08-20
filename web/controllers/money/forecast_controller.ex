@@ -5,12 +5,12 @@ defmodule Samwise.Money.ForecastController do
 
   def index(conn, _params) do
     budgets_daily = Samwise.Money.BudgetController.daily_average()
-    balance = 12000
+    balance = Samwise.Money.BankAccountController.balance()
     days_to_forecast = 90
     events = get_dates_map(days_to_forecast, Timex.today, [])
       |> add_events_to_forecast(get_forecast_items(), balance, [])
       |> add_min_max_budgets(budgets_daily, [])
-    cushion = get_cushion(events)
+    available_to_spend = get_available_to_spend(events)
 
     eventsChartData = events
       |> transform_to_chart_data
@@ -22,7 +22,7 @@ defmodule Samwise.Money.ForecastController do
       events: events,
       eventsChartData: eventsChartData,
       balance: balance,
-      cushion: cushion,
+      available_to_spend: available_to_spend,
       page_title: "Forecast")
   end
 
@@ -30,19 +30,19 @@ defmodule Samwise.Money.ForecastController do
     Samwise.SharedController.add_service_layout(conn, service)
   end
 
-  def get_cushion([head | tail]) do
-    get_cushion(tail, head.min_balance)
+  def get_available_to_spend([head | tail]) do
+    get_available_to_spend(tail, head.min_balance)
   end
 
-  def get_cushion([head | tail], smallest) do
+  def get_available_to_spend([head | tail], smallest) do
     case smallest > head.min_balance do
-      true -> get_cushion(tail, head.min_balance)
-      false -> get_cushion(tail, smallest)
+      true -> get_available_to_spend(tail, head.min_balance)
+      false -> get_available_to_spend(tail, smallest)
     end
   end
 
-  def get_cushion([], smallest) do
-    smallest
+  def get_available_to_spend([], smallest) do
+    smallest - cushion()
   end
 
   # Build list of dates for N days
@@ -160,5 +160,9 @@ defmodule Samwise.Money.ForecastController do
     incomes = Samwise.Money.IncomeController.all_incomes()
     bills = Samwise.Money.BillController.all_bills()
     incomes ++ bills
+  end
+
+  def cushion do
+    Samwise.Money.BankAccountController.cushion()
   end
 end

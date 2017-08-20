@@ -1,7 +1,7 @@
 <nav class="header-actions">
   <div>
     <span class="label label-inline">Available:</span>
-    <%= Number.Currency.number_to_currency Samwise.Money.BankAccountController.available() %>
+    <%= Number.Currency.number_to_currency Samwise.Money.BankAccountController.cushion() %>
   </div>
   <div>
     <span class="label label-inline">Total:</span>
