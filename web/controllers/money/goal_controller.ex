@@ -6,7 +6,7 @@ defmodule Samwise.Money.GoalController do
   alias Samwise.Money.Goal
 
   def index(conn, _params) do
-    goals = all_goals() |> add_progress
+    goals = all_goals()
     render(conn, "index.html", goals: goals, total: total(), page_title: "Goals")
   end
 
@@ -66,7 +66,7 @@ defmodule Samwise.Money.GoalController do
   end
 
   def all_goals do
-    from(goal in Goal, order_by: goal.order) |> Repo.all
+    from(goal in Goal, order_by: goal.order) |> Repo.all |> add_progress
   end
 
   def add_service_layout(conn, service) do
@@ -87,7 +87,9 @@ defmodule Samwise.Money.GoalController do
       true -> head.amount
       false -> available_to_spend
     end
-    updated_item = Map.put(head, :progress, progress)
+    updated_item = head
+      |> Map.put(:progress, progress)
+      |> Map.put(:progress_percentage, round(progress / head.amount * 100))
     updated_acc = acc ++ [updated_item]
     updated_available_to_spend = available_to_spend - progress
     add_progress(tail, updated_available_to_spend, updated_acc)
@@ -95,5 +97,17 @@ defmodule Samwise.Money.GoalController do
 
   def add_progress([], _available_to_spend, acc) do
     acc
+  end
+
+  def estimated_goal_month(goal) do
+    to_go = goal.amount - goal.progress
+    surplus = Samwise.Money.MoneyDashboardController.surplus()
+    months = round(to_go / surplus)
+
+    {:ok, pretty_date} = Timex.now
+      |> Timex.shift(months: months)
+      |> Timex.format("%b %Y", :strftime)
+
+    pretty_date
   end
 end

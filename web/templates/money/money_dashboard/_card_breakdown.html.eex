@@ -15,7 +15,8 @@
         },
         legend: {
           align: 'right',
-          verticalAlign: 'middle'
+          verticalAlign: 'middle',
+          layout: 'vertical'
         },
         series: [{
           name: 'Brands',

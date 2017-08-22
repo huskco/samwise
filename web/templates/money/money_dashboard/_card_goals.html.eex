@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="label">Goals</div>
+
+  <ul>
+    <%= for goal <- @goals do %>
+      <li>
+        <%= if goal.progress_percentage > 0 do %>
+          <%= goal.name %>
+          <%= render(Samwise.Money.GoalView, "_progress.html", conn: @conn, goal: goal) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

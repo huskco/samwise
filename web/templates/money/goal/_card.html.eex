@@ -14,13 +14,6 @@
   </p>
 
   <p>
-    <div class="progress">
-      <div class="progress-background">
-        <div class="progress-bar" style="width: <%= round(@goal.progress / @goal.amount * 100) %>%"></div>
-      </div>
-      <div class="progress-percent">
-        <%= round(@goal.progress / @goal.amount * 100) %>%
-      </div>
-    </div>
+    <%= render("_progress.html", conn: @conn, goal: @goal) %>
   </p>
 </article>

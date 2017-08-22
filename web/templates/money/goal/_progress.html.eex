@@ -1,0 +1,13 @@
+<div class="progress">
+  <div class="progress-background">
+    <div class="progress-bar" style="width: <%= @goal.progress_percentage %>%"></div>
+  </div>
+  <div class="progress-percent">
+    <%= @goal.progress_percentage %>%
+  </div>
+  <%= if @goal.progress_percentage > 0 && @goal.progress_percentage < 100 do %>
+    <div class="label progress-estimate">
+      Estimated <%= Samwise.Money.GoalController.estimated_goal_month(@goal) %>
+    </div>
+  <% end %>
+</div>

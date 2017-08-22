@@ -137,4 +137,8 @@ select {
     top: 50%;
     transform: translateY(-50%);
   }
+
+  &-estimate {
+    margin-top: $smallest-spacing;
+  }
 }

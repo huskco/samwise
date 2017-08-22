@@ -18,4 +18,13 @@
       <%= Number.Currency.number_to_currency @available %>
     </div>
   </div>
+
+  <div class="card">
+    <div class="label">Monthly Surplus</div>
+    <div class="dashboard-number">
+      +<%= Number.Currency.number_to_currency @surplus %>
+    </div>
+  </div>
+
+  <%= render("_card_goals.html", conn: @conn, goals: @goals) %>
 </div>

@@ -1,6 +1,7 @@
 defmodule Samwise.Money.BankAccountController do
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
+  plug :add_service_layout, "money"
 
   alias Samwise.Money.BankAccount
 
@@ -44,6 +45,10 @@ defmodule Samwise.Money.BankAccountController do
       {:error, changeset} ->
         render(conn, "edit.html", bank_account: bank_account, changeset: changeset)
     end
+  end
+
+  def add_service_layout(conn, service) do
+    Samwise.SharedController.add_service_layout(conn, service)
   end
 
   def balance do
