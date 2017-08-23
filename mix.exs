@@ -42,7 +42,8 @@ defmodule Samwise.Mixfile do
      {:timex, "~> 3.1.24"},
      {:ueberauth, "~> 0.4"},
      {:ueberauth_google, "~> 0.5"},
-     {:ex_machina, "~> 2.0"}]
+     {:ex_machina, "~> 2.0"},
+     {:credo, "~> 0.8.6"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

@@ -1,4 +1,7 @@
 defmodule Samwise do
+  @moduledoc """
+  A helpful bot for Ogles
+  """
   use Application
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html

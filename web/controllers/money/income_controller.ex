@@ -65,7 +65,9 @@ defmodule Samwise.Money.IncomeController do
   end
 
   def all_incomes do
-    from(income in Income, order_by: income.name) |> Repo.all
+    Income
+      |> order_by(asc: :name)
+      |> Repo.all
   end
 
   def add_service_layout(conn, service) do

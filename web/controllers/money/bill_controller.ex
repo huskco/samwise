@@ -65,7 +65,9 @@ defmodule Samwise.Money.BillController do
   end
 
   def all_bills do
-    from(bill in Bill, order_by: bill.name) |> Repo.all
+    Bill
+      |> order_by(asc: :name)
+      |> Repo.all
   end
 
   def add_service_layout(conn, service) do

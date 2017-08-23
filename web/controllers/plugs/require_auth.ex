@@ -1,4 +1,7 @@
 defmodule Samwise.Plugs.RequireAuth do
+  @moduledoc """
+  This module helps determind if a user is signed in
+  """
   import Plug.Conn
   import Phoenix.Controller
 

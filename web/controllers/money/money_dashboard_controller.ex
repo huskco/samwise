@@ -9,7 +9,7 @@ defmodule Samwise.Money.MoneyDashboardController do
       balance: Samwise.Money.BankAccountController.balance(),
       available: Samwise.Money.ForecastController.get_available_to_spend(),
       goals: Samwise.Money.GoalController.all_goals(),
-      surplus: surplus,
+      surplus: surplus(),
       page_title: "Dashboard")
   end
 

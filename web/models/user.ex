@@ -1,4 +1,7 @@
 defmodule Samwise.User do
+  @moduledoc """
+  User Model for Samwise based on Ueberauth
+  """
   use Samwise.Web, :model
 
   schema "users" do
@@ -19,16 +22,20 @@ defmodule Samwise.User do
   end
 
   def validate_whitelisted_user(changeset) do
-    email = get_field(changeset, :email)
+    email = changeset
+      |> get_field(:email)
     validate_whitelisted_user(changeset, email)
   end
 
   def validate_whitelisted_user(changeset, email) do
-    whitelisted_users = System.get_env("WHITELISTED_USERS") |> String.split(", ")
+    whitelisted_users = "WHITELISTED_USERS"
+      |> System.get_env()
+      |> String.split(", ")
     if Enum.member?(whitelisted_users, email) do
       changeset
     else
-      add_error(changeset, :email, "User is not whitelisted")
+      changeset
+        |> add_error(:email, "User is not whitelisted")
     end
   end
 end

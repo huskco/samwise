@@ -9,7 +9,7 @@ defmodule Samwise.Money.ForecastController do
     events = get_events()
     available_to_spend = get_available_to_spend()
 
-    eventsChartData = events
+    events_chart_data = events
       |> transform_to_chart_data
       |> Poison.encode!
 
@@ -17,7 +17,7 @@ defmodule Samwise.Money.ForecastController do
       "index.html",
       budgets_daily: budgets_daily,
       events: events,
-      eventsChartData: eventsChartData,
+      eventsChartData: events_chart_data,
       balance: balance,
       available_to_spend: available_to_spend,
       page_title: "Forecast")
@@ -37,8 +37,9 @@ defmodule Samwise.Money.ForecastController do
   end
 
   def get_events(days_to_forecast, start_date, forecast_items, balance, budgets_daily) do
-    get_dates_map(days_to_forecast, start_date, [])
-      |> add_events_to_forecast(get_forecast_items(), balance, [])
+    days_to_forecast
+      |> get_dates_map(start_date, [])
+      |> add_events_to_forecast(forecast_items, balance, [])
       |> add_min_max_budgets(budgets_daily, [])
   end
 
@@ -80,8 +81,9 @@ defmodule Samwise.Money.ForecastController do
   def add_events_to_forecast([head | tail], events_list, balance, acc) do
     events = events_on_day(events_list, head.day, [])
     new_balance = balance_after_events(events, balance)
-    updated_item = Map.put(head, :events, events)
-    |> Map.put(:max_balance, new_balance)
+    updated_item = head
+      |> Map.put(:events, events)
+      |> Map.put(:max_balance, new_balance)
     updated_acc = acc ++ [updated_item]
     add_events_to_forecast(tail, events_list, new_balance, updated_acc)
   end
@@ -112,13 +114,14 @@ defmodule Samwise.Money.ForecastController do
       Samwise.Money.Income -> nil
       Samwise.Money.Bill -> item.url
     end
-    Map.from_struct(item)
-    |> Map.delete(:__meta__)
-    |> Map.delete(:inserted_at)
-    |> Map.delete(:updated_at)
-    |> Map.delete(:id)
-    |> Map.put(:type, type)
-    |> Map.put(:url, url)
+    item
+      |> Map.from_struct()
+      |> Map.delete(:__meta__)
+      |> Map.delete(:inserted_at)
+      |> Map.delete(:updated_at)
+      |> Map.delete(:id)
+      |> Map.put(:type, type)
+      |> Map.put(:url, url)
   end
 
   def balance_after_events([head | tail], balance) do
@@ -151,12 +154,22 @@ defmodule Samwise.Money.ForecastController do
 
   # Transform all that into something the chart can digest
 
-  def transform_to_chart_data([head | tail], min_acc \\ [], max_acc \\ []) do
-    if head.events != [] do
-      min_acc = min_acc ++ [[head.date, head.min_balance]]
-      max_acc = max_acc ++ [[head.date, head.max_balance]]
+  def transform_to_chart_data(events) do
+    transform_to_chart_data(events, [], [])
+  end
+
+  def transform_to_chart_data([head | tail], min_acc, max_acc) do
+    updated_min_acc = case head.events != [] do
+      true -> min_acc ++ [[head.date, head.min_balance]]
+      false -> min_acc
     end
-    transform_to_chart_data(tail, min_acc, max_acc)
+
+    updated_max_acc = case head.events != [] do
+      true -> max_acc ++ [[head.date, head.max_balance]]
+      false -> max_acc
+    end
+
+    transform_to_chart_data(tail, updated_min_acc, updated_max_acc)
   end
 
   def transform_to_chart_data([], min_acc, max_acc) do

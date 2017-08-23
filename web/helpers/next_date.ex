@@ -1,16 +1,23 @@
 defmodule Samwise.NextDate do
+  @moduledoc """
+  This module includes helpers to transform dates
+  into more readable strings or to determine
+  how dates relate to each other
+  """
+
   use Number
 
   def pretty_next_date(day, starting_date \\ Timex.today) do
-    current_month_datetime(day, starting_date)
-    |> next_date(starting_date)
-    |> pretty_date
+    day
+      |> current_month_datetime(starting_date)
+      |> next_date(starting_date)
+      |> pretty_date
   end
 
   def current_month_datetime(day, starting_date) do
     starting_date
-    |> Timex.format!("%-m/#{day}/%Y", :strftime)
-    |> Timex.parse!("{M}/{D}/{YYYY}")
+      |> Timex.format!("%-m/#{day}/%Y", :strftime)
+      |> Timex.parse!("{M}/{D}/{YYYY}")
   end
 
   def next_date(date, starting_date) do

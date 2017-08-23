@@ -1,6 +1,8 @@
 defmodule Samwise.Plugs.SetUser do
+  @moduledoc """
+  This module lets a user sign in
+  """
   import Plug.Conn
-  import Phoenix.Controller
 
   alias Samwise.Repo
   alias Samwise.User
@@ -14,12 +16,12 @@ defmodule Samwise.Plugs.SetUser do
     else
       user_id = get_session(conn, :user_id)
 
-      cond do
-        user = user_id && Repo.get(User, user_id) ->
-          assign(conn, :user, user)
-        true ->
-          assign(conn, :user, nil)
+      user = case user_id do
+        nil -> nil
+        _ -> Repo.get(User, user_id)
       end
+
+      assign(conn, :user, user)
     end
   end
 end

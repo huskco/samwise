@@ -65,7 +65,9 @@ defmodule Samwise.Money.BudgetController do
   end
 
   def all_budgets do
-    from(budget in Budget, order_by: budget.name) |> Repo.all
+    Budget
+      |> order_by(asc: :name)
+      |> Repo.all
   end
 
   def add_service_layout(conn, service) do

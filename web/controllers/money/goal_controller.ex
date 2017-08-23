@@ -66,7 +66,10 @@ defmodule Samwise.Money.GoalController do
   end
 
   def all_goals do
-    from(goal in Goal, order_by: goal.order) |> Repo.all |> add_progress
+    Goal
+      |> order_by(asc: :order)
+      |> Repo.all
+      |> add_progress
   end
 
   def add_service_layout(conn, service) do

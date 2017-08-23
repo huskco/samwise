@@ -1,4 +1,7 @@
 defmodule Samwise.Money.Bill do
+  @moduledoc """
+  Bill Model for Money
+  """
   use Samwise.Web, :model
 
   schema "bills" do

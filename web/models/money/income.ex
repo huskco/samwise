@@ -1,4 +1,7 @@
 defmodule Samwise.Money.Income do
+  @moduledoc """
+  Income Model for Money
+  """
   use Samwise.Web, :model
 
   schema "incomes" do

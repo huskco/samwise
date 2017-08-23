@@ -1,4 +1,7 @@
 defmodule Samwise.Money.Goal do
+  @moduledoc """
+  Goal Model for Money
+  """
   use Samwise.Web, :model
 
   schema "goals" do
