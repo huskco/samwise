@@ -3,7 +3,7 @@ defmodule Samwise.Money.GoalTest do
 
   alias Samwise.Money.Goal
 
-  @valid_attrs %{amount: 42, imageUrl: "some content", isDebt: true, name: "some content", url: "some content"}
+  @valid_attrs %{amount: 42, imageUrl: "some content", isDebt: true, name: "some content", url: "some content", order: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

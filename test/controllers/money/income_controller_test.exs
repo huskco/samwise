@@ -6,60 +6,90 @@ defmodule Samwise.Money.IncomeControllerTest do
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
-    conn = get conn, income_path(conn, :index)
+    user = insert(:user)
+    conn = conn
+    |> assign(:user, user)
+    |> get(income_path(conn, :index))
     assert html_response(conn, 200) =~ "Incomes"
   end
 
   test "renders form for new resources", %{conn: conn} do
-    conn = get conn, income_path(conn, :new)
+    user = insert(:user)
+    conn = conn
+    |> assign(:user, user)
+    |> get(income_path(conn, :new))
     assert html_response(conn, 200) =~ "New income"
   end
 
   test "creates resource and redirects when data is valid", %{conn: conn} do
-    conn = post conn, income_path(conn, :create), income: @valid_attrs
+    user = insert(:user)
+    conn = conn
+    |> assign(:user, user)
+    |> post(income_path(conn, :create), income: @valid_attrs)
     assert redirected_to(conn) == income_path(conn, :index)
     assert Repo.get_by(Income, @valid_attrs)
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
-    conn = post conn, income_path(conn, :create), income: @invalid_attrs
+    user = insert(:user)
+    conn = conn
+    |> assign(:user, user)
+    |> post(income_path(conn, :create), income: @invalid_attrs)
     assert html_response(conn, 200) =~ "New income"
   end
 
   test "shows chosen resource", %{conn: conn} do
     income = Repo.insert! %Income{name: "IncomeName", due: 1, amount: 29.99}
-    conn = get conn, income_path(conn, :show, income)
+    user = insert(:user)
+    conn = conn
+    |> assign(:user, user)
+    |> get(income_path(conn, :show, income))
     assert html_response(conn, 200) =~ income.name
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do
     assert_error_sent 404, fn ->
-      get conn, income_path(conn, :show, -1)
+      user = insert(:user)
+      conn
+      |> assign(:user, user)
+      |> get(income_path(conn, :show, -1))
     end
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
     income = Repo.insert! %Income{}
-    conn = get conn, income_path(conn, :edit, income)
+    user = insert(:user)
+    conn = conn
+    |> assign(:user, user)
+    |> get(income_path(conn, :edit, income))
     assert html_response(conn, 200) =~ "Edit income"
   end
 
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
     income = Repo.insert! %Income{}
-    conn = put conn, income_path(conn, :update, income), income: @valid_attrs
+    user = insert(:user)
+    conn = conn
+    |> assign(:user, user)
+    |> put(income_path(conn, :update, income), income: @valid_attrs)
     assert redirected_to(conn) == income_path(conn, :show, income)
     assert Repo.get_by(Income, @valid_attrs)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
     income = Repo.insert! %Income{}
-    conn = put conn, income_path(conn, :update, income), income: @invalid_attrs
+    user = insert(:user)
+    conn = conn
+    |> assign(:user, user)
+    |> put(income_path(conn, :update, income), income: @invalid_attrs)
     assert html_response(conn, 200) =~ "Edit income"
   end
 
   test "deletes chosen resource", %{conn: conn} do
     income = Repo.insert! %Income{}
-    conn = delete conn, income_path(conn, :delete, income)
+    user = insert(:user)
+    conn = conn
+    |> assign(:user, user)
+    |> delete(income_path(conn, :delete, income))
     assert redirected_to(conn) == income_path(conn, :index)
     refute Repo.get(Income, income.id)
   end

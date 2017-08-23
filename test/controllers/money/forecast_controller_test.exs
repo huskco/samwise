@@ -4,7 +4,11 @@ defmodule Samwise.Money.ForecastControllerTest do
   alias Samwise.Money.ForecastController, as: Controller
 
   test "lists all entries on index", %{conn: conn} do
-    conn = get conn, forecast_path(conn, :index)
+    Repo.insert! %Samwise.Money.BankAccount{balance: 1000.00, savings: 1500.00, cushion: 500.00}
+    user = insert(:user)
+    conn = conn
+    |> assign(:user, user)
+    |> get(forecast_path(conn, :index))
     assert html_response(conn, 200) =~ "Forecast"
   end
 
@@ -31,18 +35,18 @@ defmodule Samwise.Money.ForecastControllerTest do
     ]
     events_list = [
       %Samwise.Money.Income{amount: 3500, due: 12, name: "Husk"},
-      %Samwise.Money.Bill{amount: 11.99, due: 12, name: "Hulu", url: "hulu.com"},
-      %Samwise.Money.Bill{amount: 10.35, due: 13, name: "XBox Gold", url: "xbox.com"}
+      %Samwise.Money.Bill{amount: 11.99, due: 12, name: "Hulu", url: "hulu.com", autopay: false},
+      %Samwise.Money.Bill{amount: 10.35, due: 13, name: "XBox Gold", url: "xbox.com", autopay: false}
     ]
     balance = 1000.00
     expected_list = [
       %{date: "2/11/1982", day: 11, max_balance: 1.0e3, events: []},
       %{date: "2/12/1982", day: 12, max_balance: 4488.01, events: [
         %{amount: 3500, due: 12, name: "Husk", type: "income", url: nil},
-        %{amount: 11.99, due: 12, name: "Hulu", url: "hulu.com", type: "bill"}
+        %{amount: 11.99, due: 12, name: "Hulu", url: "hulu.com", type: "bill", autopay: false}
       ]},
       %{date: "2/13/1982", day: 13, max_balance: 4477.66, events: [
-        %{amount: 10.35, due: 13, name: "XBox Gold", url: "xbox.com", type: "bill"}
+        %{amount: 10.35, due: 13, name: "XBox Gold", url: "xbox.com", type: "bill", autopay: false}
       ]},
       %{date: "2/14/1982", day: 14, max_balance: 4477.66, events: []},
       %{date: "2/15/1982", day: 15, max_balance: 4477.66, events: []}
@@ -98,21 +102,15 @@ defmodule Samwise.Money.ForecastControllerTest do
       %{
         name: "Minimum balance",
         data: [
-          ["2/11/1982", 1000],
           ["2/12/1982", 4488.01],
-          ["2/13/1982", 4477.66],
-          ["2/14/1982", 4477.66],
-          ["2/15/1982", 4477.66]
+          ["2/13/1982", 4477.66]
         ]
       },
       %{
         name: "Maximum balance",
         data: [
-          ["2/11/1982", 975],
           ["2/12/1982", 4438.01],
-          ["2/13/1982", 4402.66],
-          ["2/14/1982", 4377.66],
-          ["2/15/1982", 4352.66]
+          ["2/13/1982", 4402.66]
         ]
       }]
 

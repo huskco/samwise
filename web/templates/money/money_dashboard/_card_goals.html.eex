@@ -3,12 +3,12 @@
 
   <ul>
     <%= for goal <- @goals do %>
-      <li>
-        <%= if goal.progress_percentage > 0 do %>
+      <%= if goal.progress_percentage > 0 do %>
+        <li>
           <%= goal.name %>
           <%= render(Samwise.Money.GoalView, "_progress.html", conn: @conn, goal: goal) %>
-        <% end %>
-      </li>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </div>

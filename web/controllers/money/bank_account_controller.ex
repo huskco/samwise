@@ -6,7 +6,9 @@ defmodule Samwise.Money.BankAccountController do
   alias Samwise.Money.BankAccount
 
   def get_bank_account do
-    Repo.get!(BankAccount, 1)
+    account = Repo.get(BankAccount, 1)
+    dummy_account = %Samwise.Money.BankAccount{balance: 0.0, savings: 0.0, cushion: 0.0}
+    account || dummy_account
   end
 
   def new(conn, _params) do
@@ -38,7 +40,7 @@ defmodule Samwise.Money.BankAccountController do
     changeset = BankAccount.changeset(bank_account, bank_account_params)
 
     case Repo.update(changeset) do
-      {:ok, bank_account} ->
+      {:ok, _bank_account} ->
         conn
         |> put_flash(:info, "BankAccount updated successfully.")
         |> redirect(to: money_dashboard_path(conn, :index))

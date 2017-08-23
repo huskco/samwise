@@ -104,8 +104,7 @@ select {
 
 .progress {
   display: block;
-  height: $smallest-spacing;
-  margin: $smallest-spacing 0;
+  margin: $smallest-spacing 0 0;
   padding-right: 2.5rem;
   position: relative;
   width: 100%;
@@ -134,11 +133,10 @@ select {
     line-height: 1;
     position: absolute;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    top: -0.25em;
   }
 
   &-estimate {
-    margin-top: $smallest-spacing;
+    margin: $smallest-spacing 0 0;
   }
 }

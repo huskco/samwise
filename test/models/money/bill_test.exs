@@ -3,7 +3,7 @@ defmodule Samwise.Money.BillTest do
 
   alias Samwise.Money.Bill
 
-  @valid_attrs %{amount: 42, due: 42, name: "some content", url: "some content"}
+  @valid_attrs %{amount: 42, due: 42, name: "some content", url: "some content", autopay: false}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
