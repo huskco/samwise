@@ -14,7 +14,12 @@
           <tr>
             <td><%= date.date %></td>
             <td>
-              <img src="<%= get_logo(event.url) %>" alt="<%= get_initial(event.name) %>" class="card-icon">
+              <span class="card-icon-container">
+                <img src="<%= get_logo event.url %>" alt="<%= get_initial event.name %>" class="card-icon">
+                <%= if event.type == "bill" && event.autopay do %>
+                  <span class="card-icon-autopay ion-loop"></span>
+                <% end %>
+              </span>
               <%= event.name %>
             </td>
             <td>
