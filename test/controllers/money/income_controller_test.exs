@@ -1,14 +1,10 @@
 defmodule Samwise.Money.IncomeControllerTest do
   use Samwise.ConnCase
+  import Samwise.Plug.SetTestAuthUser
 
   alias Samwise.Money.Income
   @valid_attrs %{amount: 42, due: 1, name: "some content"}
   @invalid_attrs %{}
-
-  setup do
-    user = insert(:user)
-    [conn: assign(build_conn(), :user, user)]
-  end
 
   test "lists all entries on index", %{conn: conn} do
     conn = conn
