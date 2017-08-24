@@ -56,9 +56,9 @@ $light-background-color: $white;
 $dark-background-color: $white;
 
 // Shadows
-$base-box-shadow: 0 4px 8px rgba($brown, 0.1), 0 1px 2px rgba($brown, 0.15);
-$large-box-shadow: 0 12px 28px rgba($brown, 0.1), 0 8px 10px rgba($brown, 0.1);
-$form-box-shadow: inset 0 1px 3px rgba($brown, 0.05);
+$base-box-shadow: 0 4px 8px rgba($dark-gray, 0.1), 0 1px 2px rgba($dark-gray, 0.15);
+$large-box-shadow: 0 12px 28px rgba($dark-gray, 0.1), 0 8px 10px rgba($dark-gray, 0.1);
+$form-box-shadow: inset 0 1px 3px rgba($dark-gray, 0.05);
 $form-box-shadow-focus: inset 0 1px 3px rgba($action-color, 0.05);
 
 // Animations
@@ -68,7 +68,7 @@ $base-timing: ease;
 
 // Header
 $header-height: 4rem;
-$service_nav-width: 12rem;
+$service_nav-width: 15rem;
 
 // Text Inputs
 $all-text-inputs: 'input[type="color"]',
