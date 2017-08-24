@@ -27,6 +27,7 @@
   }
 
   h3 {
+    color: $base-font-color;
     line-height: 2rem;
     margin-bottom: $small-spacing;
   }
@@ -107,7 +108,7 @@
     color: rgba($medium-gray, 0.5);
     content: attr(alt);
     display: block;
-    font-weight: 600;
+    font-weight: 700;
     height: 100%;
     left: 0;
     position: absolute;

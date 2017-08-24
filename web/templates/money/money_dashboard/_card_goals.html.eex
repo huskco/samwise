@@ -1,7 +1,7 @@
 <div class="card">
   <div class="label">Goals</div>
 
-  <ul>
+  <ul class="goals-list">
     <%= for goal <- @goals do %>
       <%= if goal.progress_percentage > 0 do %>
         <li>

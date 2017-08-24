@@ -1,6 +1,13 @@
 .dashboard-number {
   color: $green;
+  font-family: $heading-font-family;
   font-size: $large-font-size;
   line-height: 3;
   text-align: center;
+}
+
+.goals-list {
+  li:not(:last-child) {
+    margin-bottom: $small-spacing;
+  }
 }

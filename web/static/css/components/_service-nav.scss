@@ -21,14 +21,20 @@
   }
 
   &-item {
+    color: $medium-gray;
     display: block;
+    font-family: $heading-font-family;
     font-size: 1.25rem;
     font-weight: 200;
     letter-spacing: 0.025em;
 
+    &--money {
+      color: $orange;
+    }
+
     img {
       display: inline-block;
-      margin-right: 0.5rem;
+      margin-right: 0.25rem;
       vertical-align: -0.6rem;
       width: 2rem;
     }
@@ -89,6 +95,8 @@
   a {
     color: $action-color;
     display: block;
+    font-family: $heading-font-family;
+    font-weight: 300;
     padding: $small-spacing;
 
     @media (min-width: $medium-screen) {

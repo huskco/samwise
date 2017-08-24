@@ -1,6 +1,6 @@
 // Typography
 $base-font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande";
-$heading-font-family: $base-font-family;
+$heading-font-family: "Montserrat", $base-font-family;
 
 // Font Sizes
 $base-font-size: 1em;
@@ -12,7 +12,7 @@ $base-line-height: 1.5;
 $heading-line-height: 1.2;
 
 // Other Sizes
-$base-border-radius: 0.25rem;
+$base-border-radius: 0.5rem;
 $base-spacing: $base-line-height * 1rem;
 $small-spacing: $base-spacing / 2;
 $smallest-spacing: $base-spacing / 4;
@@ -37,7 +37,7 @@ $blue: #5fbae9;
 $magenta: #c76baa;
 $dark-magenta: mix($magenta, #000, 75%);
 $cyan: #66ddd2;
-$light-gray: #F6F4F2;
+$light-gray: #F6F5F4;
 $medium-gray: darken($light-gray, 25%);
 $dark-gray: darken($medium-gray, 5%);
 
