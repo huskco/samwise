@@ -15,8 +15,7 @@ config :samwise, Samwise.Endpoint,
   secret_key_base: "0WovTnkEIfqPvZWS0HjG9UTcHkn9G3fUI3fkTidOKzuOB13H4NZimxgTyp\
     07IQfZ",
   render_errors: [view: Samwise.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Samwise.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Samwise.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,

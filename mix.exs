@@ -20,7 +20,7 @@ defmodule Samwise.Mixfile do
     [mod: {Samwise, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy,
                     :logger, :gettext, :phoenix_ecto, :postgrex, :timex,
-                    :ueberauth, :ueberauth_google, :ex_machina]]
+                    :ueberauth, :ueberauth_google, :ex_machina, :slack]]
   end
 
   # Specifies which paths to compile per environment.
@@ -31,7 +31,7 @@ defmodule Samwise.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.2.4"},
+    [{:phoenix, "~> 1.3.0"},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, ">= 0.0.0"},
@@ -45,7 +45,8 @@ defmodule Samwise.Mixfile do
      {:ueberauth_google, "~> 0.5"},
      {:ex_machina, "~> 2.0"},
      {:credo, "~> 0.8.6"},
-     {:dogma, "~> 0.1"}]
+     {:dogma, "~> 0.1"},
+     {:slack, "~> 0.12.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

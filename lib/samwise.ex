@@ -20,6 +20,7 @@ defmodule Samwise do
       # Start your own worker by calling:
       # Samwise.Worker.start_link(arg1, arg2, arg3)
       # worker(Samwise.Worker, [arg1, arg2, arg3]),
+      worker(Slack.Bot, [Samwise.Slack, [], System.get_env("SLACK_TOKEN")]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
