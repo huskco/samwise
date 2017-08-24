@@ -1,0 +1,12 @@
+<%= if get_flash(@conn) do %>
+  <div class="alert-container">
+    <%= for {status, message} <- get_flash(@conn) do %>
+      <p class="alert alert-<%= status %>" role="alert">
+        <span class="alert-emoji">
+          <%= get_emoji(status) %>
+        </span>
+        <%= message %>
+      </p>
+    <% end %>
+  </div>
+<% end %>

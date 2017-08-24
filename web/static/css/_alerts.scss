@@ -1,0 +1,22 @@
+.alert {
+  @extend .card;
+  margin-top: $smallest-spacing;
+  min-height: 0;
+  padding: $small-spacing;
+  transition: opacity $long-duration, transform $long-duration;
+
+  &.transition-out {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  &-container {
+    bottom: $smallest-spacing;
+    position: fixed;
+    right: $smallest-spacing;
+  }
+
+  &-emoji {
+    margin-right: $small-spacing;
+  }
+}

@@ -63,6 +63,7 @@ $form-box-shadow-focus: inset 0 1px 3px rgba($action-color, 0.05);
 
 // Animations
 $base-duration: 150ms;
+$long-duration: $base-duration * 2;
 $base-timing: ease;
 
 // Header

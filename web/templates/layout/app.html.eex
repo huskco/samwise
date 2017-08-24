@@ -30,8 +30,7 @@
 
   <body class="<%= if service_nav(@conn) do 'has-service_nav activer-service--#{service_name(@conn)}' end %>">
     <div class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= render Samwise.SharedView, "_flash_message.html", conn: @conn %>
 
       <%= service_nav(@conn) %>
       <main role="main">
