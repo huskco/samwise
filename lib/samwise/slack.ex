@@ -34,7 +34,7 @@ defmodule Samwise.Slack do
     case text do
       "What is my balance" -> handle_balance()
       "How much can I spend" -> handle_available_to_spend()
-      _ -> "Sorry #{slacker_name}, I didn't understand that"
+      #_ -> "Sorry #{slacker_name}, I didn't understand that"
     end
   end
 
