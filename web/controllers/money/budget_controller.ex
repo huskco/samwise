@@ -1,12 +1,18 @@
 defmodule Samwise.Money.BudgetController do
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
-  plug :add_service_layout, "money"
+  plug Samwise.Plugs.AddServiceLayout, "money"
 
   alias Samwise.Money.Budget
 
   def index(conn, _params) do
-    render(conn, "index.html", budgets: all_budgets(), total: total(), daily_average: daily_average(), page_title: "Budgets")
+    render(conn,
+      "index.html",
+      budgets: all_budgets(),
+      total: total(),
+      daily_average: daily_average(),
+      page_title: "Budgets"
+    )
   end
 
   def new(conn, _params) do
@@ -68,10 +74,6 @@ defmodule Samwise.Money.BudgetController do
     Budget
       |> order_by(asc: :name)
       |> Repo.all
-  end
-
-  def add_service_layout(conn, service) do
-    Samwise.SharedController.add_service_layout(conn, service)
   end
 
   def total do

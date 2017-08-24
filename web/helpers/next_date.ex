@@ -5,7 +5,7 @@ defmodule Samwise.NextDate do
   how dates relate to each other
   """
 
-  use Number
+  alias Number.Human
 
   def pretty_next_date(day, starting_date \\ Timex.today) do
     day
@@ -38,7 +38,7 @@ defmodule Samwise.NextDate do
 
   def pretty_date(naivedate) do
     month = naivedate.month |> short_month_names()
-    day = naivedate.day |> Number.Human.number_to_ordinal()
+    day = naivedate.day |> Human.number_to_ordinal()
 
     "#{month} #{day}"
   end

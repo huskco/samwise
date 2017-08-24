@@ -1,11 +1,19 @@
 defmodule Samwise.Money.ForecastController do
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
-  plug :add_service_layout, "money"
+  plug Samwise.Plugs.AddServiceLayout, "money"
+
+  alias Samwise.Money.Bill
+  alias Samwise.Money.Income
+  alias Samwise.Money.BillController
+  alias Samwise.Money.BudgetController
+  alias Samwise.Money.IncomeController
+  alias Samwise.Money.BankAccountController
+  alias Samwise.NextDate
 
   def index(conn, _params) do
-    budgets_daily = Samwise.Money.BudgetController.daily_average()
-    balance = Samwise.Money.BankAccountController.balance()
+    budgets_daily = BudgetController.daily_average()
+    balance = BankAccountController.balance()
     events = get_events()
     available_to_spend = get_available_to_spend()
 
@@ -23,16 +31,12 @@ defmodule Samwise.Money.ForecastController do
       page_title: "Forecast")
   end
 
-  def add_service_layout(conn, service) do
-    Samwise.SharedController.add_service_layout(conn, service)
-  end
-
-  def get_events() do
+  def get_events do
     days_to_forecast = 90
     start_date = Timex.today
     items = get_forecast_items()
-    balance = Samwise.Money.BankAccountController.balance()
-    budgets_daily = Samwise.Money.BudgetController.daily_average()
+    balance = BankAccountController.balance()
+    budgets_daily = BudgetController.daily_average()
     get_events(days_to_forecast, start_date, items, balance, budgets_daily)
   end
 
@@ -43,7 +47,7 @@ defmodule Samwise.Money.ForecastController do
       |> add_min_max_budgets(budgets_daily, [])
   end
 
-  def get_available_to_spend() do
+  def get_available_to_spend do
     get_available_to_spend(get_events())
   end
 
@@ -68,7 +72,7 @@ defmodule Samwise.Money.ForecastController do
 
   def get_dates_map(days_to_forecast, date, dates_list) when days_to_forecast > 0 do
     next_date = Timex.shift(date, days: 1)
-    item = %{date: Samwise.NextDate.simple_date(date), day: date.day, events: []}
+    item = %{date: NextDate.simple_date(date), day: date.day, events: []}
     get_dates_map(days_to_forecast - 1, next_date, [item | dates_list])
   end
 
@@ -107,12 +111,12 @@ defmodule Samwise.Money.ForecastController do
 
   def item_to_map(item) do
     type = case item.__struct__ do
-      Samwise.Money.Income -> "income"
-      Samwise.Money.Bill -> "bill"
+      Income -> "income"
+      Bill -> "bill"
     end
     url = case item.__struct__ do
-      Samwise.Money.Income -> nil
-      Samwise.Money.Bill -> item.url
+      Income -> nil
+      Bill -> item.url
     end
     item
       |> Map.from_struct()
@@ -186,12 +190,12 @@ defmodule Samwise.Money.ForecastController do
   # Get all forecast items (incomes & bills)
 
   def get_forecast_items do
-    incomes = Samwise.Money.IncomeController.all_incomes()
-    bills = Samwise.Money.BillController.all_bills()
+    incomes = IncomeController.all_incomes()
+    bills = BillController.all_bills()
     incomes ++ bills
   end
 
   def cushion do
-    Samwise.Money.BankAccountController.cushion()
+    BankAccountController.cushion()
   end
 end

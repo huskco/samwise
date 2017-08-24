@@ -1,13 +1,13 @@
 defmodule Samwise.Money.BankAccountController do
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
-  plug :add_service_layout, "money"
+  plug Samwise.Plugs.AddServiceLayout, "money"
 
   alias Samwise.Money.BankAccount
 
   def get_bank_account do
     account = Repo.get(BankAccount, 1)
-    dummy_account = %Samwise.Money.BankAccount{balance: 0.0, savings: 0.0, cushion: 0.0}
+    dummy_account = %BankAccount{balance: 0.0, savings: 0.0, cushion: 0.0}
     account || dummy_account
   end
 
@@ -47,10 +47,6 @@ defmodule Samwise.Money.BankAccountController do
       {:error, changeset} ->
         render(conn, "edit.html", bank_account: bank_account, changeset: changeset)
     end
-  end
-
-  def add_service_layout(conn, service) do
-    Samwise.SharedController.add_service_layout(conn, service)
   end
 
   def balance do

@@ -1,9 +1,11 @@
 defmodule Samwise.Money.GoalController do
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
-  plug :add_service_layout, "money"
+  plug Samwise.Plugs.AddServiceLayout, "money"
 
   alias Samwise.Money.Goal
+  alias Samwise.Money.ForecastController
+  alias Samwise.Money.MoneyDashboardController
 
   def index(conn, _params) do
     goals = all_goals()
@@ -72,16 +74,12 @@ defmodule Samwise.Money.GoalController do
       |> add_progress
   end
 
-  def add_service_layout(conn, service) do
-    Samwise.SharedController.add_service_layout(conn, service)
-  end
-
   def total do
     Repo.one(from g in Goal, select: sum(g.amount))
   end
 
   def add_progress(goals) do
-    available_to_spend = Samwise.Money.ForecastController.get_available_to_spend()
+    available_to_spend = ForecastController.get_available_to_spend()
     add_progress(goals, available_to_spend, [])
   end
 
@@ -104,7 +102,7 @@ defmodule Samwise.Money.GoalController do
 
   def estimated_goal_month(goal) do
     to_go = goal.amount - goal.progress
-    surplus = Samwise.Money.MoneyDashboardController.surplus()
+    surplus = MoneyDashboardController.surplus()
     months = round(to_go / surplus)
 
     {:ok, pretty_date} = Timex.now

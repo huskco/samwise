@@ -1,7 +1,7 @@
 defmodule Samwise.Money.BillController do
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
-  plug :add_service_layout, "money"
+  plug Samwise.Plugs.AddServiceLayout, "money"
 
   alias Samwise.Money.Bill
 
@@ -68,10 +68,6 @@ defmodule Samwise.Money.BillController do
     Bill
       |> order_by(asc: :name)
       |> Repo.all
-  end
-
-  def add_service_layout(conn, service) do
-    Samwise.SharedController.add_service_layout(conn, service)
   end
 
   def total do
