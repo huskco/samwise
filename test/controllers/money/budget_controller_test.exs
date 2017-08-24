@@ -30,7 +30,7 @@ defmodule Samwise.Money.BudgetControllerTest do
     assert Repo.get_by(Budget, @valid_attrs)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+  test "does not create and renders errors when invalid data", %{conn: conn} do
     user = insert(:user)
     conn = conn
     |> assign(:user, user)
@@ -47,7 +47,7 @@ defmodule Samwise.Money.BudgetControllerTest do
     assert html_response(conn, 200) =~ "Edit budget"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
+  test "updates chosen resource and redirects when valid data", %{conn: conn} do
     budget = Repo.insert! %Budget{}
     user = insert(:user)
     conn = conn
@@ -57,7 +57,7 @@ defmodule Samwise.Money.BudgetControllerTest do
     assert Repo.get_by(Budget, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
+  test "does not update and renders errors when invalid data", %{conn: conn} do
     budget = Repo.insert! %Budget{}
     user = insert(:user)
     conn = conn

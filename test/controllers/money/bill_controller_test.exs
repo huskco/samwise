@@ -2,7 +2,13 @@ defmodule Samwise.Money.BillControllerTest do
   use Samwise.ConnCase
 
   alias Samwise.Money.Bill
-  @valid_attrs %{amount: 42.00, due: 11, name: "some content", url: "google.com", autopay: false}
+  @valid_attrs %{
+    amount: 42.00,
+    due: 11,
+    name: "some content",
+    url: "google.com",
+    autopay: false
+  }
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
@@ -30,7 +36,7 @@ defmodule Samwise.Money.BillControllerTest do
     assert Repo.get_by(Bill, @valid_attrs)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+  test "does not create and renders errors when invalid data", %{conn: conn} do
     user = insert(:user)
     conn = conn
     |> assign(:user, user)
@@ -47,7 +53,7 @@ defmodule Samwise.Money.BillControllerTest do
     assert html_response(conn, 200) =~ "Edit bill"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
+  test "updates chosen resource and redirects when valid data", %{conn: conn} do
     bill = Repo.insert! %Bill{}
     user = insert(:user)
     conn = conn
@@ -57,7 +63,7 @@ defmodule Samwise.Money.BillControllerTest do
     assert Repo.get_by(Bill, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
+  test "does not update and renders errors when invalid data", %{conn: conn} do
     bill = Repo.insert! %Bill{}
     user = insert(:user)
     conn = conn

@@ -2,7 +2,14 @@ defmodule Samwise.Money.GoalControllerTest do
   use Samwise.ConnCase
 
   alias Samwise.Money.Goal
-  @valid_attrs %{amount: 42, imageUrl: "some content", isDebt: true, name: "some content", url: "some content", order: 1}
+  @valid_attrs %{
+    amount: 42,
+    imageUrl: "some content",
+    isDebt: true,
+    name: "some content",
+    url: "some content",
+    order: 1
+  }
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
@@ -30,7 +37,7 @@ defmodule Samwise.Money.GoalControllerTest do
     assert Repo.get_by(Goal, @valid_attrs)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+  test "does not create resource and errors when invalid", %{conn: conn} do
     user = insert(:user)
     conn = conn
     |> assign(:user, user)
@@ -47,7 +54,7 @@ defmodule Samwise.Money.GoalControllerTest do
     assert html_response(conn, 200) =~ "Edit goal"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
+  test "updates resource and redirects when data is valid", %{conn: conn} do
     goal = Repo.insert! %Goal{}
     user = insert(:user)
     conn = conn
@@ -57,7 +64,7 @@ defmodule Samwise.Money.GoalControllerTest do
     assert Repo.get_by(Goal, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
+  test "does not update and renders errors when invalid", %{conn: conn} do
     goal = Repo.insert! %Goal{}
     user = insert(:user)
     conn = conn

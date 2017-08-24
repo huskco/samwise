@@ -44,7 +44,8 @@ defmodule Samwise.NextDate do
   end
 
   def short_month_names(month) do
-    names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     Enum.at(names, month - 1)
   end
 end

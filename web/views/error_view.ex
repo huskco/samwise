@@ -1,4 +1,7 @@
 defmodule Samwise.ErrorView do
+  @moduledoc """
+  Errors Views
+  """
   use Samwise.Web, :view
 
   def render("404.html", _assigns) do

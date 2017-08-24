@@ -1,4 +1,7 @@
 defmodule Samwise.Money.IncomeController do
+  @moduledoc """
+    Controller for Money Income
+  """
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
   plug Samwise.Plugs.AddServiceLayout, "money"
@@ -6,7 +9,12 @@ defmodule Samwise.Money.IncomeController do
   alias Samwise.Money.Income
 
   def index(conn, _params) do
-    render(conn, "index.html", incomes: all_incomes(), total: total(), page_title: "Incomes")
+    render(conn,
+      "index.html",
+      incomes: all_incomes(),
+      total: total(),
+      page_title: "Incomes"
+    )
   end
 
   def new(conn, _params) do
@@ -30,7 +38,12 @@ defmodule Samwise.Money.IncomeController do
   def edit(conn, %{"id" => id}) do
     income = Repo.get!(Income, id)
     changeset = Income.changeset(income)
-    render(conn, "edit.html", income: income, changeset: changeset, page_title: "Edit #{income.name}")
+    render(conn,
+      "edit.html",
+      income: income,
+      changeset: changeset,
+      page_title: "Edit #{income.name}"
+    )
   end
 
   def update(conn, %{"id" => id, "income" => income_params}) do
@@ -38,7 +51,7 @@ defmodule Samwise.Money.IncomeController do
     changeset = Income.changeset(income, income_params)
 
     case Repo.update(changeset) do
-      {:ok, income} ->
+      {:ok, _income} ->
         conn
         |> put_flash(:info, "Income updated successfully.")
         |> redirect(to: income_path(conn, :index))

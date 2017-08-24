@@ -12,7 +12,8 @@ config :samwise,
 # Configures the endpoint
 config :samwise, Samwise.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "0WovTnkEIfqPvZWS0HjG9UTcHkn9G3fUI3fkTidOKzuOB13H4NZimxgTyp07IQfZ",
+  secret_key_base: "0WovTnkEIfqPvZWS0HjG9UTcHkn9G3fUI3fkTidOKzuOB13H4NZimxgTyp\
+    07IQfZ",
   render_errors: [view: Samwise.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Samwise.PubSub,
            adapter: Phoenix.PubSub.PG2]
@@ -25,7 +26,10 @@ config :logger, :console,
 # Configure Google OAuth
 config :ueberauth, Ueberauth,
   providers: [
-    google: {Ueberauth.Strategy.Google, [default_scope: "emails profile plus.me"]}
+    google: {
+      Ueberauth.Strategy.Google,
+      [default_scope: "emails profile plus.me"]
+    }
   ]
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: System.get_env("GOOGLE_AUTH_CLIENT_ID"),

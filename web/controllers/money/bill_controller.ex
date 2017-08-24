@@ -1,4 +1,7 @@
 defmodule Samwise.Money.BillController do
+  @moduledoc """
+    Controller for Money Bill
+  """
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
   plug Samwise.Plugs.AddServiceLayout, "money"
@@ -6,7 +9,12 @@ defmodule Samwise.Money.BillController do
   alias Samwise.Money.Bill
 
   def index(conn, _params) do
-    render(conn, "index.html", bills: all_bills(), total: total(), page_title: "Bills")
+    render(conn,
+      "index.html",
+      bills: all_bills(),
+      total: total(),
+      page_title: "Bills"
+    )
   end
 
   def new(conn, _params) do
@@ -30,7 +38,12 @@ defmodule Samwise.Money.BillController do
   def edit(conn, %{"id" => id}) do
     bill = Repo.get!(Bill, id)
     changeset = Bill.changeset(bill)
-    render(conn, "edit.html", bill: bill, changeset: changeset, page_title: "Edit #{bill.name}")
+    render(conn,
+      "edit.html",
+      bill: bill,
+      changeset: changeset,
+      page_title: "Edit #{bill.name}"
+    )
   end
 
   def update(conn, %{"id" => id, "bill" => bill_params}) do
@@ -38,7 +51,7 @@ defmodule Samwise.Money.BillController do
     changeset = Bill.changeset(bill, bill_params)
 
     case Repo.update(changeset) do
-      {:ok, bill} ->
+      {:ok, _bill} ->
         conn
         |> put_flash(:info, "Bill updated successfully.")
         |> redirect(to: bill_path(conn, :index))

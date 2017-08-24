@@ -36,12 +36,12 @@ config :logger, level: :info
 # To get SSL working, you will need to add the `https` key
 # to the previous section and set your `:url` port to 443:
 #
-#     config :samwise, Samwise.Endpoint,
-#       ...
-#       url: [host: "example.com", port: 443],
-#       https: [port: 443,
-#               keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
-#               certfile: System.get_env("SOME_APP_SSL_CERT_PATH")]
+# config :samwise, Samwise.Endpoint,
+#  ...
+#  url: [host: "example.com", port: 443],
+#  https: [port: 443,
+#  keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
+#  certfile: System.get_env("SOME_APP_SSL_CERT_PATH")]
 #
 # Where those two env variables return an absolute path to
 # the key and cert in disk or a relative path inside priv,
@@ -70,4 +70,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-#import_config "prod.secret.exs"
+# import_config "prod.secret.exs"

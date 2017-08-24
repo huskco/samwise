@@ -1,4 +1,7 @@
 defmodule Samwise.Money.MoneyDashboardController do
+  @moduledoc """
+    Controller for Money dashboard
+  """
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
   plug Samwise.Plugs.AddServiceLayout, "money"

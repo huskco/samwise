@@ -1,4 +1,7 @@
 defmodule Samwise.Endpoint do
+  @moduledoc """
+    Endpoints for Samwise
+  """
   use Phoenix.Endpoint, otp_app: :samwise
 
   socket "/socket", Samwise.UserSocket

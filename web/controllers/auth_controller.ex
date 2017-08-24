@@ -1,4 +1,7 @@
 defmodule Samwise.AuthController do
+  @moduledoc """
+    Controller for authentication
+  """
   use Samwise.Web, :controller
   plug Ueberauth
 

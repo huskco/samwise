@@ -29,7 +29,7 @@ Repo.insert! %Samwise.Money.Goal{
   name: "GoalName",
   amount: 3500.00,
   url: "disney.com",
-  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/1_epcot_spaceship_earth_2010a.JPG/250px-1_epcot_spaceship_earth_2010a.JPG",
+  imageUrl: "http://logos.wikia.com/wiki/File:Disney_Logo.png",
   isDebt: false
 }
 

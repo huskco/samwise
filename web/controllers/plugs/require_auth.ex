@@ -5,8 +5,6 @@ defmodule Samwise.Plugs.RequireAuth do
   import Plug.Conn
   import Phoenix.Controller
 
-  alias Samwise.Router.Helpers
-
   def init(_params) do
   end
 

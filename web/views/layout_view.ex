@@ -1,4 +1,7 @@
 defmodule Samwise.LayoutView do
+  @moduledoc """
+  Handles layouts and helpers
+  """
   use Samwise.Web, :view
 
   def page_title(conn) do

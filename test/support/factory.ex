@@ -1,4 +1,7 @@
 defmodule Samwise.Factory do
+  @moduledoc """
+    Factory to help test users
+  """
   use ExMachina.Ecto, repo: Samwise.Repo
 
   def user_factory do

@@ -1,4 +1,7 @@
 defmodule Samwise.Money.BudgetController do
+  @moduledoc """
+    Controller for Money Budget
+  """
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
   plug Samwise.Plugs.AddServiceLayout, "money"
@@ -36,7 +39,12 @@ defmodule Samwise.Money.BudgetController do
   def edit(conn, %{"id" => id}) do
     budget = Repo.get!(Budget, id)
     changeset = Budget.changeset(budget)
-    render(conn, "edit.html", budget: budget, changeset: changeset, page_title: "Edit #{budget.name}")
+    render(conn,
+      "edit.html",
+      budget: budget,
+      changeset: changeset,
+      page_title: "Edit #{budget.name}"
+    )
   end
 
   def update(conn, %{"id" => id, "budget" => budget_params}) do
@@ -44,7 +52,7 @@ defmodule Samwise.Money.BudgetController do
     changeset = Budget.changeset(budget, budget_params)
 
     case Repo.update(changeset) do
-      {:ok, budget} ->
+      {:ok, _budget} ->
         conn
         |> put_flash(:info, "Budget updated successfully.")
         |> redirect(to: budget_path(conn, :index))

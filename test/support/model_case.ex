@@ -48,7 +48,8 @@ defmodule Samwise.ModelCase do
 
   You could then write your assertion like:
 
-      assert {:password, "is unsafe"} in errors_on(%User{}, %{password: "password"})
+      assert {:password, "is unsafe"} in
+      errors_on(%User{}, %{password: "password"})
 
   You can also create the changeset manually and retrieve the errors
   field directly:
@@ -58,7 +59,8 @@ defmodule Samwise.ModelCase do
       true
   """
   def errors_on(struct, data) do
-    struct.__struct__.changeset(struct, data)
+    struct
+    |> struct.__struct__.changeset(data)
     |> Ecto.Changeset.traverse_errors(&Samwise.ErrorHelpers.translate_error/1)
     |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
   end

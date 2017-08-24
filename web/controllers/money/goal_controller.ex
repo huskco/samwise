@@ -1,4 +1,7 @@
 defmodule Samwise.Money.GoalController do
+  @moduledoc """
+    Controller for Money Goal
+  """
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
   plug Samwise.Plugs.AddServiceLayout, "money"
@@ -9,7 +12,12 @@ defmodule Samwise.Money.GoalController do
 
   def index(conn, _params) do
     goals = all_goals()
-    render(conn, "index.html", goals: goals, total: total(), page_title: "Goals")
+    render(conn,
+      "index.html",
+      goals: goals,
+      total: total(),
+      page_title: "Goals"
+    )
   end
 
   def new(conn, _params) do
@@ -33,7 +41,12 @@ defmodule Samwise.Money.GoalController do
   def edit(conn, %{"id" => id}) do
     goal = Repo.get!(Goal, id)
     changeset = Goal.changeset(goal)
-    render(conn, "edit.html", goal: goal, changeset: changeset, page_title: "Edit #{goal.name}")
+    render(conn,
+      "edit.html",
+      goal: goal,
+      changeset: changeset,
+      page_title: "Edit #{goal.name}"
+    )
   end
 
   def update(conn, %{"id" => id, "goal" => goal_params}) do
@@ -41,7 +54,7 @@ defmodule Samwise.Money.GoalController do
     changeset = Goal.changeset(goal, goal_params)
 
     case Repo.update(changeset) do
-      {:ok, goal} ->
+      {:ok, _goal} ->
         conn
         |> put_flash(:info, "Goal updated successfully.")
         |> redirect(to: goal_path(conn, :index))

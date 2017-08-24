@@ -18,8 +18,9 @@ defmodule Samwise.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Samwise, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :timex, :ueberauth, :ueberauth_google, :ex_machina]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy,
+                    :logger, :gettext, :phoenix_ecto, :postgrex, :timex,
+                    :ueberauth, :ueberauth_google, :ex_machina]]
   end
 
   # Specifies which paths to compile per environment.
@@ -43,7 +44,8 @@ defmodule Samwise.Mixfile do
      {:ueberauth, "~> 0.4"},
      {:ueberauth_google, "~> 0.5"},
      {:ex_machina, "~> 2.0"},
-     {:credo, "~> 0.8.6"}]
+     {:credo, "~> 0.8.6"},
+     {:dogma, "~> 0.1", only: :dev}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

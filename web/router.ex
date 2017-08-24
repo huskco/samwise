@@ -1,4 +1,7 @@
 defmodule Samwise.Router do
+  @moduledoc """
+  Router
+  """
   use Samwise.Web, :router
 
   pipeline :browser do

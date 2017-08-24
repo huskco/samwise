@@ -1,4 +1,7 @@
 defmodule Samwise.Money.ForecastController do
+  @moduledoc """
+    Controller for Money Forecast
+  """
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
   plug Samwise.Plugs.AddServiceLayout, "money"
@@ -32,19 +35,18 @@ defmodule Samwise.Money.ForecastController do
   end
 
   def get_events do
-    days_to_forecast = 90
+    days = 90
     start_date = Timex.today
-    items = get_forecast_items()
+    forecast_items = get_forecast_items()
     balance = BankAccountController.balance()
-    budgets_daily = BudgetController.daily_average()
-    get_events(days_to_forecast, start_date, items, balance, budgets_daily)
+    get_events(days, start_date, forecast_items, balance)
   end
 
-  def get_events(days_to_forecast, start_date, forecast_items, balance, budgets_daily) do
-    days_to_forecast
-      |> get_dates_map(start_date, [])
+  def get_events(days, start_date, forecast_items, balance) do
+    days
+      |> get_dates_map(start_date)
       |> add_events_to_forecast(forecast_items, balance, [])
-      |> add_min_max_budgets(budgets_daily, [])
+      |> add_min_max_budgets()
   end
 
   def get_available_to_spend do
@@ -68,15 +70,17 @@ defmodule Samwise.Money.ForecastController do
 
   # Build list of dates for N days
 
-  def get_dates_map(days_to_forecast, date, dates_list \\ [])
-
-  def get_dates_map(days_to_forecast, date, dates_list) when days_to_forecast > 0 do
-    next_date = Timex.shift(date, days: 1)
-    item = %{date: NextDate.simple_date(date), day: date.day, events: []}
-    get_dates_map(days_to_forecast - 1, next_date, [item | dates_list])
+  def get_dates_map(days, date) do
+    get_dates_map(days, date, [])
   end
 
-  def get_dates_map(days_to_forecast, _date, dates_list) when days_to_forecast == 0 do
+  def get_dates_map(days, date, dates_list) when days > 0 do
+    next_date = Timex.shift(date, days: 1)
+    item = %{date: NextDate.simple_date(date), day: date.day, events: []}
+    get_dates_map(days - 1, next_date, [item | dates_list])
+  end
+
+  def get_dates_map(days, _date, dates_list) when days == 0 do
     Enum.reverse(dates_list)
   end
 
@@ -143,7 +147,10 @@ defmodule Samwise.Money.ForecastController do
 
   # Add min & max budgets to forecast list
 
-  def add_min_max_budgets(dates_list, budgets_daily, acc, index \\ 1)
+  def add_min_max_budgets(dates_list) do
+    budgets_daily = BudgetController.daily_average()
+    add_min_max_budgets(dates_list, budgets_daily, [], 1)
+  end
 
   def add_min_max_budgets([head | tail], budgets_daily, acc, index) do
     min_balance = head.max_balance - (budgets_daily * index)

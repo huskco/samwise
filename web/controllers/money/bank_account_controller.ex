@@ -1,4 +1,7 @@
 defmodule Samwise.Money.BankAccountController do
+  @moduledoc """
+    Controller for Bank Accounts
+  """
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth
   plug Samwise.Plugs.AddServiceLayout, "money"
@@ -25,7 +28,11 @@ defmodule Samwise.Money.BankAccountController do
         |> put_flash(:info, "Account created successfully.")
         |> redirect(to: bank_account_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset, page_title: "New account")
+        render(conn,
+          "new.html",
+          changeset: changeset,
+          page_title: "New account"
+        )
     end
   end
 
@@ -45,7 +52,11 @@ defmodule Samwise.Money.BankAccountController do
         |> put_flash(:info, "BankAccount updated successfully.")
         |> redirect(to: money_dashboard_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "edit.html", bank_account: bank_account, changeset: changeset)
+        render(conn,
+          "edit.html",
+          bank_account: bank_account,
+          changeset: changeset
+        )
     end
   end
 
