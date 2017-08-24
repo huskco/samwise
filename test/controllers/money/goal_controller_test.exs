@@ -38,24 +38,6 @@ defmodule Samwise.Money.GoalControllerTest do
     assert html_response(conn, 200) =~ "New goal"
   end
 
-  test "shows chosen resource", %{conn: conn} do
-    goal = Repo.insert! %Goal{name: "GoalName", amount: 5000.00, url: "http://google.com", imageUrl: "http://google.com", isDebt: false}
-    user = insert(:user)
-    conn = conn
-    |> assign(:user, user)
-    |> get(goal_path(conn, :show, goal))
-    assert html_response(conn, 200) =~ goal.name
-  end
-
-  test "renders page not found when id is nonexistent", %{conn: conn} do
-    assert_error_sent 404, fn ->
-      user = insert(:user)
-      conn
-      |> assign(:user, user)
-      |> get(goal_path(conn, :show, -1))
-    end
-  end
-
   test "renders form for editing chosen resource", %{conn: conn} do
     goal = Repo.insert! %Goal{}
     user = insert(:user)
@@ -71,7 +53,7 @@ defmodule Samwise.Money.GoalControllerTest do
     conn = conn
     |> assign(:user, user)
     |> put(goal_path(conn, :update, goal), goal: @valid_attrs)
-    assert redirected_to(conn) == goal_path(conn, :show, goal)
+    assert redirected_to(conn) == goal_path(conn, :index)
     assert Repo.get_by(Goal, @valid_attrs)
   end
 

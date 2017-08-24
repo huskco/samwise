@@ -38,24 +38,6 @@ defmodule Samwise.Money.BudgetControllerTest do
     assert html_response(conn, 200) =~ "New budget"
   end
 
-  test "shows chosen resource", %{conn: conn} do
-    budget = Repo.insert! %Budget{name: "BudgetName", url: "http://walmart.com", amount: 29.99}
-    user = insert(:user)
-    conn = conn
-    |> assign(:user, user)
-    |> get(budget_path(conn, :show, budget))
-    assert html_response(conn, 200) =~ budget.name
-  end
-
-  test "renders page not found when id is nonexistent", %{conn: conn} do
-    assert_error_sent 404, fn ->
-      user = insert(:user)
-      conn
-      |> assign(:user, user)
-      |> get(budget_path(conn, :show, -1))
-    end
-  end
-
   test "renders form for editing chosen resource", %{conn: conn} do
     budget = Repo.insert! %Budget{}
     user = insert(:user)
@@ -71,7 +53,7 @@ defmodule Samwise.Money.BudgetControllerTest do
     conn = conn
     |> assign(:user, user)
     |> put(budget_path(conn, :update, budget), budget: @valid_attrs)
-    assert redirected_to(conn) == budget_path(conn, :show, budget)
+    assert redirected_to(conn) == budget_path(conn, :index)
     assert Repo.get_by(Budget, @valid_attrs)
   end
 

@@ -38,24 +38,6 @@ defmodule Samwise.Money.IncomeControllerTest do
     assert html_response(conn, 200) =~ "New income"
   end
 
-  test "shows chosen resource", %{conn: conn} do
-    income = Repo.insert! %Income{name: "IncomeName", due: 1, amount: 29.99}
-    user = insert(:user)
-    conn = conn
-    |> assign(:user, user)
-    |> get(income_path(conn, :show, income))
-    assert html_response(conn, 200) =~ income.name
-  end
-
-  test "renders page not found when id is nonexistent", %{conn: conn} do
-    assert_error_sent 404, fn ->
-      user = insert(:user)
-      conn
-      |> assign(:user, user)
-      |> get(income_path(conn, :show, -1))
-    end
-  end
-
   test "renders form for editing chosen resource", %{conn: conn} do
     income = Repo.insert! %Income{}
     user = insert(:user)
@@ -71,7 +53,7 @@ defmodule Samwise.Money.IncomeControllerTest do
     conn = conn
     |> assign(:user, user)
     |> put(income_path(conn, :update, income), income: @valid_attrs)
-    assert redirected_to(conn) == income_path(conn, :show, income)
+    assert redirected_to(conn) == income_path(conn, :index)
     assert Repo.get_by(Income, @valid_attrs)
   end
 

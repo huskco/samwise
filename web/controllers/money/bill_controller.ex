@@ -27,11 +27,6 @@ defmodule Samwise.Money.BillController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    bill = Repo.get!(Bill, id)
-    render(conn, "show.html", bill: bill, page_title: bill.name)
-  end
-
   def edit(conn, %{"id" => id}) do
     bill = Repo.get!(Bill, id)
     changeset = Bill.changeset(bill)
@@ -46,7 +41,7 @@ defmodule Samwise.Money.BillController do
       {:ok, bill} ->
         conn
         |> put_flash(:info, "Bill updated successfully.")
-        |> redirect(to: bill_path(conn, :show, bill))
+        |> redirect(to: bill_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", bill: bill, changeset: changeset)
     end

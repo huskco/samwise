@@ -5,7 +5,7 @@
 
   <h3>
     <img src="<%= get_logo @budget.url %>" alt="<%= get_initial @budget.name %>" class="card-icon">
-    <%= link @budget.name, to: budget_path(@conn, :show, @budget) %>
+    <%= @budget.name %>
   </h3>
 
   <p>

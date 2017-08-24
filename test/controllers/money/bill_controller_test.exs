@@ -38,24 +38,6 @@ defmodule Samwise.Money.BillControllerTest do
     assert html_response(conn, 200) =~ "New bill"
   end
 
-  test "shows chosen resource", %{conn: conn} do
-    bill = Repo.insert! %Bill{name: "Bill", url: "google.com", due: 5, amount: 10.00}
-    user = insert(:user)
-    conn = conn
-    |> assign(:user, user)
-    |> get(bill_path(conn, :show, bill))
-    assert html_response(conn, 200) =~ bill.name
-  end
-
-  test "renders page not found when id is nonexistent", %{conn: conn} do
-    assert_error_sent 404, fn ->
-      user = insert(:user)
-      conn
-      |> assign(:user, user)
-      |> get(bill_path(conn, :show, -1))
-    end
-  end
-
   test "renders form for editing chosen resource", %{conn: conn} do
     bill = Repo.insert! %Bill{}
     user = insert(:user)
@@ -71,7 +53,7 @@ defmodule Samwise.Money.BillControllerTest do
     conn = conn
     |> assign(:user, user)
     |> put(bill_path(conn, :update, bill), bill: @valid_attrs)
-    assert redirected_to(conn) == bill_path(conn, :show, bill)
+    assert redirected_to(conn) == bill_path(conn, :index)
     assert Repo.get_by(Bill, @valid_attrs)
   end
 

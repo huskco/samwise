@@ -33,11 +33,6 @@ defmodule Samwise.Money.BudgetController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    budget = Repo.get!(Budget, id)
-    render(conn, "show.html", budget: budget, page_title: budget.name)
-  end
-
   def edit(conn, %{"id" => id}) do
     budget = Repo.get!(Budget, id)
     changeset = Budget.changeset(budget)
@@ -52,7 +47,7 @@ defmodule Samwise.Money.BudgetController do
       {:ok, budget} ->
         conn
         |> put_flash(:info, "Budget updated successfully.")
-        |> redirect(to: budget_path(conn, :show, budget))
+        |> redirect(to: budget_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", budget: budget, changeset: changeset)
     end

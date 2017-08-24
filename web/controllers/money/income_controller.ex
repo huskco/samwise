@@ -27,11 +27,6 @@ defmodule Samwise.Money.IncomeController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    income = Repo.get!(Income, id)
-    render(conn, "show.html", income: income, page_title: income.name)
-  end
-
   def edit(conn, %{"id" => id}) do
     income = Repo.get!(Income, id)
     changeset = Income.changeset(income)
@@ -46,7 +41,7 @@ defmodule Samwise.Money.IncomeController do
       {:ok, income} ->
         conn
         |> put_flash(:info, "Income updated successfully.")
-        |> redirect(to: income_path(conn, :show, income))
+        |> redirect(to: income_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", income: income, changeset: changeset)
     end

@@ -4,7 +4,10 @@
   </div>
 
   <h3>
-    <%= link @income.name, to: income_path(@conn, :show, @income) %>
+    <span class="card-icon-container">
+      <img src="" alt="<%= get_initial @income.name %>" class="card-icon">
+    </span>
+    <%= @income.name %>
   </h3>
 
   <p>

@@ -49,12 +49,16 @@
 .card-actions {
   color: $medium-gray;
   cursor: context-menu;
-  opacity: 0.5;
+  opacity: 0;
   position: absolute;
-  right: $base-spacing;
-  top: $base-spacing;
+  right: $smallest-spacing;
+  top: $smallest-spacing;
   transition: opacity $base-duration $base-timing;
   z-index: 2;
+
+  .card:hover & {
+    opacity: 0.5;
+  }
 
   a {
     color: $medium-gray;
@@ -63,15 +67,12 @@
   &:hover {
     opacity: 1;
   }
-
-  .ion-edit {
-    cursor: context-menu;
-  }
 }
 
 .card-icon-container {
   display: inline-block;
   position: relative;
+  vertical-align: middle;
 
   .card-icon {
     display: block;

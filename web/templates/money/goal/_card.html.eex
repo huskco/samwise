@@ -5,7 +5,7 @@
 
   <h3>
     <img src="<%= get_logo @goal.url %>" alt="<%= get_initial @goal.name %>" class="card-icon">
-    <%= link @goal.name, to: goal_path(@conn, :show, @goal) %>
+    <%= @goal.name %>
   </h3>
 
   <p>
