@@ -64,3 +64,9 @@ picture {
   margin: 0;
   max-width: 100%;
 }
+
+small {
+  color: $medium-gray;
+  font-size: $smallest-font-size;
+  text-transform: none;
+}

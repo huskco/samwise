@@ -6,7 +6,12 @@
     <div class="card-actions">
       <%= link "", to: bank_account_path(@conn, :edit, 1), class: "ion-edit" %>
     </div>
-    <div class="label">Balance</div>
+    <div class="label">
+      Balance
+      <small>
+        Updated <%= @account_updated %>
+      </small>
+    </div>
     <div class="dashboard-number">
       <%= Number.Currency.number_to_currency @balance %>
     </div>

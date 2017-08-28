@@ -17,6 +17,3 @@ config :samwise, Samwise.Repo,
   database: "samwise_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
-
-# Don't actually use Slack for tests
-config :slack, url: "http://localhost:8000"

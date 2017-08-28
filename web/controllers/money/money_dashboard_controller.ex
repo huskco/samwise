@@ -18,6 +18,7 @@ defmodule Samwise.Money.MoneyDashboardController do
       "index.html",
       balance: BankAccountController.balance(),
       available: ForecastController.get_available_to_spend(),
+      account_updated: BankAccountController.updated_at(),
       goals: GoalController.all_goals(),
       surplus: surplus(),
       page_title: "Dashboard")
