@@ -34,6 +34,7 @@ defmodule Samwise.Money.ForecastController do
       page_title: "Forecast")
   end
 
+  # Make a list of events complete with events and budgets
   def get_events do
     days = 90
     start_date = Timex.today
@@ -49,9 +50,8 @@ defmodule Samwise.Money.ForecastController do
       |> add_min_max_budgets()
   end
 
-  def get_available_to_spend do
-    get_available_to_spend(get_events())
-  end
+  # Get smallest balance from forecast as amount safe to spend
+  def get_available_to_spend do get_available_to_spend(get_events()) end
 
   def get_available_to_spend([head | tail]) do
     get_available_to_spend(tail, head.min_balance)
@@ -69,10 +69,7 @@ defmodule Samwise.Money.ForecastController do
   end
 
   # Build list of dates for N days
-
-  def get_dates_map(days, date) do
-    get_dates_map(days, date, [])
-  end
+  def get_dates_map(days, date) do get_dates_map(days, date, []) end
 
   def get_dates_map(days, date, dates_list) when days > 0 do
     next_date = Timex.shift(date, days: 1)
@@ -85,7 +82,6 @@ defmodule Samwise.Money.ForecastController do
   end
 
   # Add events to Forecast
-
   def add_events_to_forecast([head | tail], events_list, balance, acc) do
     events = events_on_day(events_list, head.day, [])
     new_balance = balance_after_events(events, balance)
@@ -100,6 +96,7 @@ defmodule Samwise.Money.ForecastController do
     acc
   end
 
+  # Add event to day if it matches the due date
   def events_on_day([head | tail], day, acc) do
     updated_acc = case head.due == day do
       true -> acc ++ [item_to_map(head)]
@@ -113,6 +110,7 @@ defmodule Samwise.Money.ForecastController do
     acc
   end
 
+  # Convert structs to maps to add it to the events list
   def item_to_map(item) do
     type = case item.__struct__ do
       Income -> "income"

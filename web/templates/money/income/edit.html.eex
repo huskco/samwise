@@ -1,3 +1,10 @@
+<nav class="header-actions">
+  <%= link "Delete",
+    to: income_path(@conn, :delete, @income),
+    method: :delete,
+    class: "button--ghost"
+  %>
+</nav>
 <h2>Edit income</h2>
 
 <%= render "form.html", changeset: @changeset,

@@ -1,3 +1,10 @@
+<nav class="header-actions">
+  <%= link "Delete",
+    to: goal_path(@conn, :delete, @goal),
+    method: :delete,
+    class: "button--ghost"
+  %>
+</nav>
 <h2>Edit goal</h2>
 
 <%= render "form.html", changeset: @changeset,

@@ -1,3 +1,10 @@
+<nav class="header-actions">
+  <%= link "Delete",
+    to: budget_path(@conn, :delete, @budget),
+    method: :delete,
+    class: "button--ghost"
+  %>
+</nav>
 <h2>Edit budget</h2>
 
 <%= render "form.html", changeset: @changeset,

@@ -2,7 +2,7 @@
   @extend .card;
   margin-top: $smallest-spacing;
   min-height: 0;
-  padding: $small-spacing;
+  padding: $small-spacing $base-spacing;
   transition: opacity $long-duration, transform $long-duration;
 
   &.transition-out {
