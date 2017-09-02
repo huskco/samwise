@@ -42,14 +42,14 @@ defmodule Samwise.Money.BillControllerTest do
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
-    bill = Repo.insert! %Bill{}
+    bill = insert(:bill)
     conn = conn
       |> get(bill_path(conn, :edit, bill))
     assert html_response(conn, 200) =~ "Edit bill"
   end
 
   test "updates chosen resource and redirects when valid data", %{conn: conn} do
-    bill = Repo.insert! %Bill{}
+    bill = insert(:bill)
     conn = conn
       |> put(bill_path(conn, :update, bill), bill: @valid_attrs)
     assert redirected_to(conn) == bill_path(conn, :index)
@@ -64,7 +64,7 @@ defmodule Samwise.Money.BillControllerTest do
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    bill = Repo.insert! %Bill{}
+    bill = insert(:bill)
     conn = conn
       |> delete(bill_path(conn, :delete, bill))
     assert redirected_to(conn) == bill_path(conn, :index)

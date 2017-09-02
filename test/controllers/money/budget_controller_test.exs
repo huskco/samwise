@@ -36,14 +36,14 @@ defmodule Samwise.Money.BudgetControllerTest do
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
-    budget = Repo.insert! %Budget{}
+    budget = insert(:budget)
     conn = conn
       |> get(budget_path(conn, :edit, budget))
     assert html_response(conn, 200) =~ "Edit budget"
   end
 
   test "updates chosen resource and redirects when valid data", %{conn: conn} do
-    budget = Repo.insert! %Budget{}
+    budget = insert(:budget)
     conn = conn
       |> put(budget_path(conn, :update, budget), budget: @valid_attrs)
     assert redirected_to(conn) == budget_path(conn, :index)
@@ -58,7 +58,7 @@ defmodule Samwise.Money.BudgetControllerTest do
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    budget = Repo.insert! %Budget{}
+    budget = insert(:budget)
     conn = conn
       |> delete(budget_path(conn, :delete, budget))
     assert redirected_to(conn) == budget_path(conn, :index)

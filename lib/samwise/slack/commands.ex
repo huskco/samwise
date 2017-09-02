@@ -60,7 +60,7 @@ defmodule Samwise.Slack.Commands do
           "#{event.name} (#{Currency.number_to_currency event.amount})"
         end)
         |> Enum.join(", ")
-      "\nPay these bills today: #{list}"
+      "\n*Pay these bills today:* #{list}"
     end
 
     summary_manual = if Enum.any?(daily_manual_bills_list) do
@@ -69,7 +69,7 @@ defmodule Samwise.Slack.Commands do
           "#{event.name} (#{Currency.number_to_currency event.amount})"
         end)
         |> Enum.join(", ")
-      "\nBills coming out automatically: #{list}"
+      "\n*Bills coming out automatically:* #{list}"
     end
 
     summary_nobills = unless Enum.any?(daily_bills) do

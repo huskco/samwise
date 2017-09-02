@@ -36,14 +36,14 @@ defmodule Samwise.Money.IncomeControllerTest do
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
-    income = Repo.insert! %Income{}
+    income = insert(:income)
     conn = conn
       |> get(income_path(conn, :edit, income))
     assert html_response(conn, 200) =~ "Edit income"
   end
 
   test "updates chosen resource and redirects when valid data", %{conn: conn} do
-    income = Repo.insert! %Income{}
+    income = insert(:income)
     conn = conn
       |> put(income_path(conn, :update, income), income: @valid_attrs)
     assert redirected_to(conn) == income_path(conn, :index)
@@ -58,7 +58,7 @@ defmodule Samwise.Money.IncomeControllerTest do
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    income = Repo.insert! %Income{}
+    income = insert(:income)
     conn = conn
       |> delete(income_path(conn, :delete, income))
     assert redirected_to(conn) == income_path(conn, :index)

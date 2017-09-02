@@ -43,14 +43,14 @@ defmodule Samwise.Money.GoalControllerTest do
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
-    goal = Repo.insert! %Goal{}
+    goal = insert(:goal)
     conn = conn
       |> get(goal_path(conn, :edit, goal))
     assert html_response(conn, 200) =~ "Edit goal"
   end
 
   test "updates resource and redirects when data is valid", %{conn: conn} do
-    goal = Repo.insert! %Goal{}
+    goal = insert(:goal)
     conn = conn
       |> put(goal_path(conn, :update, goal), goal: @valid_attrs)
     assert redirected_to(conn) == goal_path(conn, :index)
@@ -65,7 +65,7 @@ defmodule Samwise.Money.GoalControllerTest do
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    goal = Repo.insert! %Goal{}
+    goal = insert(:goal)
     conn = conn
       |> delete(goal_path(conn, :delete, goal))
     assert redirected_to(conn) == goal_path(conn, :index)
