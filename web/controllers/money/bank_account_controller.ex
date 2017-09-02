@@ -7,7 +7,7 @@ defmodule Samwise.Money.BankAccountController do
   plug Samwise.Plugs.AddServiceLayout, "money"
 
   alias Samwise.Money.BankAccount
-  alias Samwise.NextDate
+  alias Samwise.SmartDate
 
   def get_bank_account do
     account = Repo.get(BankAccount, 1)
@@ -78,6 +78,6 @@ defmodule Samwise.Money.BankAccountController do
 
   def updated_at do
     account = get_bank_account()
-    NextDate.pretty_date account.updated_at
+    SmartDate.pretty_date account.updated_at
   end
 end

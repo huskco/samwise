@@ -56,7 +56,7 @@ defmodule Samwise.Web do
       import Samwise.Gettext
       import Samwise.GetInitial
       import Samwise.GetLogo
-      import Samwise.NextDate
+      import Samwise.SmartDate
     end
   end
 

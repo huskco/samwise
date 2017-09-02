@@ -9,7 +9,7 @@ defmodule Samwise.GetEvents do
   alias Samwise.Money.IncomeController
   alias Samwise.Money.BudgetController
   alias Samwise.Money.BankAccountController
-  alias Samwise.NextDate
+  alias Samwise.SmartDate
 
   # Use bills and incomes as default events
   def default_items do
@@ -62,7 +62,7 @@ defmodule Samwise.GetEvents do
 
   def get_dates_map(days, date, dates_list) when days > 0 do
     next_date = Timex.shift(date, days: 1)
-    item = %{date: NextDate.simple_date(date), day: date.day, events: []}
+    item = %{date: SmartDate.simple_date(date), day: date.day, events: []}
     get_dates_map(days - 1, next_date, [item | dates_list])
   end
 
