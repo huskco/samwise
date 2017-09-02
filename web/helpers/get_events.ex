@@ -180,4 +180,14 @@ defmodule Samwise.GetEvents do
       data: min_acc
     }]
   end
+
+  # Get events that happen on specific day
+  def on_day(day) do
+    on_day(default_items(), day)
+  end
+
+  def on_day(items, day) do
+    items
+      |> Enum.filter(fn(x) -> x.due == day end)
+  end
 end

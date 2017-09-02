@@ -144,4 +144,47 @@ defmodule Samwise.GetEventsHelperTest do
 
     assert GetEvents.transform_to_chart_data(dates_list) == expected_list
   end
+
+  test "gets list of events that happen on certain day" do
+    events = [
+      %Samwise.Money.Income{amount: 3500, due: 12, name: "Husk"},
+      %Samwise.Money.Bill{
+        amount: 11.99,
+        due: 12,
+        name: "Hulu",
+        url: "hulu.com",
+        autopay: false
+      },
+      %Samwise.Money.Bill{
+        amount: 10.35,
+        due: 13,
+        name: "XBox Gold",
+        url: "xbox.com",
+        autopay: false
+      }
+    ]
+
+    expected_list = [
+      %Samwise.Money.Income{
+        amount: 3500,
+        due: 12,
+        id: nil,
+        inserted_at: nil,
+        name: "Husk",
+        updated_at: nil
+      },
+      %Samwise.Money.Bill{
+        amount: 11.99,
+        autopay: false,
+        due: 12,
+        id: nil,
+        inserted_at: nil,
+        name: "Hulu",
+        updated_at: nil,
+        url: "hulu.com"
+      }
+    ]
+
+    assert GetEvents.on_day(events, 12) == expected_list
+  end
 end
