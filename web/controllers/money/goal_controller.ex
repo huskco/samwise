@@ -6,8 +6,8 @@ defmodule Samwise.Money.GoalController do
   plug Samwise.Plugs.RequireAuth
   plug Samwise.Plugs.AddServiceLayout, "money"
 
+  alias Samwise.GetEvents
   alias Samwise.Money.Goal
-  alias Samwise.Money.ForecastController
   alias Samwise.Money.MoneyDashboardController
 
   def index(conn, _params) do
@@ -87,7 +87,7 @@ defmodule Samwise.Money.GoalController do
   end
 
   def add_progress(goals) do
-    available_to_spend = ForecastController.get_available_to_spend()
+    available_to_spend = GetEvents.get_available_to_spend()
     add_progress(goals, available_to_spend, [])
   end
 

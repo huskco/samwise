@@ -4,6 +4,7 @@ defmodule Samwise.Slack.Commands do
   """
   alias Samwise.Money.BankAccountController
   alias Samwise.Money.ForecastController
+  alias Samwise.GetEvents
   alias Number.Currency
 
   def match(text) do
@@ -27,7 +28,7 @@ defmodule Samwise.Slack.Commands do
   end
 
   def handle_available_to_spend do
-    amount = ForecastController.get_available_to_spend() |> add_currency
+    amount = GetEvents.get_available_to_spend() |> add_currency
     "You have #{amount} available"
   end
 end

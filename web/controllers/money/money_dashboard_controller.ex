@@ -7,17 +7,17 @@ defmodule Samwise.Money.MoneyDashboardController do
   plug Samwise.Plugs.AddServiceLayout, "money"
 
   alias Samwise.Money.BankAccountController
-  alias Samwise.Money.ForecastController
   alias Samwise.Money.GoalController
   alias Samwise.Money.IncomeController
   alias Samwise.Money.BillController
   alias Samwise.Money.BudgetController
+  alias Samwise.GetEvents
 
   def index(conn, _params) do
     render(conn,
       "index.html",
       balance: BankAccountController.balance(),
-      available: ForecastController.get_available_to_spend(),
+      available: GetEvents.get_available_to_spend(),
       account_updated: BankAccountController.updated_at(),
       goals: GoalController.all_goals(),
       surplus: surplus(),
