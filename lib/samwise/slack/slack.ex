@@ -7,6 +7,9 @@ defmodule Samwise.Slack do
 
   def handle_connect(slack, state) do
     IO.puts "Connected to Slack as #{slack.me.name}"
+    :ets.new(:slack_state, [:named_table])
+      |> :ets.insert({"slack", slack})
+
     {:ok, state}
   end
 
@@ -26,11 +29,20 @@ defmodule Samwise.Slack do
   end
   def handle_event(_, _, state), do: {:ok, state}
 
-  # When this app sends a message by itself
 
   def handle_info({:message, text, channel}, slack, state) do
     send_message(text, channel, slack)
     {:ok, state}
   end
   def handle_info(_, _, state), do: {:ok, state}
+
+  def send_message(message, channel) do
+    [{"slack", slack}] = :ets.lookup(:slack_state, "slack")
+    send_message(message, channel, slack)
+  end
+
+  def post_money_summary do
+    IO.puts "Posting money summary"
+    send_message(Commands.money_summary(), "#moneys")
+  end
 end

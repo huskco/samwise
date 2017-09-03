@@ -2,6 +2,7 @@ defmodule Samwise.Slack.Commands do
   @moduledoc """
   A helpful bot for Ogles
   """
+
   alias Samwise.Money.BankAccountController
   alias Samwise.SharedView
   alias Samwise.GetEvents
@@ -73,7 +74,7 @@ defmodule Samwise.Slack.Commands do
     end
 
     summary_nobills = unless Enum.any?(daily_bills) do
-      "\nNo bills due today. #{SharedView.good_emoji()}"
+      " *No bills due today.* #{SharedView.good_emoji()}"
     end
 
     [summary_greeting, summary_payday, summary_autopay,
