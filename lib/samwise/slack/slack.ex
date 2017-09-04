@@ -42,7 +42,8 @@ defmodule Samwise.Slack do
   end
 
   def post_money_summary do
-    IO.puts "Posting money summary"
-    send_message(Commands.money_summary(), "#moneys")
+    channel = System.get_env("SLACK_CHANNEL_MONEY")
+    IO.puts "Posting money summary to #{channel}"
+    send_message(Commands.money_summary(), channel)
   end
 end

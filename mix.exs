@@ -47,7 +47,7 @@ defmodule Samwise.Mixfile do
      {:credo, "~> 0.8.6"},
      {:dogma, "~> 0.1"},
      {:slack, "~> 0.12.0"},
-     {:quantum, "~> 1.9"}]
+     {:quantum, "~> 2.1.0-beta.1"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

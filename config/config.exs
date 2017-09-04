@@ -36,7 +36,7 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
 
 config :samwise, Samwise.Scheduler,
   jobs: [
-    {"0 8 * * *", fn -> Samwise.Slack.post_money_summary end},
+    {"0 8 * * *", {Samwise.Slack, :post_money_summary, []}},
   ]
 
 # Import environment specific config. This must remain at the bottom

@@ -1,4 +1,5 @@
 defmodule Samwise.Scheduler do
-  use Quantum.Scheduler,
-    otp_app: :samwise
+  import Quantum
+
+  use Quantum.Scheduler, otp_app: :samwise
 end
