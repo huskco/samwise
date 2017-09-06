@@ -34,7 +34,9 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: System.get_env("GOOGLE_AUTH_CLIENT_ID"),
   client_secret: System.get_env("GOOGLE_AUTH_CLIENT_SECRET")
 
+# Configure Quantum to schedule tasks
 config :samwise, Samwise.Scheduler,
+  timezone: "America/Denver",
   jobs: [
     {"0 8 * * *", {Samwise.Slack, :post_money_summary, []}},
   ]

@@ -1,5 +1,6 @@
 defmodule Samwise.Scheduler do
-  import Quantum
-
+  @moduledoc """
+  Performs tasks at specified times using elixir-quantum
+  """
   use Quantum.Scheduler, otp_app: :samwise
 end
