@@ -26,12 +26,13 @@ defmodule Samwise.Slack.Commands do
   def handle_balance do
     balance = BankAccountController.balance() |> add_currency
     savings = BankAccountController.savings() |> add_currency
-    "Your balance is #{balance}, with #{savings} in savings"
+
+    %{message: "Your balance is #{balance}, with #{savings} in savings"}
   end
 
   def handle_available_to_spend do
     amount = GetEvents.get_available_to_spend() |> add_currency
-    "You have #{amount} available"
+    %{message: "You have #{amount} available"}
   end
 
   def money_summary do
@@ -48,11 +49,22 @@ defmodule Samwise.Slack.Commands do
       |> Enum.filter(fn(event) -> event.autopay end)
     daily_manual_bills_list = daily_bills
       |> Enum.filter(fn(event) -> !event.autopay end)
+    balance = BankAccountController.balance() |> add_currency
+    available = GetEvents.get_available_to_spend() |> add_currency
 
     summary_greeting = "Good morning, here is your money update for today:"
 
+    message = "You have #{balance} total (#{available} is safe to spend)"
+    summary_account = %{
+      color: "#bfd849",
+      text: message
+    }
+
     summary_payday = if Enum.any?(daily_income) do
-      "\nIt's pay day! #{SharedView.good_emoji()}"
+      %{
+        color: "#ebe8e6",
+        text: "It's pay day! #{SharedView.good_emoji()}"
+      }
     end
 
     summary_autopay = if Enum.any?(daily_autopay_bills_list) do
@@ -61,7 +73,11 @@ defmodule Samwise.Slack.Commands do
           "#{event.name} (#{Currency.number_to_currency event.amount})"
         end)
         |> Enum.join(", ")
-      "\n*Pay these bills today:* #{list}"
+
+      %{
+        color: "#ebe8e6",
+        text: "Pay these bills today: #{list}"
+      }
     end
 
     summary_manual = if Enum.any?(daily_manual_bills_list) do
@@ -70,15 +86,31 @@ defmodule Samwise.Slack.Commands do
           "#{event.name} (#{Currency.number_to_currency event.amount})"
         end)
         |> Enum.join(", ")
-      "\n*Bills coming out automatically:* #{list}"
+
+      %{
+        color: "#f4da5c",
+        text: "Bills coming out automatically: #{list}"
+      }
     end
 
     summary_nobills = unless Enum.any?(daily_bills) do
-      " *No bills due today.* #{SharedView.good_emoji()}"
+      %{
+        color: "#ebe8e6",
+        text: "No bills due today! #{SharedView.good_emoji()}"
+      }
     end
 
-    [summary_greeting, summary_payday, summary_autopay,
+    {:ok, attachments} = [summary_account, summary_payday, summary_autopay,
       summary_manual, summary_nobills]
-      |> Enum.join()
+      |> Enum.reject(fn(item) -> item == nil end)
+      |> Poison.encode
+
+    %{
+      message: message,
+      options: %{
+        text: summary_greeting,
+        attachments: attachments
+      }
+    }
   end
 end
