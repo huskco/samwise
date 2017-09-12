@@ -76,7 +76,7 @@ defmodule Samwise.Slack.Commands do
 
       %{
         color: "#ebe8e6",
-        text: "Pay these bills today: #{list}"
+        text: "*Pay these bills today: *#{list}"
       }
     end
 
@@ -89,7 +89,7 @@ defmodule Samwise.Slack.Commands do
 
       %{
         color: "#f4da5c",
-        text: "Bills coming out automatically: #{list}"
+        text: "*Bills coming out automatically: *#{list}"
       }
     end
 
@@ -106,9 +106,8 @@ defmodule Samwise.Slack.Commands do
       |> Poison.encode
 
     %{
-      message: message,
+      message: summary_greeting,
       options: %{
-        text: summary_greeting,
         attachments: attachments
       }
     }

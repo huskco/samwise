@@ -64,6 +64,7 @@ defmodule Samwise.Slack do
   def add_options(options) do
     defaults = %{
       username: "Samwise",
+      as_user: true,
       mrkdwn: true,
     }
 
