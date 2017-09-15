@@ -13,7 +13,7 @@ defmodule Samwise.Slack.Commands do
       "What is my balance?" -> handle_balance()
       "How much can I spend?" -> handle_available_to_spend()
       "Money summary" -> money_summary()
-      # _ -> "Sorry #{slacker_name}, I didn't understand that"
+      _ -> false
     end
   end
 
@@ -46,23 +46,22 @@ defmodule Samwise.Slack.Commands do
     daily_bills = daily_events
       |> Enum.filter(fn(event) -> event.__struct__ == Samwise.Money.Bill end)
     daily_autopay_bills_list = daily_bills
-      |> Enum.filter(fn(event) -> event.autopay end)
+      |> Enum.filter(fn(event) -> event.autopay == true end)
     daily_manual_bills_list = daily_bills
-      |> Enum.filter(fn(event) -> !event.autopay end)
+      |> Enum.filter(fn(event) -> event.autopay == false end)
+    IO.inspect daily_bills
     balance = BankAccountController.balance() |> add_currency
     available = GetEvents.get_available_to_spend() |> add_currency
 
-    summary_greeting = "Good morning, here is your money update for today:"
-
-    message = "You have #{balance} total (#{available} is safe to spend)"
     summary_account = %{
       color: "#bfd849",
-      text: message
+      text: "You have #{balance} total (*#{available} is safe to spend*)",
+      mrkdwn_in: ["text"]
     }
 
     summary_payday = if Enum.any?(daily_income) do
       %{
-        color: "#ebe8e6",
+        color: "#bfd849",
         text: "It's pay day! #{SharedView.good_emoji()}"
       }
     end
@@ -75,8 +74,9 @@ defmodule Samwise.Slack.Commands do
         |> Enum.join(", ")
 
       %{
-        color: "#ebe8e6",
-        text: "*Pay these bills today: *#{list}"
+        color: "#f4da5c",
+        text: "*Bills coming out automatically:* #{list}",
+        mrkdwn_in: ["text"]
       }
     end
 
@@ -88,8 +88,9 @@ defmodule Samwise.Slack.Commands do
         |> Enum.join(", ")
 
       %{
-        color: "#f4da5c",
-        text: "*Bills coming out automatically: *#{list}"
+        color: "#f15729",
+        text: "*Pay these bills today:* #{list}",
+        mrkdwn_in: ["text"]
       }
     end
 
@@ -106,9 +107,9 @@ defmodule Samwise.Slack.Commands do
       |> Poison.encode
 
     %{
-      message: summary_greeting,
+      message: "Good morning, here is your money update for today:",
       options: %{
-        attachments: attachments
+        attachments: attachments,
       }
     }
   end

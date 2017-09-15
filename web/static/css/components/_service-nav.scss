@@ -32,6 +32,10 @@
       color: $orange;
     }
 
+    &--school {
+      color: $blue;
+    }
+
     img {
       display: inline-block;
       margin-right: 0.25rem;
@@ -107,4 +111,8 @@
 
 .service-nav--moneypenny .service-nav-logo {
   color: $orange;
+}
+
+.service-nav--school .service-nav-logo {
+  color: $blue;
 }

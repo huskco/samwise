@@ -22,9 +22,12 @@ defmodule Samwise.Slack do
     if is_command(message, slack) do
       request = demention(message, slack)
       response = Commands.match(request)
-      options = add_options(response[:options])
-      message.channel
-        |> Chat.post_message(response.message, options)
+
+      if response do
+        options = add_options(response[:options])
+        message.channel
+          |> Chat.post_message(response.message, options)
+      end
     end
     {:ok, state}
   end
@@ -64,8 +67,7 @@ defmodule Samwise.Slack do
   def add_options(options) do
     defaults = %{
       username: "Samwise",
-      as_user: true,
-      mrkdwn: true,
+      as_user: true
     }
 
     case options != nil do
