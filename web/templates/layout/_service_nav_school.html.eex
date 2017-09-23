@@ -1,0 +1,13 @@
+<header class="service-nav service-nav--school">
+  <%= link "", to: "/", class: "service-nav-back ion-android-more-vertical" %>
+
+  <%= link to: school_dashboard_path(@conn, :index), class: "service-nav-item service-nav-item--school" do %>
+    <img src="/images/favicon-school.png" class="service-nav-logo">
+    School
+  <% end %>
+
+  <div class="service-nav-toggle ion-navicon-round"></div>
+  <nav class="service-nav-nav">
+    <%#= link "Forecast", to: forecast_path(@conn, :index) %>
+  </nav>
+</header>

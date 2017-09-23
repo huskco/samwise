@@ -4,7 +4,7 @@
     Money
   <% end %>
 
-  <%= link to: money_dashboard_path(@conn, :index), class: "service-nav-item service-nav-item--school" do %>
+  <%= link to: school_dashboard_path(@conn, :index), class: "service-nav-item service-nav-item--school" do %>
     <img src="/images/favicon-school.png" class="service-nav-logo">
     School
   <% end %>

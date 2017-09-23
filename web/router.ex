@@ -39,6 +39,10 @@ defmodule Samwise.Router do
       resources "/incomes", IncomeController
       resources "/bank_account", BankAccountController
     end
+
+    scope "/school", School do
+      resources "/", SchoolDashboardController, only: [:index]
+    end
   end
 
   # Other scopes may use custom stacks.
