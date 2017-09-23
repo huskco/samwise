@@ -42,6 +42,7 @@ defmodule Samwise.Router do
 
     scope "/school", School do
       resources "/", SchoolDashboardController, only: [:index]
+      resources "/students", StudentController
     end
   end
 

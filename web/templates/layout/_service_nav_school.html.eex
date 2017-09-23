@@ -8,6 +8,6 @@
 
   <div class="service-nav-toggle ion-navicon-round"></div>
   <nav class="service-nav-nav">
-    <%#= link "Forecast", to: forecast_path(@conn, :index) %>
+    <%= link "Students", to: student_path(@conn, :index) %>
   </nav>
 </header>

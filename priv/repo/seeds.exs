@@ -44,3 +44,7 @@ Repo.insert! %Samwise.Money.BankAccount{
   savings: 1000.00,
   cushion: 1000.00
 }
+
+Repo.insert! %Samwise.School.Student{
+  name: "Student1"
+}
