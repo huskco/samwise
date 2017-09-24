@@ -45,6 +45,7 @@ defmodule Samwise.Router do
       resources "/students", StudentController
       resources "/courses", CourseController
       resources "/classes", ClassController
+      resources "/overdues", OverdueController
     end
   end
 

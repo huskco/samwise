@@ -1,0 +1,23 @@
+<h2>Show overdue</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @overdue.name %>
+  </li>
+
+  <li>
+    <strong>Course:</strong>
+    <%= @overdue.course_id %>
+  </li>
+
+  <li>
+    <strong>Due:</strong>
+    <%= @overdue.due %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: overdue_path(@conn, :edit, @overdue) %></span>
+<span><%= link "Back", to: overdue_path(@conn, :index) %></span>

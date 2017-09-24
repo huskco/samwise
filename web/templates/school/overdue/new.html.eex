@@ -1,0 +1,6 @@
+<h2>New overdue</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: overdue_path(@conn, :create) %>
+
+<span><%= link "Back", to: overdue_path(@conn, :index) %></span>
