@@ -54,3 +54,17 @@ Repo.insert! %Samwise.School.Course{
   grade: 90.00,
   student_id: 1
 }
+
+Repo.insert! %Samwise.School.Class{
+  name: "Class1",
+  start_time: "9:00 AM",
+  end_time: "9:45 AM",
+  required: true,
+  course_id: 1
+}
+
+Repo.insert! %Samwise.School.Overdue{
+  name: "Overdue1",
+  due: DateTime.utc_now,
+  course_id: 1
+}
