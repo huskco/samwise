@@ -48,3 +48,9 @@ Repo.insert! %Samwise.Money.BankAccount{
 Repo.insert! %Samwise.School.Student{
   name: "Student1"
 }
+
+Repo.insert! %Samwise.School.Course{
+  name: "Course1",
+  grade: 90.00,
+  student_id: 1
+}

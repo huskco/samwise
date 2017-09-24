@@ -1,5 +1,6 @@
 defmodule Samwise.School.CourseController do
   use Samwise.Web, :controller
+  plug Samwise.Plugs.AddServiceLayout, "school"
 
   alias Samwise.School.Course
 

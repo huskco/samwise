@@ -9,5 +9,7 @@
   <div class="service-nav-toggle ion-navicon-round"></div>
   <nav class="service-nav-nav">
     <%= link "Students", to: student_path(@conn, :index) %>
+    <%= link "Courses", to: course_path(@conn, :index) %>
+    <%= link "Classes", to: class_path(@conn, :index) %>
   </nav>
 </header>

@@ -44,6 +44,7 @@ defmodule Samwise.Router do
       resources "/", SchoolDashboardController, only: [:index]
       resources "/students", StudentController
       resources "/courses", CourseController
+      resources "/classes", ClassController
     end
   end
 

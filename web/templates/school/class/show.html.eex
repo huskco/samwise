@@ -1,0 +1,33 @@
+<h2>Show class</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @class.name %>
+  </li>
+
+  <li>
+    <strong>Start time:</strong>
+    <%= @class.start_time %>
+  </li>
+
+  <li>
+    <strong>End time:</strong>
+    <%= @class.end_time %>
+  </li>
+
+  <li>
+    <strong>Required:</strong>
+    <%= @class.required %>
+  </li>
+
+  <li>
+    <strong>Course:</strong>
+    <%= @class.course_id %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: class_path(@conn, :edit, @class) %></span>
+<span><%= link "Back", to: class_path(@conn, :index) %></span>
