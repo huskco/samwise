@@ -1,4 +1,7 @@
 defmodule Samwise.School.OverdueController do
+  @moduledoc """
+  Controller for Overdue Assignments
+  """
   use Samwise.Web, :controller
   plug Samwise.Plugs.AddServiceLayout, "school"
 

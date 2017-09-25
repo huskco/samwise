@@ -2,7 +2,12 @@ defmodule Samwise.School.ClassControllerTest do
   use Samwise.ConnCase
 
   alias Samwise.School.Class
-  @valid_attrs %{end_time: "some end_time", name: "some name", required: true, start_time: "some start_time"}
+  @valid_attrs %{
+    end_time: "some end_time",
+    name: "some name",
+    required: true,
+    start_time: "some start_time"
+  }
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
@@ -21,7 +26,7 @@ defmodule Samwise.School.ClassControllerTest do
     assert redirected_to(conn) == class_path(conn, :show, class.id)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+  test "doesnt add and renders errors when data is invalid", %{conn: conn} do
     conn = post conn, class_path(conn, :create), class: @invalid_attrs
     assert html_response(conn, 200) =~ "New class"
   end
@@ -44,14 +49,14 @@ defmodule Samwise.School.ClassControllerTest do
     assert html_response(conn, 200) =~ "Edit class"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
+  test "updates and redirects when data is valid", %{conn: conn} do
     class = Repo.insert! %Class{}
     conn = put conn, class_path(conn, :update, class), class: @valid_attrs
     assert redirected_to(conn) == class_path(conn, :show, class)
     assert Repo.get_by(Class, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
+  test "doesnt update and renders errors when data is invalid", %{conn: conn} do
     class = Repo.insert! %Class{}
     conn = put conn, class_path(conn, :update, class), class: @invalid_attrs
     assert html_response(conn, 200) =~ "Edit class"

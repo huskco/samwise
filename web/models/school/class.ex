@@ -1,4 +1,7 @@
 defmodule Samwise.School.Class do
+  @moduledoc """
+  Classes Model for School
+  """
   use Samwise.Web, :model
 
   schema "classes" do

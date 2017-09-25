@@ -12,7 +12,7 @@ defmodule Samwise.Slack.Commands do
     case text do
       "What is my balance?" -> handle_balance()
       "How much can I spend?" -> handle_available_to_spend()
-      "Money summary" -> money_summary()
+      "Money summary" -> money_summary(%{with_emojis: true})
       _ -> false
     end
   end
@@ -37,19 +37,18 @@ defmodule Samwise.Slack.Commands do
 
   def money_summary do
     daily_events = GetEvents.on_day(Timex.today().day)
-    money_summary(daily_events)
+    money_summary(%{events: daily_events, with_emojis: true})
   end
 
-  def money_summary(daily_events) do
+  def money_summary(%{events: daily_events, with_emojis: with_emojis}) do
     daily_income = daily_events
       |> Enum.filter(fn(event) -> event.__struct__ == Samwise.Money.Income end)
     daily_bills = daily_events
       |> Enum.filter(fn(event) -> event.__struct__ == Samwise.Money.Bill end)
     daily_autopay_bills_list = daily_bills
-      |> Enum.filter(fn(event) -> event.autopay == true end)
+      |> Enum.filter(fn(event) -> event.autopay end)
     daily_manual_bills_list = daily_bills
-      |> Enum.filter(fn(event) -> event.autopay == false end)
-    IO.inspect daily_bills
+      |> Enum.filter(fn(event) -> !event.autopay end)
     balance = BankAccountController.balance() |> add_currency
     available = GetEvents.get_available_to_spend() |> add_currency
 
@@ -59,10 +58,11 @@ defmodule Samwise.Slack.Commands do
       mrkdwn_in: ["text"]
     }
 
+    summary_payday_emoji = if with_emojis, do: SharedView.good_emoji()
     summary_payday = if Enum.any?(daily_income) do
       %{
         color: "#bfd849",
-        text: "It's pay day! #{SharedView.good_emoji()}"
+        text: "It's pay day! #{summary_payday_emoji}"
       }
     end
 
@@ -94,10 +94,11 @@ defmodule Samwise.Slack.Commands do
       }
     end
 
+    summary_nobills_emoji = if with_emojis, do: SharedView.good_emoji()
     summary_nobills = unless Enum.any?(daily_bills) do
       %{
         color: "#ebe8e6",
-        text: "No bills due today! #{SharedView.good_emoji()}"
+        text: "No bills due today! #{summary_nobills_emoji}"
       }
     end
 

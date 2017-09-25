@@ -15,13 +15,13 @@ defmodule Samwise.School.StudentControllerTest do
     assert html_response(conn, 200) =~ "New student"
   end
 
-  test "creates resource and redirects when data is valid", %{conn: conn} do
+  test "creates and redirects when data is valid", %{conn: conn} do
     conn = post conn, student_path(conn, :create), student: @valid_attrs
     student = Repo.get_by!(Student, @valid_attrs)
     assert redirected_to(conn) == student_path(conn, :show, student.id)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+  test "doesnt create and renders errors when data is invalid", %{conn: conn} do
     conn = post conn, student_path(conn, :create), student: @invalid_attrs
     assert html_response(conn, 200) =~ "New student"
   end
@@ -44,16 +44,17 @@ defmodule Samwise.School.StudentControllerTest do
     assert html_response(conn, 200) =~ "Edit student"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
+  test "updates and redirects when data is valid", %{conn: conn} do
     student = Repo.insert! %Student{}
     conn = put conn, student_path(conn, :update, student), student: @valid_attrs
     assert redirected_to(conn) == student_path(conn, :show, student)
     assert Repo.get_by(Student, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
+  test "doesnt update and renders errors when data is invalid", %{conn: conn} do
     student = Repo.insert! %Student{}
-    conn = put conn, student_path(conn, :update, student), student: @invalid_attrs
+    conn = conn
+      |> put(student_path(conn, :update, student), student: @invalid_attrs)
     assert html_response(conn, 200) =~ "Edit student"
   end
 

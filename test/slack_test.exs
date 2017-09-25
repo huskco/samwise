@@ -3,12 +3,11 @@ defmodule Samwise.SlackTest do
   alias Samwise.Slack
 
   test "Wraps message in attachment format" do
-    message = "This is a test message"
+    message = %{message: "This is a test message"}
     expected = %{
-      fallback: "This is a test message",
-      text: "This is a test message",
-      color: "#bfd849",
-      author_icon: "https://sam.husk.co/images/apple-touch-icon.png",
+      message: "This is a test message",
+      username: "Samwise",
+      as_user: true
     }
 
     assert Slack.add_options(message) == expected

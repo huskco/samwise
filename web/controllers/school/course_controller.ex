@@ -1,4 +1,7 @@
 defmodule Samwise.School.CourseController do
+  @moduledoc """
+  Controller for Bank Courses
+  """
   use Samwise.Web, :controller
   plug Samwise.Plugs.AddServiceLayout, "school"
 

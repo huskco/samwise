@@ -3,7 +3,12 @@ defmodule Samwise.School.ClassTest do
 
   alias Samwise.School.Class
 
-  @valid_attrs %{end_time: "some end_time", name: "some name", required: true, start_time: "some start_time"}
+  @valid_attrs %{
+    end_time: "some end_time",
+    name: "some name",
+    required: true,
+    start_time: "some start_time"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

@@ -1,4 +1,7 @@
 defmodule Samwise.School.Overdue do
+  @moduledoc """
+  Overdue Assignments Model for School
+  """
   use Samwise.Web, :model
 
   schema "overdues" do

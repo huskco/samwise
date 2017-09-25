@@ -21,7 +21,7 @@ defmodule Samwise.School.CourseControllerTest do
     assert redirected_to(conn) == course_path(conn, :show, course.id)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+  test "doesnt create and renders errors when data is invalid", %{conn: conn} do
     conn = post conn, course_path(conn, :create), course: @invalid_attrs
     assert html_response(conn, 200) =~ "New course"
   end
@@ -44,14 +44,14 @@ defmodule Samwise.School.CourseControllerTest do
     assert html_response(conn, 200) =~ "Edit course"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
+  test "updates and redirects when data is valid", %{conn: conn} do
     course = Repo.insert! %Course{}
     conn = put conn, course_path(conn, :update, course), course: @valid_attrs
     assert redirected_to(conn) == course_path(conn, :show, course)
     assert Repo.get_by(Course, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
+  test "doesnt update and renders errors when data is invalid", %{conn: conn} do
     course = Repo.insert! %Course{}
     conn = put conn, course_path(conn, :update, course), course: @invalid_attrs
     assert html_response(conn, 200) =~ "Edit course"

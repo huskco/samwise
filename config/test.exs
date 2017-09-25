@@ -4,7 +4,9 @@ use Mix.Config
 # you can enable the server option below.
 config :samwise, Samwise.Endpoint,
   http: [port: 4001],
-  server: false
+  server: true
+
+config :samwise, :sql_sandbox, true
 
 # Print only warnings and errors during test
 config :logger, level: :warn

@@ -1,6 +1,6 @@
 defmodule Samwise.Money.BankAccountController do
   @moduledoc """
-    Controller for Bank Accounts
+  Controller for Bank Accounts
   """
   use Samwise.Web, :controller
   plug Samwise.Plugs.RequireAuth

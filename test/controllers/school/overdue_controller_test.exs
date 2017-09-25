@@ -21,7 +21,7 @@ defmodule Samwise.School.OverdueControllerTest do
     assert redirected_to(conn) == overdue_path(conn, :show, overdue.id)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+  test "doesnt create and renders errors when data is invalid", %{conn: conn} do
     conn = post conn, overdue_path(conn, :create), overdue: @invalid_attrs
     assert html_response(conn, 200) =~ "New overdue"
   end
@@ -44,16 +44,17 @@ defmodule Samwise.School.OverdueControllerTest do
     assert html_response(conn, 200) =~ "Edit overdue"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
+  test "updates and redirects when data is valid", %{conn: conn} do
     overdue = Repo.insert! %Overdue{}
     conn = put conn, overdue_path(conn, :update, overdue), overdue: @valid_attrs
     assert redirected_to(conn) == overdue_path(conn, :show, overdue)
     assert Repo.get_by(Overdue, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
+  test "doesnt update and renders errors when data is invalid", %{conn: conn} do
     overdue = Repo.insert! %Overdue{}
-    conn = put conn, overdue_path(conn, :update, overdue), overdue: @invalid_attrs
+    conn = conn
+      |> put(overdue_path(conn, :update, overdue), overdue: @invalid_attrs)
     assert html_response(conn, 200) =~ "Edit overdue"
   end
 
