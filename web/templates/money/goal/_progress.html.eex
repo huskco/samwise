@@ -5,7 +5,7 @@
   <div class="progress-percent">
     <%= @goal.progress_percentage %>%
   </div>
-  <%= if @goal.progress_percentage > 0 && @goal.progress_percentage < 100 do %>
+  <%= if @goal.progress_percentage < 100 do %>
     <small>
       Estimated <%= Samwise.Money.GoalController.estimated_goal_month(@goal) %>
     </small>

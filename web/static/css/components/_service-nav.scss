@@ -24,8 +24,8 @@
     color: $medium-gray;
     display: block;
     font-family: $heading-font-family;
-    font-size: 1.25rem;
-    font-weight: 200;
+    font-size: 1.5rem;
+    font-weight: 400;
     letter-spacing: 0.025em;
 
     &--money {
@@ -99,7 +99,7 @@
   a {
     color: $action-color;
     display: block;
-    font-family: $heading-font-family;
+    font-family: $base-font-family;
     font-weight: 300;
     padding: $small-spacing;
 
