@@ -15,7 +15,7 @@ defmodule Samwise.SmartDateHelperTest do
 
   test "makes a date pretty" do
     date = Timex.parse!("02/23/1982", "%-m/%-d/%Y", :strftime)
-    assert SmartDate.pretty_date(date) == "Feb 23rd"
+    assert SmartDate.pretty_date(date, :day) == "Feb 23rd"
   end
 
   test "shifts to next month if passed" do

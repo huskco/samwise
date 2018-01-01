@@ -34,6 +34,10 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: System.get_env("GOOGLE_AUTH_CLIENT_ID"),
   client_secret: System.get_env("GOOGLE_AUTH_CLIENT_SECRET")
 
+# Configure Timex
+config :tzdata, :autoupdate, :disabled
+
+# Configure Slack
 config :slack,
   api_token: System.get_env("SLACK_TOKEN")
 

@@ -11,7 +11,7 @@ defmodule Samwise.SmartDate do
     day
       |> current_month_datetime(starting_date)
       |> next_date(starting_date)
-      |> pretty_date
+      |> pretty_date(:day)
   end
 
   def current_month_datetime(day, starting_date) do
@@ -36,11 +36,17 @@ defmodule Samwise.SmartDate do
     end
   end
 
-  def pretty_date(naivedate) do
+  def pretty_date(naivedate, :day) do
     month = naivedate.month |> short_month_names()
     day = naivedate.day |> Human.number_to_ordinal()
 
     "#{month} #{day}"
+  end
+
+  def pretty_date(naivedate, :month) do
+    {:ok, date} = naivedate
+      |> Timex.format("%b %Y", :strftime)
+    date
   end
 
   def short_month_names(month) do

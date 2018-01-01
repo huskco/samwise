@@ -78,6 +78,7 @@ defmodule Samwise.Money.BankAccountController do
 
   def updated_at do
     account = get_bank_account()
-    SmartDate.pretty_date account.updated_at
+    account.updated_at
+      |> SmartDate.pretty_date(:day)
   end
 end

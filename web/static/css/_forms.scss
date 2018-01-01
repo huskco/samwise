@@ -124,6 +124,7 @@ select {
     background-color: $green;
     border-radius: $base-spacing;
     height: $smallest-spacing;
+    max-width: 100%;
     z-index: 2;
   }
 

@@ -25,9 +25,9 @@ defmodule Samwise.Money.MoneyDashboardController do
   end
 
   def surplus do
-    income_monthly = IncomeController.total()
-    bills_monthly = BillController.total()
-    budgets_monthly = BudgetController.total()
+    income_monthly = IncomeController.total() || 0
+    bills_monthly = BillController.total() || 0
+    budgets_monthly = BudgetController.total() || 0
 
     income_monthly - bills_monthly - budgets_monthly
   end
