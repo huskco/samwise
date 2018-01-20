@@ -1,6 +1,6 @@
 defmodule Samwise.Scheduler do
   @moduledoc """
-  Performs tasks at specified times using elixir-quantum
+    Scheduler to run cron tasks
   """
   use Quantum.Scheduler, otp_app: :samwise
 end
