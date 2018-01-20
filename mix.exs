@@ -45,7 +45,6 @@ defmodule Samwise.Mixfile do
      {:ueberauth_google, "~> 0.5"},
      {:ex_machina, "~> 2.0"},
      {:credo, "~> 0.8.6"},
-     {:dogma, "~> 0.1"},
      {:slack, "~> 0.12.0"},
      {:quantum, "~> 2.1.0-beta.1"},
      {:wallaby, "~> 0.19.1"}]
@@ -61,6 +60,6 @@ defmodule Samwise.Mixfile do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
      "test": ["ecto.create --quiet", "ecto.migrate", "test",
-       "credo --strict", "dogma"]]
+       "credo --strict"]]
   end
 end

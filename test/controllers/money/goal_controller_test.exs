@@ -60,7 +60,7 @@ defmodule Samwise.Money.GoalControllerTest do
       inserted_at: ~N[2018-01-01 00:00:00.000000],
       updated_at: ~N[2018-01-01 00:00:00.000000],
       achieved: 1000,
-      progress_percentage: 100.0
+      progress_percentage: 100
     },
     %{
       id: 2,
@@ -72,8 +72,8 @@ defmodule Samwise.Money.GoalControllerTest do
       url: "http://example2.com",
       inserted_at: ~N[2018-01-01 00:00:00.000000],
       updated_at: ~N[2018-01-01 00:00:00.000000],
-      achieved: 1250,
-      progress_percentage: 50.0
+      achieved: 1050,
+      progress_percentage: 42
     },
     %{
       id: 3,
@@ -86,7 +86,7 @@ defmodule Samwise.Money.GoalControllerTest do
       inserted_at: ~N[2018-01-01 00:00:00.000000],
       updated_at: ~N[2018-01-01 00:00:00.000000],
       achieved: 0,
-      progress_percentage: 0.0
+      progress_percentage: 0
     }
   ]
   @goals_with_dates [
@@ -101,7 +101,7 @@ defmodule Samwise.Money.GoalControllerTest do
       inserted_at: ~N[2018-01-01 00:00:00.000000],
       updated_at: ~N[2018-01-01 00:00:00.000000],
       achieved: 1000,
-      progress_percentage: 100.0,
+      progress_percentage: 100,
       estimated_end_date: "Jan 2018"
     },
     %{
@@ -114,8 +114,8 @@ defmodule Samwise.Money.GoalControllerTest do
       url: "http://example2.com",
       inserted_at: ~N[2018-01-01 00:00:00.000000],
       updated_at: ~N[2018-01-01 00:00:00.000000],
-      achieved: 1250,
-      progress_percentage: 50.0,
+      achieved: 1050,
+      progress_percentage: 42,
       estimated_end_date: "Feb 2018"
     },
     %{
@@ -129,7 +129,7 @@ defmodule Samwise.Money.GoalControllerTest do
       inserted_at: ~N[2018-01-01 00:00:00.000000],
       updated_at: ~N[2018-01-01 00:00:00.000000],
       achieved: 0,
-      progress_percentage: 0.0,
+      progress_percentage: 0,
       estimated_end_date: "Sep 2018"
     }
   ]
@@ -214,7 +214,7 @@ defmodule Samwise.Money.GoalControllerTest do
 
   test "adds progress" do
     results = @goals_default
-      |> GoalController.add_progress(2250, [])
+      |> GoalController.add_progress(2050, [])
     assert results == @goals_with_progress
   end
 

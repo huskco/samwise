@@ -8,8 +8,6 @@
   <%= if @goal.progress_percentage < 100.0 do %>
     <small>
       Estimated <%= @goal.estimated_end_date %>
-      <br/>
-      Achieved: <%= Number.Currency.number_to_currency @goal.achieved %>
     </small>
   <% end %>
 </div>

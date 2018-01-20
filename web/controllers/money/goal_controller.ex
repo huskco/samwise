@@ -95,10 +95,8 @@ defmodule Samwise.Money.GoalController do
 
   def add_progress([head | tail], available_to_spend, acc) do
     goal_achieved = goal_achieved(available_to_spend, head.amount)
-    progress_percentage = goal_achieved / head.amount * 100
+    progress_percentage = round(goal_achieved / head.amount * 100)
     updated_available_to_spend = available_to_spend - goal_achieved
-
-    IO.puts("available: #{available_to_spend}, amount: #{head.amount}, achieved: #{goal_achieved}, percentage: #{progress_percentage}, updated_available_to_spend: #{updated_available_to_spend}")
 
     updated_item = head
       |> Map.put(:achieved, goal_achieved)
@@ -119,13 +117,11 @@ defmodule Samwise.Money.GoalController do
 
   def add_date([head|tail], date, daily_surplus, acc) do
     remaining = head.amount - head.achieved
-    shifted_date = date
-      |> shift_date(remaining, daily_surplus)
-    pretty_date = shifted_date
-      |> SmartDate.pretty_date(:month)
-    updated_item = head
-      |> Map.put(:estimated_end_date, pretty_date)
+    shifted_date = shift_date(date, remaining, daily_surplus)
+    pretty_date = SmartDate.pretty_date(shifted_date, :month)
+    updated_item = Map.put(head, :estimated_end_date, pretty_date)
     updated_acc = acc ++ [updated_item]
+
     add_date(tail, shifted_date, daily_surplus, updated_acc)
   end
 
@@ -135,8 +131,7 @@ defmodule Samwise.Money.GoalController do
 
   def shift_date(date, remaining, surplus) do
     days_to_shift = round(remaining / surplus)
-    shifted_date = date
-      |> Timex.shift(days: days_to_shift)
+    shifted_date = Timex.shift(date, days: days_to_shift)
     shifted_date
   end
 
