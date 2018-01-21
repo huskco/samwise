@@ -25,9 +25,8 @@ defmodule Samwise do
 
     env_children = case System.get_env("MIX_ENV") do
       "prod" ->
-        token = System.get_env("SLACK_TOKEN")
         slack = Slack.Bot
-          |> worker([Samwise.Slack, [], token])
+          |> worker([Samwise.Slack, [], System.get_env("SLACK_TOKEN")])
         children ++ [slack]
       _ -> children
     end

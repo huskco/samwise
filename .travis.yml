@@ -1,9 +1,0 @@
-language: elixir
-elixir: '1.5.1'
-otp_release: '19.0'
-
-env:
- global:
-   - WHITELISTED_USERS=$WHITELISTED_USERS
-   - SLACK_TOKEN=$SLACK_TOKEN
-   - SLACK_CHANNEL_MONEY=$SLACK_CHANNEL_MONEY
