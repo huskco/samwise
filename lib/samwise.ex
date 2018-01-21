@@ -20,14 +20,22 @@ defmodule Samwise do
       # Start your own worker by calling:
       # Samwise.Worker.start_link(arg1, arg2, arg3)
       # worker(Samwise.Worker, [arg1, arg2, arg3]),
-      worker(Slack.Bot, [Samwise.Slack, [], System.get_env("SLACK_TOKEN")]),
       worker(Samwise.Scheduler, [])
     ]
+
+    env_children = case System.get_env("MIX_ENV") do
+      "prod" ->
+        token = System.get_env("SLACK_TOKEN")
+        slack = Slack.Bot
+          |> worker([Samwise.Slack, [], token])
+        children ++ [slack]
+      _ -> children
+    end
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Supervisor]
-    Supervisor.start_link(children, opts)
+    Supervisor.start_link(env_children, opts)
   end
 
   # Tell Phoenix to update the endpoint configuration
