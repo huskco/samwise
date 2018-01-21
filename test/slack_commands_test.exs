@@ -10,13 +10,10 @@ defmodule Samwise.CommandsTest do
       insert(:bill, %{name: "BillNameB", amount: 200.00, autopay: false})
     ]
 
-    result = Commands.money_summary(%{
-      events: daily_events,
-      with_emojis: false
-    })
+    result = Commands.money_summary(daily_events, 10000, 5000, false)
     {:ok, attachments} = [
       %{
-        text: "You have $0.00 total (*$0.00 is safe to spend*)",
+        text: "You have $10,000.00 total (*$5,000.00 safe to spend*)",
         mrkdwn_in: ["text"],
         color: "#bfd849"
       },
@@ -47,13 +44,10 @@ defmodule Samwise.CommandsTest do
   test "Respond with friendly daily update when not pay day" do
     daily_events = [insert(:bill, %{name: "BillNameC", amount: 300.00})]
 
-    result = Commands.money_summary(%{
-      events: daily_events,
-      with_emojis: false
-    })
+    result = Commands.money_summary(daily_events, 3000, 1000, false)
     {:ok, attachments} = [
       %{
-        text: "You have $0.00 total (*-$900.00 is safe to spend*)",
+        text: "You have $3,000.00 total (*$1,000.00 safe to spend*)",
         mrkdwn_in: ["text"],
         color: "#bfd849"
       },
@@ -75,13 +69,10 @@ defmodule Samwise.CommandsTest do
   test "Respond with friendly daily update when nothing going on" do
     daily_events = []
 
-    result = Commands.money_summary(%{
-      events: daily_events,
-      with_emojis: false
-    })
+    result = Commands.money_summary(daily_events, 8500, 1250, false)
     {:ok, attachments} = [
       %{
-        text: "You have $0.00 total (*$0.00 is safe to spend*)",
+        text: "You have $8,500.00 total (*$1,250.00 safe to spend*)",
         mrkdwn_in: ["text"],
         color: "#bfd849"
       },

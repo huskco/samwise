@@ -82,7 +82,7 @@ defmodule Samwise.Slack do
     channel = System.get_env("SLACK_CHANNEL_MONEY")
     IO.puts "Posting money summary to #{channel}"
 
-    response = Commands.money_summary()
+    response = Commands.money_summary(true)
     options = add_options(response.options)
 
     channel
