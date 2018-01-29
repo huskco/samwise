@@ -95,7 +95,10 @@ defmodule Samwise.Money.GoalController do
 
   def add_progress([head | tail], available_to_spend, acc) do
     goal_achieved = goal_achieved(available_to_spend, head.amount)
-    progress_percentage = round(goal_achieved / head.amount * 100)
+    progress_percentage = case head.amount != 0 do
+      true -> round(goal_achieved / head.amount * 100)
+      false -> 100
+    end
     updated_available_to_spend = available_to_spend - goal_achieved
 
     updated_item = head

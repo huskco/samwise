@@ -23,7 +23,7 @@
           colorByPoint: true,
           innerSize: "75%",
           data: [{
-            name: 'Leftover',
+            name: 'Surplus',
             y: <%= Samwise.Money.IncomeController.total() - Samwise.Money.BillController.total() - Samwise.Money.BudgetController.total() %>
           }, {
             name: 'Bills',
