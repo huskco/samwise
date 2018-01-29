@@ -79,6 +79,7 @@ defmodule Samwise.Money.GoalController do
   def all_goals do
     Goal
       |> order_by(asc: :order)
+      |> order_by(desc: :amount)
       |> Repo.all
       |> add_progress
       |> add_date
