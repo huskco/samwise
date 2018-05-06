@@ -38,4 +38,8 @@
     conn: @conn,
     goals: @goals
   ) %>
+  <%= render("_card_house_levels.html",
+    conn: @conn,
+    total_available: @total_available
+  ) %>
 </div>

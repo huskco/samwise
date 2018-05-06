@@ -1,0 +1,25 @@
+<li>
+  <div class="list-key">
+    <%= Number.Currency.number_to_currency(
+      @value,
+      precision: 0
+    ) %>
+  </div>
+  <div class="list-value">
+    <%= Number.Currency.number_to_currency(
+      @monthly,
+      precision: 0
+    ) %>
+  </div>
+  <div class="list-value">
+    <%= if @total_available > (10000 + (@value * 0.05)) do %>
+      👍
+    <% else %>
+      👎
+    <% end %>
+    <%= Number.Currency.number_to_currency(
+      10000 + (@value * 0.05),
+      precision: 0
+    ) %>
+  </div>
+</li>

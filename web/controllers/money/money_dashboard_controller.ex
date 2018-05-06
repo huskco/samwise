@@ -11,6 +11,7 @@ defmodule Samwise.Money.MoneyDashboardController do
   alias Samwise.Money.IncomeController
   alias Samwise.Money.BillController
   alias Samwise.Money.BudgetController
+  alias Samwise.Money.ForecastController
   alias Samwise.GetEvents
 
   def index(conn, _params) do

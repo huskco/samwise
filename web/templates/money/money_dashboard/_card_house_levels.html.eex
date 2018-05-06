@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="label">We've saved up enough for a house..</div>
+
+  <ul class="accounts-list key-value-list">
+    <li>
+      <label class="list-key">
+        Value
+      </label>
+      <label class="list-value">
+        Monthly Payment
+      </label>
+      <label class="list-value">
+        For Closing
+      </label>
+    </li>
+
+    <%= render("_card_house_levels_row.html",
+      conn: @conn,
+      value: 350000,
+      monthly: 2334,
+      total_available: @total_available
+    ) %>
+
+    <%= render("_card_house_levels_row.html",
+      conn: @conn,
+      value: 375000,
+      monthly: 2448,
+      total_available: @total_available
+    ) %>
+
+    <%= render("_card_house_levels_row.html",
+      conn: @conn,
+      value: 400000,
+      monthly: 2582,
+      total_available: @total_available
+    ) %>
+
+    <%= render("_card_house_levels_row.html",
+      conn: @conn,
+      value: 425000,
+      monthly: 2716,
+      total_available: @total_available
+    ) %>
+
+    <%= render("_card_house_levels_row.html",
+      conn: @conn,
+      value: 450000,
+      monthly: 2850,
+      total_available: @total_available
+    ) %>
+  </ul>
+</div>

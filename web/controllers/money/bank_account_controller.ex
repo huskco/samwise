@@ -74,7 +74,7 @@ defmodule Samwise.Money.BankAccountController do
 
   def all_bank_accounts do
     BankAccount
-      |> order_by(asc: :name)
+      |> order_by(desc: :amount)
       |> Repo.all
   end
 
