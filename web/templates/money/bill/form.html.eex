@@ -30,8 +30,10 @@
   </div>
 
   <div class="form-group">
-    <%= label f, "Autopay?", class: "control-label" %>
-    <%= checkbox f, :autopay, class: "form-control" %>
+    <%= label f, :autopay, class: "control-label" do %>
+      <%= checkbox f, :autopay, class: "form-control" %>
+      Autopay?
+    <% end %>
     <%= error_tag f, :autopay %>
   </div>
 

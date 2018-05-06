@@ -18,26 +18,34 @@
   </div>
 
   <div class="form-group">
-    <%= label f, "Is this available to spend?", class: "control-label" %>
-    <%= checkbox f, :is_available, class: "form-control" %>
+    <%= label f, :is_available, class: "control-label" do %>
+      <%= checkbox f, :is_available, class: "form-control" %>
+      Is this available to spend?
+    <% end %>
     <%= error_tag f, :is_available %>
   </div>
 
   <div class="form-group">
-    <%= label f, "Is this an investment?", class: "control-label" %>
-    <%= checkbox f, :is_investment, class: "form-control" %>
+    <%= label f, :is_investment, class: "control-label" do %>
+      <%= checkbox f, :is_investment, class: "form-control" %>
+      Is this an investment?
+    <% end %>
     <%= error_tag f, :is_investment %>
   </div>
 
   <div class="form-group">
-    <%= label f, "Is this an allowance?", class: "control-label" %>
-    <%= checkbox f, :is_allowance, class: "form-control" %>
+    <%= label f, :is_allowance, class: "control-label" do %>
+      <%= checkbox f, :is_allowance, class: "form-control" %>
+      Is this an allowance?
+    <% end %>
     <%= error_tag f, :is_allowance %>
   </div>
 
   <div class="form-group">
-    <%= label f, "Show this account on dashboard?", class: "control-label" %>
-    <%= checkbox f, :show_on_dashboard, class: "form-control" %>
+    <%= label f, :show_on_dashboard, class: "control-label" do %>
+      <%= checkbox f, :show_on_dashboard, class: "form-control" %>
+      Show this account on dashboard?
+    <% end %>
     <%= error_tag f, :show_on_dashboard %>
   </div>
 
