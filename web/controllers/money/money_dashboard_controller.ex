@@ -23,6 +23,8 @@ defmodule Samwise.Money.MoneyDashboardController do
       bank_accounts: BankAccountController.all_dashboard_accounts(),
       investment_accounts: BankAccountController.all_investment_accounts(),
       allowance_accounts: BankAccountController.all_allowance_accounts(),
+      monthly_income: IncomeController.total(),
+      monthly_debt: BillController.debt_total() || 0,
       page_title: "Dashboard")
   end
 

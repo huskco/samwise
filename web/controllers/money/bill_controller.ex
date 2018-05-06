@@ -81,4 +81,12 @@ defmodule Samwise.Money.BillController do
   def total do
     Repo.one(from b in Bill, select: sum(b.amount))
   end
+
+  def debt_total do
+    Repo.one(
+      from b in Bill,
+      where: b.is_debt == true,
+      select: sum(b.amount)
+    )
+  end
 end

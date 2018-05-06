@@ -3,7 +3,10 @@
     <%= link "", to: goal_path(@conn, :edit, @goal), class: "ion-edit" %>
   </div>
 
-  <a href="<%= @goal.url %>" target="_blank">
+  <%= if @goal.url do %>
+    <a href="<%= @goal.url %>" target="_blank">
+  <% end %>
+
     <div class="card-image" style="background-image: url(<%= @goal.imageUrl %>)"></div>
 
     <h3>
@@ -13,7 +16,10 @@
         &nbsp; <span class="ion-ios-chatboxes-outline"></span>
       <% end %>
     </h3>
-  </a>
+
+  <%= if @goal.url do %>
+    </a>
+  <% end %>
 
   <p>
     <span class="label label-inline">Amount</span>

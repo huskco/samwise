@@ -1,0 +1,53 @@
+<%= if @monthly_debt do %>
+  <div class="card">
+    <div class="label">Debt to Income Ratio</div>
+    <div id="debtToIncomeChart" class="card-list-chart"></div>
+
+    <ul class="accounts-list key-value-list">
+      <li>
+        <div class="list-key">
+          Debt to Income ratio
+        </div>
+        <div class="list-value">
+          <%= Number.Percentage.number_to_percentage(
+            (@monthly_debt / @monthly_income * 100),
+            precision: 0
+          ) %>
+        </div>
+      </li>
+    </ul>
+
+    <script>
+      $(function() {
+        var options = Object.assign(window.chartOptions, {
+          colors: ['#eaeaea', '#66ddd2'],
+          chart: {
+            type: 'pie',
+            height: $("#debtToIncomeChart").width() * 0.5,
+            marginLeft: 0,
+            marginTop: 0,
+            marginBottom: 0
+          },
+          legend: {
+            align: 'right',
+            verticalAlign: 'middle',
+            layout: 'vertical'
+          },
+          series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            innerSize: "75%",
+            data: [{
+              name: 'Monthly Income',
+              y: <%= @monthly_income %>
+            }, {
+              name: 'Monthly Debt',
+              y: <%= @monthly_debt %>
+            }]
+          }]
+        });
+        Highcharts.chart('debtToIncomeChart', options);
+      });
+    </script>
+  </div>
+<% end %>

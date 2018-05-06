@@ -1,6 +1,13 @@
 <h2>Dashboard</h2>
 <div class="card-list">
-  <%= render("_card_breakdown.html", conn: @conn) %>
+  <%= render("_card_breakdown.html",
+    conn: @conn
+  ) %>
+    <%= render("_card_debt_to_income.html",
+      conn: @conn,
+      monthly_debt: @monthly_debt,
+      monthly_income: @monthly_income
+    ) %>
   <%= render("_card_accounts.html",
     conn: @conn,
     title: "Accounts",
@@ -16,20 +23,18 @@
     title: "Investments",
     accounts: @investment_accounts)
   %>
-
-  <div class="card">
-    <div class="label">Available to spend</div>
-    <div class="dashboard-number">
-      <%= Number.Currency.number_to_currency @available %>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="label">Monthly Surplus</div>
-    <div class="dashboard-number">
-      +<%= Number.Currency.number_to_currency @surplus %>
-    </div>
-  </div>
-
-  <%= render("_card_goals.html", conn: @conn, goals: @goals) %>
+  <%= render("_card_number.html",
+    conn: @conn,
+    title: "Available to spend",
+    number: Number.Currency.number_to_currency @available)
+  %>
+  <%= render("_card_number.html",
+    conn: @conn,
+    title: "Monthly Surplus",
+    number: Number.Currency.number_to_currency @surplus)
+  %>
+  <%= render("_card_goals.html",
+    conn: @conn,
+    goals: @goals
+  ) %>
 </div>
