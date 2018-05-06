@@ -7,12 +7,14 @@ defmodule Samwise.Money.BankAccountController do
   plug Samwise.Plugs.AddServiceLayout, "money"
 
   alias Samwise.Money.BankAccount
-  alias Samwise.SmartDate
 
-  def get_bank_account do
-    account = Repo.get(BankAccount, 1)
-    dummy_account = %BankAccount{balance: 0.0, savings: 0.0, cushion: 0.0}
-    account || dummy_account
+  def index(conn, _params) do
+    render(conn,
+      "index.html",
+      bank_accounts: all_bank_accounts(),
+      total_available: total_available(),
+      page_title: "Bank Accounts"
+    )
   end
 
   def new(conn, _params) do
@@ -20,65 +22,79 @@ defmodule Samwise.Money.BankAccountController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"" => bank_account_params}) do
+  def create(conn, %{"bank_account" => bank_account_params}) do
     changeset = BankAccount.changeset(%BankAccount{}, bank_account_params)
 
     case Repo.insert(changeset) do
       {:ok, _bank_account} ->
         conn
-        |> put_flash(:info, "Account created successfully.")
+        |> put_flash(:info, "Bank Account created successfully.")
         |> redirect(to: bank_account_path(conn, :index))
       {:error, changeset} ->
-        render(conn,
-          "new.html",
-          changeset: changeset,
-          page_title: "New account"
-        )
+        render(conn, "new.html", changeset: changeset, page_title: "New Bank Account")
     end
   end
 
-  def edit(conn, _) do
-    bank_account = get_bank_account()
+  def edit(conn, %{"id" => id}) do
+    bank_account = Repo.get!(BankAccount, id)
     changeset = BankAccount.changeset(bank_account)
-    render(conn, "edit.html", bank_account: bank_account, changeset: changeset)
+    render(conn,
+      "edit.html",
+      bank_account: bank_account,
+      changeset: changeset,
+      page_title: "Edit #{bank_account.name}"
+    )
   end
 
-  def update(conn, %{"id" => _, "bank_account" => bank_account_params}) do
-    bank_account = get_bank_account()
+  def update(conn, %{"id" => id, "bank_account" => bank_account_params}) do
+    bank_account = Repo.get!(BankAccount, id)
     changeset = BankAccount.changeset(bank_account, bank_account_params)
 
     case Repo.update(changeset) do
       {:ok, _bank_account} ->
         conn
-        |> put_flash(:info, "BankAccount updated successfully.")
-        |> redirect(to: money_dashboard_path(conn, :index))
+        |> put_flash(:info, "Bank Account updated successfully.")
+        |> redirect(to: bank_account_path(conn, :index))
       {:error, changeset} ->
-        render(conn,
-          "edit.html",
-          bank_account: bank_account,
-          changeset: changeset
-        )
+        render(conn, "edit.html", bank_account: bank_account, changeset: changeset)
     end
   end
 
-  def balance do
-    account = get_bank_account()
-    account.balance
+  def delete(conn, %{"id" => id}) do
+    bank_account = Repo.get!(BankAccount, id)
+
+    # Here we use delete! (with a bang) because we expect
+    # it to always work (and if it does not, it will raise).
+    Repo.delete!(bank_account)
+
+    conn
+    |> put_flash(:info, "Bank Account deleted successfully.")
+    |> redirect(to: bank_account_path(conn, :index))
   end
 
-  def savings do
-    account = get_bank_account()
-    account.savings
+  def all_bank_accounts do
+    BankAccount
+      |> order_by(asc: :name)
+      |> Repo.all
   end
 
-  def cushion do
-    account = get_bank_account()
-    account.cushion
+  def total do
+    Repo.one(from ba in BankAccount, select: sum(ba.amount))
   end
 
-  def updated_at do
-    account = get_bank_account()
-    account.updated_at
-      |> SmartDate.pretty_date(:day)
+  def total_available do
+    Repo.one(
+      from ba in BankAccount,
+      where: ba.is_available == true,
+      select: sum(ba.amount)
+    )
+  end
+
+  def total_investments do
+    Repo.one(
+      from ba in BankAccount,
+      where: ba.is_investment == true,
+      select: sum(ba.amount)
+    )
   end
 end

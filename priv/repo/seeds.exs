@@ -40,9 +40,13 @@ Repo.insert! %Samwise.Money.Income{
 }
 
 Repo.insert! %Samwise.Money.BankAccount{
-  balance: 1000.00,
-  savings: 1000.00,
-  cushion: 1000.00
+  name: "Checking",
+  amount: 10000.00,
+  is_available: true,
+  is_investment: false,
+  is_allowance: false,
+  show_on_dashboard: true,
+  comments: "some content"
 }
 
 Repo.insert! %Samwise.School.Student{

@@ -100,7 +100,7 @@ defmodule Samwise.GetEventsHelperTest do
         events: []}
     ]
 
-    test_data = GetEvents.add_min_max_budgets(dates_list, budgets_daily, [], 1)
+    test_data = GetEvents.add_min_max_budgets(dates_list, budgets_daily, budgets_daily, [])
     assert test_data == expected_list
   end
 

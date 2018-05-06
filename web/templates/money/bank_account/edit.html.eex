@@ -1,4 +1,11 @@
+<nav class="header-actions">
+  <%= link "Delete",
+    to: bank_account_path(@conn, :delete, @bank_account),
+    method: :delete,
+    class: "button--ghost"
+  %>
+</nav>
 <%= render "form.html",
   changeset: @changeset,
-  action: bank_account_path(@conn, :update, 1)
+  action: bank_account_path(@conn, :update, @bank_account)
 %>

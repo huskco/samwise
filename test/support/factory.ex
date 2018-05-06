@@ -16,9 +16,13 @@ defmodule Samwise.Factory do
 
   def bank_account_factory do
     %Samwise.Money.BankAccount{
-      balance: sequence(:balance, &"#{&1}000.00"),
-      savings: sequence(:savings, &"#{&1 * 5}00.00"),
-      cushion: sequence(:cushion, &"#{&1}00.00")
+      name: sequence(:name, &"Bank Account #{&1}"),
+      amount: sequence(:amount, &"#{&1}000.00"),
+      is_available: true,
+      is_investment: false,
+      is_allowance: false,
+      show_on_dashboard: true,
+      comments: nil
     }
   end
 

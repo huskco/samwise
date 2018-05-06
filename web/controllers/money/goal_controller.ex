@@ -10,12 +10,15 @@ defmodule Samwise.Money.GoalController do
   alias Samwise.GetEvents
   alias Samwise.Money.Goal
   alias Samwise.Money.MoneyDashboardController
+  alias Samwise.GetEvents
 
   def index(conn, _params) do
     goals = all_goals()
+    safe_to_spend = GetEvents.get_safe_to_spend()
     render(conn,
       "index.html",
       goals: goals,
+      safe_to_spend: safe_to_spend,
       total: total(),
       page_title: "Goals"
     )
@@ -90,23 +93,23 @@ defmodule Samwise.Money.GoalController do
   end
 
   def add_progress(goals) do
-    available_to_spend = GetEvents.get_available_to_spend()
-    add_progress(goals, available_to_spend, [])
+    safe_to_spend = GetEvents.get_safe_to_spend()
+    add_progress(goals, safe_to_spend, [])
   end
 
-  def add_progress([head | tail], available_to_spend, acc) do
-    goal_achieved = goal_achieved(available_to_spend, head.amount)
+  def add_progress([head | tail], safe_to_spend, acc) do
+    goal_achieved = goal_achieved(safe_to_spend, head.amount)
     progress_percentage = case head.amount != 0 do
       true -> round(goal_achieved / head.amount * 100)
       false -> 0
     end
-    updated_available_to_spend = available_to_spend - goal_achieved
+    updated_safe_to_spend = safe_to_spend - goal_achieved
 
     updated_item = head
       |> Map.put(:achieved, goal_achieved)
       |> Map.put(:progress_percentage, progress_percentage)
     updated_acc = acc ++ [updated_item]
-    add_progress(tail, updated_available_to_spend, updated_acc)
+    add_progress(tail, updated_safe_to_spend, updated_acc)
   end
 
   def add_progress([], _, acc) do
@@ -139,11 +142,11 @@ defmodule Samwise.Money.GoalController do
     shifted_date
   end
 
-  def goal_achieved(available_to_spend, goal_amount) do
+  def goal_achieved(safe_to_spend, goal_amount) do
     cond do
-      available_to_spend > goal_amount -> goal_amount
-      available_to_spend < 0 -> 0
-      true -> available_to_spend
+      safe_to_spend > goal_amount -> goal_amount
+      safe_to_spend < 0 -> 0
+      true -> safe_to_spend
     end
   end
 end

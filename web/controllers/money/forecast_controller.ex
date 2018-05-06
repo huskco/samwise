@@ -12,21 +12,20 @@ defmodule Samwise.Money.ForecastController do
 
   def index(conn, _params) do
     budgets_daily = BudgetController.daily_average()
-    balance = BankAccountController.balance()
+    total_available = BankAccountController.total_available()
     events = GetEvents.all()
-    available_to_spend = GetEvents.get_available_to_spend()
+    safe_to_spend = GetEvents.get_safe_to_spend()
 
     events_chart_data = events
       |> GetEvents.transform_to_chart_data
       |> Poison.encode!
-
     render(conn,
       "index.html",
       budgets_daily: budgets_daily,
       events: events,
       eventsChartData: events_chart_data,
-      balance: balance,
-      available_to_spend: available_to_spend,
+      total_available: total_available,
+      safe_to_spend: safe_to_spend,
       page_title: "Forecast")
   end
 end

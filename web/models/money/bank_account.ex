@@ -5,9 +5,13 @@ defmodule Samwise.Money.BankAccount do
   use Samwise.Web, :model
 
   schema "bankaccount" do
-    field :balance, :float
-    field :savings, :float
-    field :cushion, :float
+    field :name, :string
+    field :amount, :float
+    field :is_available, :boolean
+    field :is_investment, :boolean
+    field :is_allowance, :boolean
+    field :show_on_dashboard, :boolean
+    field :comments, :string
 
     timestamps()
   end
@@ -17,7 +21,22 @@ defmodule Samwise.Money.BankAccount do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:balance, :savings, :cushion])
-    |> validate_required([:balance, :savings, :cushion])
+    |> cast(params, [
+      :name,
+      :amount,
+      :is_available,
+      :is_investment,
+      :is_allowance,
+      :show_on_dashboard,
+      :comments
+    ])
+    |> validate_required([
+      :name,
+      :amount,
+      :is_available,
+      :is_investment,
+      :is_allowance,
+      :show_on_dashboard
+    ])
   end
 end

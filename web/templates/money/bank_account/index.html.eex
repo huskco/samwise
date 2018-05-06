@@ -1,0 +1,16 @@
+<nav class="header-actions">
+  <div>
+    <span class="label label-inline">Total Available:</span>
+    <%= Number.Currency.number_to_currency @total_available %>
+  </div>
+</nav>
+<h2>Bank Accounts</h2>
+
+<div class="card-list">
+  <%= for bank_account <- @bank_accounts do %>
+    <%= render("_card.html", conn: @conn, bank_account: bank_account) %>
+  <% end %>
+  <%= link to: bank_account_path(@conn, :new), class: "card card-add" do %>
+    <span class="add-icon">+</span>
+  <% end %>
+</div>

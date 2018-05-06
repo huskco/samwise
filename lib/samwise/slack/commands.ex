@@ -11,7 +11,7 @@ defmodule Samwise.Slack.Commands do
   def match(text) do
     case text do
       "What is my balance?" -> handle_balance()
-      "How much can I spend?" -> handle_available_to_spend()
+      "How much can I spend?" -> handle_safe_to_spend()
       "Money summary" -> money_summary(%{with_emojis: true})
       _ -> false
     end
@@ -24,15 +24,14 @@ defmodule Samwise.Slack.Commands do
   # Known commands
 
   def handle_balance do
-    balance = BankAccountController.balance() |> add_currency
-    savings = BankAccountController.savings() |> add_currency
+    total_available = BankAccountController.total_available() |> add_currency
 
-    %{message: "Your balance is #{balance}, with #{savings} in savings"}
+    %{message: "You have #{total_available} available to spend"}
   end
 
-  def handle_available_to_spend do
-    amount = GetEvents.get_available_to_spend() |> add_currency
-    %{message: "You have #{amount} available"}
+  def handle_safe_to_spend do
+    amount = GetEvents.get_safe_to_spend() |> add_currency
+    %{message: "You have #{amount} safe to spend"}
   end
 
   def money_summary(with_emojis) do
@@ -41,15 +40,15 @@ defmodule Samwise.Slack.Commands do
   end
 
   def money_summary(daily_events, with_emojis) do
-    balance = BankAccountController.balance() |> add_currency
-    available = GetEvents.get_available_to_spend() |> add_currency
+    total_available = BankAccountController.total_available() |> add_currency
+    safe_to_spend = GetEvents.get_safe_to_spend() |> add_currency
 
-    money_summary(daily_events, balance, available, with_emojis)
+    money_summary(daily_events, total_available, safe_to_spend, with_emojis)
   end
 
-  def money_summary(daily_events, balance, available, with_emojis) do
-    show_balance = balance |> add_currency
-    show_available = available |> add_currency
+  def money_summary(daily_events, total_available, safe_to_spend, with_emojis) do
+    show_total_available = total_available |> add_currency
+    show_safe_to_spend = safe_to_spend |> add_currency
     income_events = get_income_events(daily_events)
     bill_events = get_bill_events(daily_events)
     summary_payday = summary_payday(income_events, with_emojis)
@@ -59,7 +58,7 @@ defmodule Samwise.Slack.Commands do
 
     summary_account = %{
       color: "#bfd849",
-      text: "You have #{show_balance} total (*#{show_available} safe to spend*)",
+      text: "You have #{show_total_available} available (*#{show_safe_to_spend} safe to spend*)",
       mrkdwn_in: ["text"]
     }
 

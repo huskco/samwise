@@ -16,9 +16,8 @@ defmodule Samwise.Money.MoneyDashboardController do
   def index(conn, _params) do
     render(conn,
       "index.html",
-      balance: BankAccountController.balance(),
-      available: GetEvents.get_available_to_spend(),
-      account_updated: BankAccountController.updated_at(),
+      total_available: BankAccountController.total_available(),
+      available: GetEvents.get_safe_to_spend(),
       goals: GoalController.all_goals(),
       surplus: surplus(),
       page_title: "Dashboard")

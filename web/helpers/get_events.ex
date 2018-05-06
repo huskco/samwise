@@ -25,7 +25,7 @@ defmodule Samwise.GetEvents do
 
   def all(forecast_items, days) do
     start_date = Timex.today
-    balance = BankAccountController.balance()
+    balance = BankAccountController.total_available()
     all(days, start_date, forecast_items, balance)
   end
 
@@ -37,24 +37,24 @@ defmodule Samwise.GetEvents do
   end
 
   # Get smallest balance from forecast as amount safe to spend
-  def get_available_to_spend do
+  def get_safe_to_spend do
     events_list = all()
-    get_available_to_spend(events_list)
+    get_safe_to_spend(events_list)
   end
 
-  def get_available_to_spend([head | tail]) do
-    get_available_to_spend(tail, head.min_balance)
+  def get_safe_to_spend([head | tail]) do
+    get_safe_to_spend(tail, head.min_balance)
   end
 
-  def get_available_to_spend([head | tail], smallest) do
+  def get_safe_to_spend([head | tail], smallest) do
     case smallest > head.min_balance do
-      true -> get_available_to_spend(tail, head.min_balance)
-      false -> get_available_to_spend(tail, smallest)
+      true -> get_safe_to_spend(tail, head.min_balance)
+      false -> get_safe_to_spend(tail, smallest)
     end
   end
 
-  def get_available_to_spend([], smallest) do
-    smallest - BankAccountController.cushion()
+  def get_safe_to_spend([], smallest) do
+    smallest
   end
 
   # Build list of dates for N days
@@ -136,17 +136,18 @@ defmodule Samwise.GetEvents do
 
   def add_min_max_budgets(dates_list) do
     budgets_daily = BudgetController.daily_average()
-    add_min_max_budgets(dates_list, budgets_daily, [], 1)
+    add_min_max_budgets(dates_list, budgets_daily, 0, [])
   end
 
-  def add_min_max_budgets([head | tail], budgets_daily, acc, index) do
-    min_balance = head.max_balance - (budgets_daily * index)
+  def add_min_max_budgets([head | tail], budgets_daily, budgets_acc, acc) do
+    min_balance = head.max_balance - budgets_acc
     updated_item = Map.put(head, :min_balance, min_balance)
+    updated_budgets_acc = budgets_acc + budgets_daily
     updated_acc = acc ++ [updated_item]
-    add_min_max_budgets(tail, budgets_daily, updated_acc, index + 1)
+    add_min_max_budgets(tail, budgets_daily, updated_budgets_acc, updated_acc)
   end
 
-  def add_min_max_budgets([], _budgets_daily, acc, _index) do
+  def add_min_max_budgets([], _budgets_daily, _budgets_acc, acc) do
     acc
   end
 

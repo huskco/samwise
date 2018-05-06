@@ -3,7 +3,15 @@ defmodule Samwise.Money.BankAccountTest do
 
   alias Samwise.Money.BankAccount
 
-  @valid_attrs %{balance: 42, cushion: 42, savings: 42}
+  @valid_attrs %{
+    name: "Checking",
+    amount: 10000.00,
+    is_available: true,
+    is_investment: false,
+    is_allowance: false,
+    show_on_dashboard: true,
+    comments: "some content"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

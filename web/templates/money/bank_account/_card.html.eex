@@ -1,0 +1,20 @@
+<article class="card">
+  <div class="card-actions">
+    <%= link "", to: bank_account_path(@conn, :edit, @bank_account), class: "ion-edit" %>
+  </div>
+
+  <h3>
+    <span class="card-icon-container">
+      <img alt="<%= get_initial @bank_account.name %>" class="card-icon">
+    </span>
+    <%= @bank_account.name %>
+    <%= if @bank_account.comments do %>
+      &nbsp; <span class="ion-ios-chatboxes-outline"></span>
+    <% end %>
+  </h3>
+
+  <p>
+    <span class="label label-inline">Amount</span>
+    <%= Number.Currency.number_to_currency @bank_account.amount %>
+  </p>
+</article>

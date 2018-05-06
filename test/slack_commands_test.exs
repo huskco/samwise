@@ -3,7 +3,16 @@ defmodule Samwise.CommandsTest do
   alias Samwise.Slack.Commands
 
   test "Respond with friendly daily update with everything" do
-    insert(:bank_account, balance: 10000.00, cushion: 0.00)
+    insert(
+      :bank_account,
+      name: "Checking",
+      amount: 10000.00,
+      is_available: true,
+      is_investment: false,
+      is_allowance: false,
+      show_on_dashboard: true,
+      comments: "some content"
+    )
     daily_events = [
       insert(:income, amount: 5000.00),
       insert(:bill, %{name: "BillNameA", amount: 100.00, autopay: true}),
@@ -13,7 +22,7 @@ defmodule Samwise.CommandsTest do
     result = Commands.money_summary(daily_events, 10000, 5000, false)
     {:ok, attachments} = [
       %{
-        text: "You have $10,000.00 total (*$5,000.00 safe to spend*)",
+        text: "You have $10,000.00 available (*$5,000.00 safe to spend*)",
         mrkdwn_in: ["text"],
         color: "#bfd849"
       },
@@ -47,7 +56,7 @@ defmodule Samwise.CommandsTest do
     result = Commands.money_summary(daily_events, 3000, 1000, false)
     {:ok, attachments} = [
       %{
-        text: "You have $3,000.00 total (*$1,000.00 safe to spend*)",
+        text: "You have $3,000.00 available (*$1,000.00 safe to spend*)",
         mrkdwn_in: ["text"],
         color: "#bfd849"
       },
@@ -72,7 +81,7 @@ defmodule Samwise.CommandsTest do
     result = Commands.money_summary(daily_events, 8500, 1250, false)
     {:ok, attachments} = [
       %{
-        text: "You have $8,500.00 total (*$1,250.00 safe to spend*)",
+        text: "You have $8,500.00 available (*$1,250.00 safe to spend*)",
         mrkdwn_in: ["text"],
         color: "#bfd849"
       },

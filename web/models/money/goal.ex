@@ -21,7 +21,15 @@ defmodule Samwise.Money.Goal do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :url, :amount, :imageUrl, :isDebt, :order, :comments])
+    |> cast(params, [
+      :name,
+      :url,
+      :amount,
+      :imageUrl,
+      :isDebt,
+      :order,
+      :comments
+    ])
     |> validate_required([:name, :amount, :isDebt, :order])
   end
 end

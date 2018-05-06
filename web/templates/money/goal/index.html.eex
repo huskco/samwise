@@ -1,7 +1,7 @@
 <nav class="header-actions">
   <div>
-    <span class="label label-inline">Available:</span>
-    <%= Number.Currency.number_to_currency Samwise.GetEvents.get_available_to_spend() %>
+    <span class="label label-inline">Safe to spend:</span>
+    <%= Number.Currency.number_to_currency @safe_to_spend %>
   </div>
   <div>
     <span class="label label-inline">Total:</span>

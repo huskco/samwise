@@ -9,6 +9,7 @@
   <div class="service-nav-toggle ion-navicon-round"></div>
   <nav class="service-nav-nav">
     <%= link "Forecast", to: forecast_path(@conn, :index) %>
+    <%= link "Accounts", to: bank_account_path(@conn, :index) %>
     <%= link "Bills", to: bill_path(@conn, :index) %>
     <%= link "Budgets", to: budget_path(@conn, :index) %>
     <%= link "Goals", to: goal_path(@conn, :index) %>
