@@ -9,6 +9,9 @@
     <h3>
       <img src="<%= get_logo @goal.url %>" alt="<%= get_initial @goal.name %>" class="card-icon">
       <%= @goal.name %>
+      <%= if @goal.comments do %>
+        &nbsp; <span class="ion-ios-chatboxes-outline"></span>
+      <% end %>
     </h3>
   </a>
 

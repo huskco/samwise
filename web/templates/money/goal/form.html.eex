@@ -42,6 +42,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :comments, class: "control-label" %>
+    <%= textarea f, :comments, class: "form-control" %>
+    <%= error_tag f, :comments %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Save", class: "button" %>
   </div>
 <% end %>

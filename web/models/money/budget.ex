@@ -8,6 +8,7 @@ defmodule Samwise.Money.Budget do
     field :name, :string
     field :url, :string
     field :amount, :float
+    field :comments, :string
 
     timestamps()
   end
@@ -17,7 +18,7 @@ defmodule Samwise.Money.Budget do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :url, :amount])
+    |> cast(params, [:name, :url, :amount, :comments])
     |> validate_required([:name, :amount])
   end
 end
