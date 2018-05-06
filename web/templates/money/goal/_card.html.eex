@@ -3,12 +3,14 @@
     <%= link "", to: goal_path(@conn, :edit, @goal), class: "ion-edit" %>
   </div>
 
-  <div class="card-image" style="background-image: url(<%= @goal.imageUrl %>)"></div>
+  <a href="<%= @goal.url %>" target="_blank">
+    <div class="card-image" style="background-image: url(<%= @goal.imageUrl %>)"></div>
 
-  <h3>
-    <img src="<%= get_logo @goal.url %>" alt="<%= get_initial @goal.name %>" class="card-icon">
-    <%= @goal.name %>
-  </h3>
+    <h3>
+      <img src="<%= get_logo @goal.url %>" alt="<%= get_initial @goal.name %>" class="card-icon">
+      <%= @goal.name %>
+    </h3>
+  </a>
 
   <p>
     <span class="label label-inline">Amount</span>

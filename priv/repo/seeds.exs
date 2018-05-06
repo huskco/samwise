@@ -16,19 +16,19 @@ Repo.insert! %Samwise.Money.Bill{
   name: "BillName",
   amount: 9.99,
   due: 14,
-  url: "netflix.com"
+  url: "http://netflix.com"
 }
 
 Repo.insert! %Samwise.Money.Budget{
   name: "BudgetName",
   amount: 600.00,
-  url: "walmart.com"
+  url: "http://walmart.com"
 }
 
 Repo.insert! %Samwise.Money.Goal{
   name: "GoalName",
   amount: 3500.00,
-  url: "disney.com",
+  url: "http://disney.com",
   imageUrl: "http://logos.wikia.com/wiki/File:Disney_Logo.png",
   isDebt: false
 }
