@@ -7,7 +7,8 @@ defmodule Samwise.Money.BillControllerTest do
     due: 11,
     name: "some content",
     url: "google.com",
-    autopay: false
+    autopay: false,
+    is_debt: false
   }
   @invalid_attrs %{}
 

@@ -47,11 +47,11 @@ defmodule Samwise.GetEventsHelperTest do
       %{date: "2/12/1982", day: 12, max_balance: 4488.01, events: [
         %{amount: 3500, due: 12, name: "Husk", type: "income", url: nil},
         %{amount: 11.99, due: 12, name: "Hulu", url: "hulu.com", type: "bill",
-          autopay: false}
+          autopay: false, is_debt: false}
       ]},
       %{date: "2/13/1982", day: 13, max_balance: 4477.66, events: [
         %{amount: 10.35, due: 13, name: "XBox Gold", url: "xbox.com",
-          type: "bill", autopay: false}
+          type: "bill", autopay: false, is_debt: false}
       ]},
       %{date: "2/14/1982", day: 14, max_balance: 4477.66, events: []},
       %{date: "2/15/1982", day: 15, max_balance: 4477.66, events: []}
@@ -153,14 +153,16 @@ defmodule Samwise.GetEventsHelperTest do
         due: 12,
         name: "Hulu",
         url: "hulu.com",
-        autopay: false
+        autopay: false,
+        is_debt: false
       },
       %Samwise.Money.Bill{
         amount: 10.35,
         due: 13,
         name: "XBox Gold",
         url: "xbox.com",
-        autopay: false
+        autopay: false,
+        is_debt: false
       }
     ]
 
@@ -176,6 +178,7 @@ defmodule Samwise.GetEventsHelperTest do
       %Samwise.Money.Bill{
         amount: 11.99,
         autopay: false,
+        is_debt: false,
         due: 12,
         id: nil,
         inserted_at: nil,

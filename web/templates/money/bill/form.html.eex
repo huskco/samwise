@@ -38,6 +38,14 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :is_debt, class: "control-label" do %>
+      <%= checkbox f, :is_debt, class: "form-control" %>
+      Is this a debt?
+    <% end %>
+    <%= error_tag f, :is_debt %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Save", class: "button" %>
   </div>
 <% end %>

@@ -9,7 +9,6 @@ defmodule Samwise.Money.Goal do
     field :url, :string
     field :amount, :float
     field :imageUrl, :string
-    field :isDebt, :boolean, default: false
     field :order, :integer
     field :comments, :string
 
@@ -26,10 +25,9 @@ defmodule Samwise.Money.Goal do
       :url,
       :amount,
       :imageUrl,
-      :isDebt,
       :order,
       :comments
     ])
-    |> validate_required([:name, :amount, :isDebt, :order])
+    |> validate_required([:name, :amount, :order])
   end
 end

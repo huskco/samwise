@@ -6,7 +6,6 @@ defmodule Samwise.Money.GoalTest do
   @valid_attrs %{
     amount: 42,
     imageUrl: "some content",
-    isDebt: true,
     name: "some content",
     url: "some content",
     order: 1

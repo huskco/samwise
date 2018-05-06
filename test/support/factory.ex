@@ -22,6 +22,7 @@ defmodule Samwise.Factory do
       is_investment: false,
       is_allowance: false,
       show_on_dashboard: true,
+      is_debt: false,
       comments: nil
     }
   end
@@ -32,7 +33,8 @@ defmodule Samwise.Factory do
       url: "billexample.com",
       due: 15,
       amount: sequence(:amount, &"#{&1}00.00"),
-      autopay: true
+      autopay: true,
+      is_debt: false
     }
   end
 
@@ -50,7 +52,6 @@ defmodule Samwise.Factory do
       url: "goalexample.com",
       amount: sequence(:amount, &"#{&1 * 2}00.00"),
       imageUrl: "goalexample.com/image.png",
-      isDebt: false,
       order: 1
     }
   end

@@ -16,7 +16,8 @@ Repo.insert! %Samwise.Money.Bill{
   name: "BillName",
   amount: 9.99,
   due: 14,
-  url: "http://netflix.com"
+  url: "http://netflix.com",
+  is_debt: false
 }
 
 Repo.insert! %Samwise.Money.Budget{
@@ -29,8 +30,7 @@ Repo.insert! %Samwise.Money.Goal{
   name: "GoalName",
   amount: 3500.00,
   url: "http://disney.com",
-  imageUrl: "http://logos.wikia.com/wiki/File:Disney_Logo.png",
-  isDebt: false
+  imageUrl: "http://logos.wikia.com/wiki/File:Disney_Logo.png"
 }
 
 Repo.insert! %Samwise.Money.Income{
@@ -46,6 +46,7 @@ Repo.insert! %Samwise.Money.BankAccount{
   is_investment: false,
   is_allowance: false,
   show_on_dashboard: true,
+  is_debt: false,
   comments: "some content"
 }
 

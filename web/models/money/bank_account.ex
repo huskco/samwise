@@ -7,10 +7,11 @@ defmodule Samwise.Money.BankAccount do
   schema "bankaccount" do
     field :name, :string
     field :amount, :float
-    field :is_available, :boolean
-    field :is_investment, :boolean
-    field :is_allowance, :boolean
-    field :show_on_dashboard, :boolean
+    field :is_available, :boolean, default: false
+    field :is_investment, :boolean, default: false
+    field :is_allowance, :boolean, default: false
+    field :show_on_dashboard, :boolean, default: true
+    field :is_debt, :boolean, default: false
     field :comments, :string
 
     timestamps()
@@ -28,6 +29,7 @@ defmodule Samwise.Money.BankAccount do
       :is_investment,
       :is_allowance,
       :show_on_dashboard,
+      :is_debt,
       :comments
     ])
     |> validate_required([
@@ -36,7 +38,8 @@ defmodule Samwise.Money.BankAccount do
       :is_available,
       :is_investment,
       :is_allowance,
-      :show_on_dashboard
+      :show_on_dashboard,
+      :is_debt
     ])
   end
 end
