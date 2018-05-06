@@ -1,0 +1,18 @@
+<%= if Enum.any?(@accounts) do %>
+  <div class="card">
+    <div class="label"><%= @title %></div>
+
+    <ul class="accounts-list key-value-list">
+      <%= for account <- @accounts do %>
+        <li>
+          <div class="list-key">
+            <%= account.name %>
+          </div>
+          <div class="list-value">
+            <%= Number.Currency.number_to_currency account.amount %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

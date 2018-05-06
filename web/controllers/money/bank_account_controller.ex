@@ -78,6 +78,30 @@ defmodule Samwise.Money.BankAccountController do
       |> Repo.all
   end
 
+  def all_dashboard_accounts do
+    Repo.all(
+      from ba in BankAccount,
+      where: ba.show_on_dashboard == true,
+      order_by: [desc: :amount]
+    )
+  end
+
+  def all_allowance_accounts do
+    Repo.all(
+      from ba in BankAccount,
+      where: ba.is_allowance == true,
+      order_by: [desc: :amount]
+    )
+  end
+
+  def all_investment_accounts do
+    Repo.all(
+      from ba in BankAccount,
+      where: ba.is_investment == true,
+      order_by: [desc: :amount]
+    )
+  end
+
   def total do
     Repo.one(from ba in BankAccount, select: sum(ba.amount))
   end

@@ -20,6 +20,9 @@ defmodule Samwise.Money.MoneyDashboardController do
       available: GetEvents.get_safe_to_spend(),
       goals: GoalController.all_goals(),
       surplus: surplus(),
+      bank_accounts: BankAccountController.all_dashboard_accounts(),
+      investment_accounts: BankAccountController.all_investment_accounts(),
+      allowance_accounts: BankAccountController.all_allowance_accounts(),
       page_title: "Dashboard")
   end
 

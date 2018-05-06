@@ -8,6 +8,27 @@
 
 .goals-list {
   li:not(:last-child) {
+    border-bottom: $base-border;
     margin-bottom: $small-spacing;
+    padding-bottom: $small-spacing;
+  }
+}
+
+.key-value-list {
+  margin-top: $base-spacing;
+
+  .list-key {
+    color: $light-font-color;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+
+    &:not(:last-child) {
+      border-bottom: $base-border;
+      margin-bottom: $smallest-spacing;
+      padding-bottom: $smallest-spacing;
+    }
   }
 }

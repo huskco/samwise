@@ -1,17 +1,21 @@
 <h2>Dashboard</h2>
 <div class="card-list">
   <%= render("_card_breakdown.html", conn: @conn) %>
-
-  <div class="card">
-    <div class="card-actions">
-      <%= link "", to: bank_account_path(@conn, :edit, 1), class: "ion-edit" %>
-    </div>
-    <div class="label">
-      Accounts
-    </div>
-    <div class="dashboard-number">
-    </div>
-  </div>
+  <%= render("_card_accounts.html",
+    conn: @conn,
+    title: "Accounts",
+    accounts: @bank_accounts)
+  %>
+  <%= render("_card_accounts.html",
+    conn: @conn,
+    title: "Allowances",
+    accounts: @allowance_accounts)
+  %>
+  <%= render("_card_accounts.html",
+    conn: @conn,
+    title: "Investments",
+    accounts: @investment_accounts)
+  %>
 
   <div class="card">
     <div class="label">Available to spend</div>
