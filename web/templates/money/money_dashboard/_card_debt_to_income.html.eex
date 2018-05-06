@@ -10,9 +10,22 @@
         </div>
         <div class="list-value">
           <%= Number.Percentage.number_to_percentage(
-            (@monthly_debt / @monthly_income * 100),
+            (@ratio * 100),
             precision: 0
           ) %>
+          <%= if @ratio > 0.45 do %>
+            🤮
+          <% else %>
+            <%= if @ratio > 0.35 do %>
+              😥
+            <% else %>
+              <%= if @ratio > 0.25 do %>
+                🙂
+              <% else %>
+                😍
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
       </li>
     </ul>

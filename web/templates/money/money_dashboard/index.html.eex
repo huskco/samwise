@@ -6,7 +6,8 @@
     <%= render("_card_debt_to_income.html",
       conn: @conn,
       monthly_debt: @monthly_debt,
-      monthly_income: @monthly_income
+      monthly_income: @monthly_income,
+      ratio: @monthly_debt / @monthly_income
     ) %>
   <%= render("_card_accounts.html",
     conn: @conn,
