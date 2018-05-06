@@ -14,25 +14,10 @@
     title: "Accounts",
     accounts: @bank_accounts)
   %>
-  <%= render("_card_accounts.html",
-    conn: @conn,
-    title: "Allowances",
-    accounts: @allowance_accounts)
-  %>
-  <%= render("_card_accounts.html",
-    conn: @conn,
-    title: "Investments",
-    accounts: @investment_accounts)
-  %>
   <%= render("_card_number.html",
     conn: @conn,
     title: "Available to spend",
     number: Number.Currency.number_to_currency @available)
-  %>
-  <%= render("_card_number.html",
-    conn: @conn,
-    title: "Monthly Surplus",
-    number: Number.Currency.number_to_currency @surplus)
   %>
   <%= render("_card_goals.html",
     conn: @conn,

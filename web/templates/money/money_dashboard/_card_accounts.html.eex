@@ -7,6 +7,15 @@
         <li>
           <div class="list-key">
             <%= account.name %>
+            <%= if account.is_allowance do %>
+              &nbsp;
+              <span class="list-allowance ion-ios-game-controller-b"></span>
+            <% else %>
+              <%= if account.is_available do %>
+                &nbsp;
+                <span class="list-available ion-cash"></span>
+              <% end %>
+            <% end %>
           </div>
           <div class="list-value">
             <%= Number.Currency.number_to_currency account.amount %>
