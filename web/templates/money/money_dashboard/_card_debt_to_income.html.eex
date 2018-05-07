@@ -51,8 +51,8 @@
             colorByPoint: true,
             innerSize: "75%",
             data: [{
-              name: 'Monthly Income',
-              y: <%= @monthly_income %>
+              name: 'Income Leftover',
+              y: <%= @monthly_income - @monthly_debt %>
             }, {
               name: 'Monthly Debt',
               y: <%= @monthly_debt %>

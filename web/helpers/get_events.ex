@@ -33,7 +33,7 @@ defmodule Samwise.GetEvents do
     days
       |> get_dates_map(start_date)
       |> add_events_to_forecast(forecast_items, balance, [])
-      |> add_min_max_budgets()
+      |> add_min_max_budgets(BudgetController.daily_average())
   end
 
   # Get smallest balance from forecast as amount safe to spend
@@ -134,13 +134,13 @@ defmodule Samwise.GetEvents do
 
   # Add min & max budgets to forecast list
 
-  def add_min_max_budgets(dates_list) do
-    budgets_daily = BudgetController.daily_average()
-    add_min_max_budgets(dates_list, budgets_daily, 0, [])
+  def add_min_max_budgets(dates_list, budgets_daily) do
+    add_min_max_budgets(dates_list, budgets_daily, budgets_daily, [])
   end
 
   def add_min_max_budgets([head | tail], budgets_daily, budgets_acc, acc) do
-    min_balance = head.max_balance - budgets_acc
+    max_balance = head.max_balance || 0
+    min_balance = max_balance - budgets_acc
     updated_item = Map.put(head, :min_balance, min_balance)
     updated_budgets_acc = budgets_acc + budgets_daily
     updated_acc = acc ++ [updated_item]

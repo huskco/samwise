@@ -11,7 +11,6 @@ defmodule Samwise.Money.MoneyDashboardController do
   alias Samwise.Money.IncomeController
   alias Samwise.Money.BillController
   alias Samwise.Money.BudgetController
-  alias Samwise.Money.ForecastController
   alias Samwise.GetEvents
 
   def index(conn, _params) do
@@ -26,7 +25,8 @@ defmodule Samwise.Money.MoneyDashboardController do
       allowance_accounts: BankAccountController.all_allowance_accounts(),
       monthly_income: IncomeController.total(),
       monthly_debt: BillController.debt_total() || 0,
-      page_title: "Dashboard")
+      page_title: "Dashboard"
+    )
   end
 
   def surplus do
