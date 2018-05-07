@@ -7,17 +7,21 @@
         Value
       </label>
       <label class="list-value">
-        Monthly Payment
+        Payment
+      </label>
+      <label class="list-value">
+        DTI
       </label>
       <label class="list-value">
         For Closing
       </label>
     </li>
-
     <%= render("_card_house_levels_row.html",
       conn: @conn,
       value: 350000,
       monthly: 2334,
+      monthly_debt: @monthly_debt,
+      monthly_income: @monthly_income,
       total_available: @total_available
     ) %>
 
@@ -25,6 +29,8 @@
       conn: @conn,
       value: 375000,
       monthly: 2448,
+      monthly_debt: @monthly_debt,
+      monthly_income: @monthly_income,
       total_available: @total_available
     ) %>
 
@@ -32,6 +38,8 @@
       conn: @conn,
       value: 400000,
       monthly: 2582,
+      monthly_debt: @monthly_debt,
+      monthly_income: @monthly_income,
       total_available: @total_available
     ) %>
 
@@ -39,6 +47,8 @@
       conn: @conn,
       value: 425000,
       monthly: 2716,
+      monthly_debt: @monthly_debt,
+      monthly_income: @monthly_income,
       total_available: @total_available
     ) %>
 
@@ -46,6 +56,8 @@
       conn: @conn,
       value: 450000,
       monthly: 2850,
+      monthly_debt: @monthly_debt,
+      monthly_income: @monthly_income,
       total_available: @total_available
     ) %>
   </ul>

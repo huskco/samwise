@@ -25,6 +25,8 @@
   ) %>
   <%= render("_card_house_levels.html",
     conn: @conn,
-    total_available: @total_available
+    total_available: @total_available,
+    monthly_debt: @monthly_debt,
+    monthly_income: @monthly_income
   ) %>
 </div>

@@ -12,6 +12,12 @@
     ) %>
   </div>
   <div class="list-value">
+    <%= Number.Percentage.number_to_percentage(
+      ((@monthly_debt + @monthly) / @monthly_income) * 100,
+      precision: 0
+    ) %>
+  </div>
+  <div class="list-value">
     <%= if @total_available > (10000 + (@value * 0.05)) do %>
       👍
     <% else %>
