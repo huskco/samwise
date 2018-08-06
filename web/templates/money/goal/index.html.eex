@@ -10,6 +10,24 @@
 </nav>
 <h2>Goals</h2>
 
+<div class="total-progress card">
+  <div class="label">Goal Progress</div>
+  <div class="progress">
+    <div class="progress-background">
+      <div class="progress-bar" style="width: <%= @total_percentage %>"></div>
+      <div class="progress-stops">
+        <%= for goal <- @goals do %><div class="progress-stop"
+            style="width: <%= Number.Percentage.number_to_percentage((goal.amount / @total * 100), precision: 1) %>"
+            data-name="<%= goal.name %>"
+          ></div><% end %>
+      </div>
+    </div>
+    <div class="progress-percent">
+      <%= @total_percentage %>
+    </div>
+  </div>
+</div>
+
 <div class="card-list">
   <%= for goal <- @goals do %>
     <%= render("_card.html", conn: @conn, goal: goal) %>
