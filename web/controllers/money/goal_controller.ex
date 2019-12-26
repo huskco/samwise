@@ -15,14 +15,13 @@ defmodule Samwise.Money.GoalController do
   def index(conn, _params) do
     goals = all_goals()
     safe_to_spend = GetEvents.get_safe_to_spend()
-    total_percentage = (safe_to_spend / total() * 100) |>
-      Number.Percentage.number_to_percentage(precision: 0)
+
     render(conn,
       "index.html",
       goals: goals,
       safe_to_spend: safe_to_spend,
       total: total(),
-      total_percentage: total_percentage,
+      total_percentage: total_percentage(safe_to_spend, total()),
       page_title: "Goals"
     )
   end
@@ -151,5 +150,14 @@ defmodule Samwise.Money.GoalController do
       safe_to_spend < 0 -> 0
       true -> safe_to_spend
     end
+  end
+
+  def total_percentage(_, nil) do
+    0
+  end
+
+  def total_percentage(safe_to_spend, total) do
+    (safe_to_spend / total) * 100
+    |> Number.Percentage.number_to_percentage(precision: 0)
   end
 end

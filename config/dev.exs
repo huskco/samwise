@@ -38,6 +38,6 @@ config :samwise, Samwise.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "samwise_dev",
+  database: "samwise_original_dev",
   hostname: "localhost",
   pool_size: 10

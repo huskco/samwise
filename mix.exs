@@ -3,8 +3,8 @@ defmodule Samwise.Mixfile do
 
   def project do
     [app: :samwise,
-     version: "0.1.0",
-     elixir: "~> 1.5.1",
+     version: "0.2.0",
+     elixir: "~> 1.9.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -44,7 +44,6 @@ defmodule Samwise.Mixfile do
      {:ueberauth, "~> 0.4"},
      {:ueberauth_google, "~> 0.5"},
      {:ex_machina, "~> 2.0"},
-     {:credo, "~> 0.8.6"},
      {:slack, "~> 0.12.0"},
      {:quantum, "~> 2.1.0-beta.1"}]
   end
@@ -56,9 +55,10 @@ defmodule Samwise.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create --quiet", "ecto.migrate", "test",
-       "credo --strict"]]
+    [
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+    ]
   end
 end
